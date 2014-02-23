@@ -2,7 +2,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 
-from project_management.forms import register_form
+from project_management.forms.auth_forms import register_form
 
 
 def index(request):
