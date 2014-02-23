@@ -1,20 +1,19 @@
 import os
 import sys
 from django.db import connection
-from django.core.management.commands import syncdb
 import threading
 
 project_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(project_path)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "HoneyBeeHive.settings")
 
+from django.core.management.commands import syncdb
 
 def sync():
     syncdb.Command().execute(noinput=True, verbosity=1, database='default')
 
 
 def deletetables():
-
     cursor = connection.cursor()
     print "DROP"
     try:

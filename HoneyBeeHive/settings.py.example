@@ -114,6 +114,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
+TEMPLATE_DIRS = (
+    BASE_DIR
+)
+
 AUTH_USER_MODEL = 'project_management.UserWorker'
 LOGIN_URL = '/'
 
