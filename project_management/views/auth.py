@@ -3,13 +3,13 @@ from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidde
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import authenticate, login, logout
 from project_management.models import UserWorker
-from project_management.forms.auth_forms import register_form
-from project_management.forms.auth_validation import activate_user
+from project_management.forms.auth_forms import RegisterForm
+from project_management.forms.auth_validation import activate_user, send_activation_mail
 
 
 def register(request):
     if request.method == 'POST':
-        form = register_form(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             new_user = form.save()
             user = authenticate(username=request.POST.get('username'),
@@ -26,7 +26,7 @@ def register(request):
             {'form': form},
             context_instance=RequestContext(request))
     else:
-        form = register_form()
+        form = RegisterForm()
         return render_to_response(
             "templates/project_management/auth/register.html",
             {'form': form},
@@ -49,6 +49,7 @@ def activate(request):
 
 
 def login_user(request):
+    #TODO tener en cuenta el "remember me"
     error = ""
     if request.method == "POST":
         user = authenticate(
@@ -58,9 +59,11 @@ def login_user(request):
             if user.is_active:
                 login(request, user)
                 return redirect("/profile/")
-            error = "You don't have password."
+            #TODO add celery task with the activation email
+            #send_activation_mail(user)
+            error = "Check your email for an activation link."
         else:
-            error = "Incorrect username or password."
+            error = "Incorrect email or password."
     return render_to_response(
         "templates/project_management/auth/login.html",
         {'error': error},

@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 import datetime
 
 
-class user_creation_form(forms.ModelForm):
+class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(
         label = _("Password"),
         widget = forms.PasswordInput)
@@ -31,14 +31,14 @@ class user_creation_form(forms.ModelForm):
         return password2
 
     def save(self, commit=True):
-        user = super(user_creation_form, self).save(commit=False)
+        user = super(UserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
         return user
 
 
-class register_form(user_creation_form):
+class RegisterForm(UserCreationForm):
     email = forms.EmailField(label="E-Mail")
 
     class Meta:
@@ -54,7 +54,7 @@ class register_form(user_creation_form):
         raise forms.ValidationError("A user with that email address already exists.")
 
     def save(self, commit=True):
-        user = super(register_form, self).save(commit=False)
+        user = super(RegisterForm, self).save(commit=False)
         user.email_active = False
         user.is_active = False
         user.date_joined=datetime.datetime.now()
