@@ -43,7 +43,7 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = UserWorker
-        fields = ("email", )
+        fields = ("email", "first_name", "last_name")
 
     def clean_email(self):
         email = self.cleaned_data["email"]

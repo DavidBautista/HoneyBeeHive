@@ -1,23 +1,29 @@
 <div class="panel panel-default">
-    <div class="panel-heading "><h1 class="panel-title text-center">Login</h1></div>
-    <div class="panel-body">
-        {% if error %}
-            <div class="alert alert-danger">{{ error }}</div>
-        {% endif %}
-        <form role="form" action="/login/" method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-                <input type="text" name="email" class="input-lg" placeholder="Email" />
-            </div>
-            <div class="form-group">
-                <input type="password" name="password" class="input-lg" placeholder="Password" />
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="remember" > Remember me on this computer.
-                </label>
-            </div>
-            <button type="submit" class="btn btn-default center-block">Submit</button>
-        </form>
+  <div class="panel-heading "><h1 class="panel-title text-center">Login</h1></div>
+  <div class="panel-body">
+    {% if error %}
+      <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    <form role="form" action="/login/" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <input type="text" name="email" class="input-lg" placeholder="Email" />
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" class="input-lg" placeholder="Password" />
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="remember" > Remember me on this computer.
+        </label>
+      </div>
+      <button type="submit" class="btn btn-default center-block">Submit</button>
+    </form>
+
+    <div class="small text-center top10">
+      <p>Don't have a HoneyBeeHive account?</br><a href="/register/">Register now.</a></p>
+
     </div>
+
+  </div>
 </div>

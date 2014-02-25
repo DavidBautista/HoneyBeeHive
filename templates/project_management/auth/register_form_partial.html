@@ -1,0 +1,32 @@
+<h3>Registro</h3>
+<form action="" class="form-horizontal" method="POST">
+  {% csrf_token %}
+  <div>
+    {{ form.first_name.errors }}
+    <label for="first_name">First name: </label>
+    {{ form.first_name }}
+  </div>
+  <div>
+    {{ form.last_name.errors }}
+    <label for="last_name">Last name: </label>
+    {{ form.last_name }}
+  </div>
+
+  <div>
+    {{ form.email.errors }}
+    <label for="id_email">E-Mail: </label>
+    {{ form.email }}
+  </div>
+  <div>
+    {{ form.password1.errors }}
+    <label for="id_password1">Password: </label>
+    {{ form.password1 }}
+  </div>
+  <div>
+    {{ form.password2.errors }}
+    <label for="id_password2">Repeat password: </label>
+    {{ form.password2 }}
+  </div>
+  <br>
+  <input class="btn btn-inverse" type="submit" name="submit" value="Register" />
+</form>

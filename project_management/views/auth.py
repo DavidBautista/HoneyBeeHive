@@ -11,8 +11,9 @@ def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
+            print "FORM VALID"
             new_user = form.save()
-            user = authenticate(username=request.POST.get('username'),
+            user = authenticate(email=request.POST.get('email'),
                                 password=request.POST.get('password1'))
             user.save()
 
@@ -34,11 +35,11 @@ def register(request):
 
 
 def activate(request):
-    username = request.GET.get('username')
+    email = request.GET.get('email')
     code = request.GET.get('code')
-    user = UserWorker.objects.get(username=username)
-    if username and code and not user.is_active:
-        if activate_user(username,  code):
+    user = UserWorker.objects.get(email=email)
+    if email and code and not user.is_active:
+        if activate_user(email,  code):
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
             return HttpResponseRedirect("/profile/")
@@ -53,7 +54,7 @@ def login_user(request):
     error = ""
     if request.method == "POST":
         user = authenticate(
-            username=request.POST.get('username'),
+            email=request.POST.get('email'),
             password=request.POST.get('password'))
         if user is not None:
             if user.is_active:
