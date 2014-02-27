@@ -1,38 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="description" content="Free projects management">
-  <meta name="keywords" content="Project, Project management, management">
-  <meta name="author" content="David Bautista">
-  <meta charset="UTF-8">
-  <title>HoneyBeeHive {% block title %}{% endblock %}</title>
-
-  <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css">
-  <style type="text/css">
-    {#        http://stackoverflow.com/questions/17943264/how-to-use-twitter-bootstrap-3-for-non-responsive-site#}
-    .container-no-responsive{
-      max-width: none !important;
-      width: 970px;
-    }
-    .container{
-      max-width: 970px !important;
-    }
-
-    .top3 { margin-top:3%; }
-    .top5 { margin-top:5%; }
-    .top7 { margin-top:7%; }
-    .top10 { margin-top:10%; }
-  </style>
-  {% block styles %}{% endblock %}
-
-  <script src="{{ STATIC_URL }}js/jquery-1.11.0.js"></script>
-  <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
-  {% block scripts %}{% endblock %}
-
-</head>
-<body>
-
-
 <nav class="navbar navbar-default" role="navigation">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -43,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/"><img src="{{ STATIC_URL }}img/logo4b.png" height="35px" width="auto"></a>
+      <a class="navbar-brand logo-padding" href="/"><img src="{{ STATIC_URL }}img/logo4b.png" height="35px" width="auto"></a>
 
     </div>
 
@@ -75,7 +40,7 @@
       {#        <button type="submit" class="btn btn-default">Submit</button>#}
       {#      </form>#}
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><button class="btn btn-info">Login</button></a></li>
+        <li class="login-navbar-padding"><button href="#" class="btn btn-info">Login</button></li>
         {#        <li class="dropdown">#}
         {#          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>#}
         {#          <ul class="dropdown-menu">#}
@@ -90,18 +55,3 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-
-<div class="container container-no-responsive">
-
-  {% block content %}{% endblock %}
-
-</div>
-
-
-
-
-</body>
-
-
-</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="description" content="Free projects management">
+  <meta name="keywords" content="Project, Project management, management">
+  <meta name="author" content="David Bautista">
+  <meta charset="UTF-8">
+  <title>HoneyBeeHive {% block title %}{% endblock %}</title>
+
+  <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css">
+  <style type="text/css">
+    {#        http://stackoverflow.com/questions/17943264/how-to-use-twitter-bootstrap-3-for-non-responsive-site#}
+    .container-no-responsive{
+      max-width: none !important;
+      width: 970px;
+    }
+    .container{
+      max-width: 970px !important;
+    }
+
+    .top3 { margin-top:3%; }
+    .top5 { margin-top:5%; }
+    .top7 { margin-top:7%; }
+    .top10 { margin-top:10%; }
+
+    .logo-padding {
+        padding: 5px 15px;
+    }
+    .login-navbar-padding{
+        padding: 7px 5px;
+    }
+  </style>
+  {% block styles %}{% endblock %}
+
+  <script src="{{ STATIC_URL }}js/jquery-1.11.0.js"></script>
+  <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+  {% block scripts %}{% endblock %}
+
+</head>
+<body>
+
+
+{% include "templates/project_management/common/_navbar_anonym.html" %}
+
+
+<div class="container container-no-responsive">
+
+  {% block content %}{% endblock %}
+
+</div>
+
+
+
+
+</body>
+
+
+</html>
