@@ -1,0 +1,28 @@
+{% extends "templates/project_management/__base_bootstrap.html" %}
+{% block title %}HBH Projects{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+
+
+{% block content %}
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>Your projects</h3>
+    </div>
+    <div class="col-xs-3">
+      <a href="/create_project/" class="btn btn-default">Create new project</a>
+    </div>
+  </div>
+
+  <div class="row">
+    {% for project in projects %}
+      {% include "templates/project_management/psttasks/_project_box.html" %}
+    {% endfor %}
+  </div>
+  <div class="row"></div>
+{% endblock %}

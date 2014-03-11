@@ -8,5 +8,29 @@ from project_management.forms.auth_forms import RegisterForm
 def index(request):
     form = RegisterForm()
     return render_to_response('templates/project_management/common/index.html',
-        {'form':form, 'error':""},
-      context_instance=RequestContext(request))
+        {'form': form, 'error': ""},
+        context_instance=RequestContext(request))
+
+
+def features(request):
+    return render_to_response('templates/project_management/common/features.html',
+        {},
+        context_instance=RequestContext(request))
+
+
+def pricing(request):
+    return render_to_response('templates/project_management/common/pricing.html',
+        {},
+        context_instance=RequestContext(request))
+
+
+def help_and_community(request):
+    return render_to_response('templates/project_management/common/help_and_community.html',
+        {},
+        context_instance=RequestContext(request))
+
+
+def about(request):
+    return render_to_response('templates/project_management/common/about.html',
+        {},
+        context_instance=RequestContext(request))

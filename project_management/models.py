@@ -97,7 +97,7 @@ class UserWorker(AbstractBaseUser, PermissionsMixin):
 class Project(models.Model):
     name = models.CharField(max_length=140)
     ptype = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
+    description = models.TextField(max_length=1024)
     pred_start_date = models.DateTimeField(null=True)
     pred_end_date = models.DateTimeField(null=True)
     real_start_date = models.DateTimeField(null=True)

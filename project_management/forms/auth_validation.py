@@ -6,6 +6,7 @@ from django.template import loader, Context
 from project_management.tasks.auth_tasks import mail_sender
 from HoneyBeeHive.settings import SECRET_KEY
 
+
 def send_activation_mail(user):
     code = sha512("%s%s" % (SECRET_KEY, user.email)).hexdigest()
     url = "http://127.0.0.1:8000/activate_email/?email=%s&code=%s" % (user.email,  code)

@@ -1,0 +1,13 @@
+{% extends "templates/project_management/__base_bootstrap.html" %}
+
+
+{% block content %}
+<h3>Create project</h3>
+  <form action="/create_project/" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="hidden" name="created_by_id" value="{{ user.id }}">
+    <input type="submit" value="submit">
+  </form>
+
+{% endblock %}

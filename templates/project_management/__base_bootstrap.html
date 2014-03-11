@@ -50,6 +50,14 @@
 
 {% include "templates/project_management/common/_navbar_anonym.html" %}
 
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 {% block content_container %}
 <div class="container container-no-responsive">
 
