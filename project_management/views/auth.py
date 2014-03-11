@@ -42,7 +42,7 @@ def activate(request):
         if activate_user(email,  code):
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
-            return HttpResponseRedirect("/profile/")
+            return HttpResponseRedirect("/projects/")
         else:
             return HttpResponseForbidden()
     else:
@@ -59,7 +59,7 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect("/profile/")
+                return redirect("/projects/")
             #TODO add celery task with the activation email
             #send_activation_mail(user)
             error = "Check your email for an activation link."

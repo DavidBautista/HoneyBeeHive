@@ -36,7 +36,7 @@ def create_project(request):
         if form.is_valid():
             #the project data is valid
             new_project = form.save()
-            messages.success(request, "project created")
+            #TODO messages.success(request, "project created")
             return HttpResponseRedirect(reverse('project', kwargs={'proj_id': new_project.id}))
         #the project data is not valid
     else:

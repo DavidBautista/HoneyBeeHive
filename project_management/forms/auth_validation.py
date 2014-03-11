@@ -11,13 +11,13 @@ def send_activation_mail(user):
     code = sha512("%s%s" % (SECRET_KEY, user.email)).hexdigest()
     url = "http://127.0.0.1:8000/activate_email/?email=%s&code=%s" % (user.email,  code)
     print(url)
-    template = loader.get_template('templates/project_management/auth/activate_email.html')
+    template = loader.get_template('templates/project_management/auth/e_activation.html')
     context = Context({
         'email': user.email,
         'url': url,
     })
     try:
-        mail_sender.delay('Bienvenido a Caribbean Tradders: Activa tu cuenta', template.render(context), [user.email])
+        mail_sender.delay('Bienvenido a HoneyBeeHive: Activa tu cuenta', template.render(context), [user.email])
     except:
         print "something went wrong in send_mail"
 
