@@ -25,6 +25,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CURRENT_HOST = "127.0.0.1"
 
 
 # Application definition
@@ -135,5 +136,6 @@ BROKER_URL = 'amqp://guest:guest@localhost//'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CELERY_IMPORTS = ('project_management.tasks.auth_tasks', )
 
 #El worker de celery de momento se arranca con celery -A HoneyBeeHive worker -l info
