@@ -11,18 +11,46 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-xs-6">
-      <h3>Your projects</h3>
+    <div class="col-xs-9">
+      <div class="well page-header">
+        <h1>Your projects <small>Subtext for header</small></h1>
+      </div>
     </div>
     <div class="col-xs-3">
-      <a href="/create_project/" class="btn btn-default">Create new project</a>
+      {% if projects %}
+        <a href="/create_project/" class="btn btn-default">Create new project</a>
+      {% endif %}
     </div>
   </div>
 
   <div class="row">
-    {% for project in projects %}
-      {% include "templates/project_management/psttasks/_project_box.html" %}
-    {% endfor %}
+    {% if projects %}
+      {% for project in projects %}
+        {% include "templates/project_management/psttasks/_project_box.html" %}
+      {% endfor %}
+    {% else %}
+      <div class="col-xs-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">You can create your own projects.</h3>
+          </div>
+          <div class="panel-body">
+            <a href="/create_project/" class="btn btn-lg btn-info">Create new project</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Ask your friends to be invited in their projects!.</h3>
+          </div>
+          <div class="panel-body">
+             asf
+          </div>
+        </div>
+      </div>
+
+    {% endif %}
   </div>
   <div class="row"></div>
 {% endblock %}

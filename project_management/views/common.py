@@ -3,8 +3,9 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 
 from project_management.forms.auth_forms import RegisterForm
+from project_management.decorators.auth import anonymous_required
 
-
+@anonymous_required
 def index(request):
     form = RegisterForm()
     return render_to_response('templates/project_management/common/index.html',

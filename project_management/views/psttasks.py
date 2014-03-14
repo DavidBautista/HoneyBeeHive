@@ -42,7 +42,7 @@ def create_project(request):
     else:
         #requesting the create project page
         form = ProjectForm()
-    messages.success(request, "caca created")
+    #messages.success(request, "Project created")
 
     return render_to_response('templates/project_management/psttasks/create_project.html',
         {'form': form, 'user': request.user},
