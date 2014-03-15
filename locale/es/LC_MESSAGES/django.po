@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-15 14:38+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: HoneyBeeHive/settings.py:107
+msgid "English"
+msgstr "Inglés"
+
+#: HoneyBeeHive/settings.py:108
+msgid "German"
+msgstr "Alemán"
+
+#: HoneyBeeHive/settings.py:109
+msgid "Spanish"
+msgstr "Español"
+
+#: project_management/forms/auth_forms.py:10
+msgid "Password"
+msgstr "Contraseña"
+
+#: project_management/forms/auth_forms.py:13
+msgid "Password confirmation"
+msgstr "Confirmación de contraseña"
+
+#: project_management/forms/auth_forms.py:15
+msgid "Enter the same password as above, for verification."
+msgstr "Introduce la misma contraseña que arriba, para verificación."
+
+#: project_management/forms/auth_forms.py:18
+msgid "A user with that username already exists."
+msgstr "Ya existe un usuario con este nombre"
+
+#: project_management/forms/auth_forms.py:19
+msgid "The two password fields didn't match."
+msgstr "Las contraseñas no coinciden."
+
+#: project_management/forms/psttask_forms.py:11
+msgid "Project name"
+msgstr "Nombre del proyecto"
+
+#: project_management/forms/psttask_forms.py:15
+msgid "Project type"
+msgstr "Tipo de proyecto"
+
+#: project_management/forms/psttask_forms.py:19
+msgid "Description"
+msgstr "Descripción"
+
+#: project_management/forms/psttask_forms.py:23
+msgid "Start date"
+msgstr "Fecha inicio"
+
+#: project_management/forms/psttask_forms.py:27
+msgid "End date"
+msgstr "Fecha fin"
+
+#: templates/project_management/auth/_login_form.html:3
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: templates/project_management/auth/_login_form.html:19
+msgid "Remember me on this computer."
+msgstr "Recuérdame en este ordenador."
+
+#: templates/project_management/auth/_login_form.html:26
+msgid "Don't have a HoneyBeeHive account?"
+msgstr "No tienes una cuenta en HoneyBeeHive?"
+
+#: templates/project_management/auth/_login_form.html:26
+msgid "Register now"
+msgstr "Regístrate ahora"
+
+#: templates/project_management/auth/_register_form.html:1
+msgid "Register"
+msgstr "Registro"
+
+#: templates/project_management/auth/activate_email.html:4
+msgid "Account activation"
+msgstr "Activación de cuenta"
+
+#: templates/project_management/auth/activate_email.html:7
+msgid "Check your email to activate your account."
+msgstr "Comprueba tu email para activar tu cuenta"
+
+#: templates/project_management/common/_navbar_anonym.html:20
+msgid "Features"
+msgstr "Características"
+
+#: templates/project_management/common/_navbar_anonym.html:21
+msgid "Pricing"
+msgstr "Precios"
+
+#: templates/project_management/common/_navbar_anonym.html:22
+msgid "Help & Community"
+msgstr "Ayuda y comunidad"
+
+#: templates/project_management/common/_navbar_anonym.html:23
+msgid "About us"
+msgstr "Quiénes somos"
+
+#: templates/project_management/psttasks/_project_box.html:9
+msgid "View Project"
+msgstr "Ver proyecto"
+
+#: templates/project_management/psttasks/create_project.html:6
+#: templates/project_management/psttasks/projects.html:23
+#: templates/project_management/psttasks/projects.html:40
+msgid "Create new project"
+msgstr "Crear nuevo proyecto"
+
+#: templates/project_management/psttasks/projects.html:18
+msgid "Your projects"
+msgstr "Tus proyectos"
+
+#: templates/project_management/psttasks/projects.html:37
+msgid "You can create your own projects."
+msgstr "Puedes crear tus propios proyectos."
+
+#: templates/project_management/psttasks/projects.html:47
+msgid "Ask your friends to be invited in their projects!"
+msgstr "Pide a tus amigos que te inviten a sus proyectos!"

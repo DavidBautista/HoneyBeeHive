@@ -1,5 +1,7 @@
-<h3>Registro</h3>
-<form action="" class="form-horizontal" method="POST">
+{% load i18n %}
+<h3>{% trans "Register" %}</h3>
+{# TODO rehacer este formulario #}
+<form action="{% url "register" %}" class="form-horizontal" method="POST">
   {% csrf_token %}
   <div>
     {{ form.first_name.errors }}
