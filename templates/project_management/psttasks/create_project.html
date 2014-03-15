@@ -7,7 +7,7 @@
   </div>
   <div class="row">
     <div class="col-xs-8">
-      <form action="/create_project/" method="POST" role="form">
+      <form action="{% url 'create_project' %}" method="POST" role="form">
         {% csrf_token %}
         <div class="row">
           <div class="col-xs-6">

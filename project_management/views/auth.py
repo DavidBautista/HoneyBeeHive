@@ -2,6 +2,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.core.urlresolvers import reverse
 from project_management.models import UserWorker
 from project_management.forms.auth_forms import RegisterForm
 from project_management.forms.auth_validation import activate_user, send_activation_mail
@@ -15,8 +16,7 @@ def register(request):
             new_user = form.save()
             user = authenticate(email=request.POST.get('email'),
                                 password=request.POST.get('password1'))
-            user.save()
-
+            #user.save()
             if user is not None:
                 return render_to_response(
                     "templates/project_management/auth/activate_email.html",
@@ -42,7 +42,7 @@ def activate(request):
         if activate_user(email,  code):
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
-            return HttpResponseRedirect("/projects/")
+            return HttpResponseRedirect(reverse('projects_list'))
         else:
             return HttpResponseForbidden()
     else:
@@ -59,9 +59,7 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect("/projects/")
-            #TODO add celery task with the activation email
-            #send_activation_mail(user)
+                return HttpResponseRedirect(reverse('projects_list'))
             error = "Check your email for an activation link."
         else:
             error = "Incorrect email or password."
@@ -73,4 +71,4 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect("/")
+    return HttpResponseRedirect(reverse('index'))

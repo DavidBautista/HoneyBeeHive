@@ -7,9 +7,8 @@ from project_management.decorators.auth import anonymous_required
 
 @anonymous_required
 def index(request):
-    form = RegisterForm()
     return render_to_response('templates/project_management/common/index.html',
-        {'form': form, 'error': ""},
+        {},
         context_instance=RequestContext(request))
 
 
