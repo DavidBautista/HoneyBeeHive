@@ -6,41 +6,43 @@
   <meta name="keywords" content="Project, Project management, management">
   <meta name="author" content="David Bautista">
   <meta charset="UTF-8">
+  <link rel="icon" href="{{ STATIC_URL }}img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico" type="image/x-icon">
 
   <title>{% block title %}HoneyBeeHive{% endblock %}</title>
 
   {% block stylebootstrap %}
-  <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css">
   {% endblock %}
   {% block default_style %}
-  <style type="text/css">
-    {#        http://stackoverflow.com/questions/17943264/how-to-use-twitter-bootstrap-3-for-non-responsive-site#}
-    .container-no-responsive{
-      max-width: none !important;
-      width: 970px;
-    }
-    .container{
-      max-width: 970px !important;
-    }
+    <style type="text/css">
+      {#        http://stackoverflow.com/questions/17943264/how-to-use-twitter-bootstrap-3-for-non-responsive-site#}
+      .container-no-responsive{
+        max-width: none !important;
+        width: 970px;
+      }
+      .container{
+        max-width: 970px !important;
+      }
 
-    .top3 { margin-top:3%; }
-    .top5 { margin-top:5%; }
-    .top7 { margin-top:7%; }
-    .top10 { margin-top:10%; }
+      .top3 { margin-top:3%; }
+      .top5 { margin-top:5%; }
+      .top7 { margin-top:7%; }
+      .top10 { margin-top:10%; }
 
-    .logo-padding {
+      .logo-padding {
         padding: 5px 15px;
-    }
-    .login-navbar-padding{
+      }
+      .login-navbar-padding{
         padding: 7px 5px;
-    }
-  </style>
+      }
+    </style>
   {% endblock %}
   {% block styles %}{% endblock %}
 
   {% block default_scripts %}
-  <script src="{{ STATIC_URL }}js/jquery-1.11.0.js"></script>
-  <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery-1.11.0.js"></script>
+    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
   {% endblock %}
 
   {% block scripts %}{% endblock %}
@@ -52,19 +54,19 @@
 {% include "templates/project_management/common/_navbar_anonym.html" %}
 
 {% if messages %}
-<ul class="messages">
+  <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
-</ul>
+  </ul>
 {% endif %}
 
 {% block content_container %}
-<div class="container container-no-responsive">
+  <div class="container container-no-responsive">
 
-  {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 
-</div>
+  </div>
 {% endblock %}
 
 
