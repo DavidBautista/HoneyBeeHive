@@ -1,5 +1,5 @@
 from django import forms
-from project_management.models import Project
+from bee.models import Project
 from django.utils.translation import ugettext_lazy as _
 
 

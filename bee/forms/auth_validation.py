@@ -1,9 +1,9 @@
-from project_management.models import UserWorker
+from bee.models import UserWorker
 from django.utils.html import simple_email_re
 from django.core.exceptions import ObjectDoesNotExist
 from hashlib import sha512
 from django.template import loader, Context
-from project_management.tasks.auth_tasks import mail_sender
+from bee.tasks.auth_tasks import mail_sender
 from HoneyBeeHive.settings import SECRET_KEY, CURRENT_HOST
 
 
@@ -11,7 +11,7 @@ def send_activation_mail(user):
     code = sha512("%s%s" % (SECRET_KEY, user.email)).hexdigest()
     url = "http://%s/activate_email/?email=%s&code=%s" % (CURRENT_HOST, user.email,  code)
     print(url)
-    template = loader.get_template('templates/project_management/auth/e_activation.html')
+    template = loader.get_template('templates/bee/auth/e_activation.html')
     context = Context({
         'email': user.email,
         'url': url,

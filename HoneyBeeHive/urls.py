@@ -5,13 +5,13 @@ from HoneyBeeHive import settings
 
 #url with language code prepend
 urlpatterns = i18n_patterns('',
-    url(r'^$', 'project_management.views.common.index', name='index'),
-    url(r'^', include('project_management.urls.trans_urls')),
+    url(r'^$', 'bee.views.common.index', name='index'),
+    url(r'^', include('bee.urls.trans_urls')),
 )
 
 #regular urls
 urlpatterns += patterns('',
-    url(r'^', include('project_management.urls.regular_urls')),
+    url(r'^', include('bee.urls.regular_urls')),
     (r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'img/favicon.ico')),
 )
 

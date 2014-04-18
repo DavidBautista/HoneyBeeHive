@@ -1,5 +1,5 @@
 from django import forms
-from project_management.models import UserWorker
+from bee.models import UserWorker
 from auth_validation import send_activation_mail
 from django.utils.translation import ugettext_lazy as _
 import datetime

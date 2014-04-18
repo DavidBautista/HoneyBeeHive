@@ -3,9 +3,9 @@ from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidde
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
-from project_management.models import UserWorker
-from project_management.forms.auth_forms import RegisterForm
-from project_management.forms.auth_validation import activate_user, send_activation_mail
+from bee.models import UserWorker
+from bee.forms.auth_forms import RegisterForm
+from bee.forms.auth_validation import activate_user, send_activation_mail
 
 
 def register(request):
@@ -19,17 +19,17 @@ def register(request):
             #user.save()
             if user is not None:
                 return render_to_response(
-                    "templates/project_management/auth/activate_email.html",
+                    "templates/bee/auth/activate_email.html",
                     {},
                     context_instance=RequestContext(request))
         return render_to_response(
-            "templates/project_management/auth/register.html",
+            "templates/bee/auth/register.html",
             {'form': form},
             context_instance=RequestContext(request))
     else:
         form = RegisterForm()
         return render_to_response(
-            "templates/project_management/auth/register.html",
+            "templates/bee/auth/register.html",
             {'form': form},
             context_instance=RequestContext(request))
 
@@ -64,7 +64,7 @@ def login_user(request):
         else:
             error = "Incorrect email or password."
     return render_to_response(
-        "templates/project_management/auth/login.html",
+        "templates/bee/auth/login.html",
         {'error': error},
         context_instance=RequestContext(request))
 

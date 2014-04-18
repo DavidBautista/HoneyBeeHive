@@ -4,8 +4,8 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render_to_response
 from django.views.decorators.http import require_POST, require_http_methods
-from project_management.models import Project
-from project_management.forms.psttask_forms import ProjectForm
+from bee.models import Project
+from bee.forms.psttask_forms import ProjectForm
 import pprint
 from django.contrib import messages
 
@@ -13,14 +13,14 @@ from django.contrib import messages
 @login_required
 def projects(request):
     pr_list = Project.objects.filter(created_by=request.user)
-    return render_to_response('templates/project_management/psttasks/projects.html',
+    return render_to_response('templates/bee/psttasks/projects.html',
         {'projects': pr_list},
         context_instance=RequestContext(request))
 
 @login_required
 def project(request, proj_id):
     pr = Project.objects.get(id=proj_id)
-    return render_to_response('templates/project_management/psttasks/project.html',
+    return render_to_response('templates/bee/psttasks/project.html',
         {'project': pr},
         context_instance=RequestContext(request))
 
@@ -44,7 +44,7 @@ def create_project(request):
         form = ProjectForm()
     #messages.success(request, "Project created")
 
-    return render_to_response('templates/project_management/psttasks/create_project.html',
+    return render_to_response('templates/bee/psttasks/create_project.html',
         {'form': form, 'user': request.user},
         context_instance=RequestContext(request))
 

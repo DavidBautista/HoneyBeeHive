@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'project_management',
+    'bee',
     'djcelery',
 
 )
@@ -128,7 +128,7 @@ TEMPLATE_DIRS = (
     BASE_DIR
 )
 
-AUTH_USER_MODEL = 'project_management.UserWorker'
+AUTH_USER_MODEL = 'bee.UserWorker'
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/projects/'
 
@@ -145,6 +145,6 @@ BROKER_URL = 'amqp://guest:guest@localhost//'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_IMPORTS = ('project_management.tasks.auth_tasks', )
+CELERY_IMPORTS = ('bee.tasks.auth_tasks', )
 
 #El worker de celery de momento se arranca con celery -A HoneyBeeHive worker -l info
