@@ -1,3 +1,8 @@
 .idea
 *.pyc
 settings.py
+
+bee/vendor/bootstrap/node_modules/*
+bee/vendor/bootstrap/dist/*
+bee/vendor/bootstrap/npm-debug.log
+bee/static/node_modules/*
