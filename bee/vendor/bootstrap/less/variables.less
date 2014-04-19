@@ -26,6 +26,10 @@
 @bee-hive-light: #ffd556;
 @bee-hive-lighter: #fefacd;
 
+@bee-hive-lighter-2: darken(@bee-hive-lighter, 8%); // #fdf6a5
+@bee-hive-lighter-3: lighten(@bee-hive-lighter, 8%);
+@bee-hive-dark-2: lighten(#6b3506, 10%);
+
 //== Scaffolding
 //
 // ## Settings for some of the most global styles.
@@ -34,7 +38,7 @@
 //@body-bg: #FFFEB3;
 @body-bg: @bee-hive-lighter;
 //** Global text color on `<body>`.
-@text-color:            @gray-dark;
+@text-color:            @bee-hive-dark;
 
 //** Global textual link color.
 @link-color:            @brand-primary;
@@ -144,9 +148,9 @@
 
 @btn-font-weight:                normal;
 
-@btn-default-color:              #333;
-@btn-default-bg:                 #fff;
-@btn-default-border:             #ccc;
+@btn-default-color:              #fff;
+@btn-default-bg:                 @bee-hive-dark-2;
+@btn-default-border:             @bee-hive-darker;
 
 @btn-primary-color:              #fff;
 @btn-primary-bg:                 @brand-primary;
@@ -176,21 +180,25 @@
 //##
 
 //** `<input>` background color
-@input-bg:                       #fff;
+//@input-bg:                       #fff;
+@input-bg:                       @bee-hive-lighter-3;
 //** `<input disabled>` background color
-@input-bg-disabled:              @gray-lighter;
+//@input-bg-disabled:              @gray-lighter;
+@input-bg-disabled:              @bee-hive-lighter-2;
 
 //** Text color for `<input>`s
-@input-color:                    @gray;
+//@input-color:                    @gray;
+@input-color:                    @bee-hive-dark-2;
 //** `<input>` border color
-@input-border:                   #ccc;
+//@input-border:                   #ccc;
+@input-border:                   @bee-hive-dark;
 //** `<input>` border radius
 @input-border-radius:            @border-radius-base;
 //** Border color for inputs on focus
-@input-border-focus:             #66afe9;
+@input-border-focus:             #66afe9; //TODO
 
 //** Placeholder text color
-@input-color-placeholder:        @gray-light;
+@input-color-placeholder:        @bee-hive-dark-2;
 
 //** Default `.form-control` height
 @input-height-base:              (@line-height-computed + (@padding-base-vertical * 2) + 2);
@@ -199,8 +207,8 @@
 //** Small `.form-control` height
 @input-height-small:             (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) + 2);
 
-@legend-color:                   @gray-dark;
-@legend-border-color:            #e5e5e5;
+@legend-color:                   @gray-dark; //todo
+@legend-border-color:            #e5e5e5; // todo
 
 //** Background color for textual input addons
 @input-group-addon-bg:           @gray-lighter;
@@ -346,12 +354,12 @@
 @navbar-default-border:            darken(@navbar-default-bg, 6.5%);
 
 // Navbar links
-@navbar-default-link-color:                @bee-hive-darker; //TODO
-@navbar-default-link-hover-color:          @bee-hive-dark; //TODO
+@navbar-default-link-color:                @bee-hive-darker;
+@navbar-default-link-hover-color:          @bee-hive-dark;//TODO
 @navbar-default-link-hover-bg:             lighten(@navbar-default-bg, 8%);
-@navbar-default-link-active-color:         #491b03; //TODO
+@navbar-default-link-active-color:         @bee-hive-darker;
 @navbar-default-link-active-bg:            @bee-hive;
-@navbar-default-link-disabled-color:       #ccc;
+@navbar-default-link-disabled-color:       lighten(@bee-hive-dark, 10%); //TODO
 @navbar-default-link-disabled-bg:          transparent;
 
 // Navbar brand label
@@ -669,17 +677,17 @@
 //
 //##
 
-@panel-bg:                    #fff;
+@panel-bg:                    @bee-hive-lighter-2;
 @panel-body-padding:          15px;
 @panel-border-radius:         @border-radius-base;
 
 //** Border color for elements within panels
-@panel-inner-border:          #ddd;
-@panel-footer-bg:             #f5f5f5;
+@panel-inner-border:          @bee-hive;
+@panel-footer-bg:             @bee-hive-light;
 
-@panel-default-text:          @gray-dark;
-@panel-default-border:        #ddd;
-@panel-default-heading-bg:    #f5f5f5;
+@panel-default-text:          @bee-hive-darker;
+@panel-default-border:        @bee-hive;
+@panel-default-heading-bg:    @bee-hive-light;
 
 @panel-primary-text:          #fff;
 @panel-primary-border:        @brand-primary;
