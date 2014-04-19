@@ -128,7 +128,7 @@ TEMPLATE_DIRS = (
 )
 TEMPLATE_CONTEXT_RPCESSORS = 'django.core.context_processors.i18n'
 
-AUTH_USER_MODEL = 'bee.UserWorker'
+AUTH_USER_MODEL = 'bee.UserBee'
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/projects/'
 

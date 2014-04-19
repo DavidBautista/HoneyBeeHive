@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidde
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
-from bee.models import UserWorker
+from bee.models import UserBee
 from bee.forms.auth_forms import RegisterForm
 from bee.forms.auth_validation import activate_user, send_activation_mail
 
@@ -37,7 +37,7 @@ def register(request):
 def activate(request):
     email = request.GET.get('email')
     code = request.GET.get('code')
-    user = UserWorker.objects.get(email=email)
+    user = UserBee.objects.get(email=email)
     if email and code and not user.is_active:
         if activate_user(email,  code):
             user.backend = 'django.contrib.auth.backends.ModelBackend'

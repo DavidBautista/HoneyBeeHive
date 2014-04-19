@@ -3,13 +3,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.utils import timezone
 import datetime
 
-def __getitem__(self, item):
-  return getattr(self,item)
-def __setitem__(self, key, value):
-  return setattr(self,key,value)
-models.Model.__getitem__=__getitem__
-models.Model.__setitem__=__setitem__
-
 
 #####################################################################################
 #####################################################################################
@@ -45,7 +38,7 @@ class UserManager(BaseUserManager):
 #####################################################################################
 
 
-class UserWorker(AbstractBaseUser, PermissionsMixin):
+class UserBee(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     #from AbstractBaseUser
     #password = models.CharField(_('password'), max_length=128)
@@ -74,6 +67,11 @@ class UserWorker(AbstractBaseUser, PermissionsMixin):
 
     ############### APP attributes ###############
 
+
+    class Meta:
+        app_label="bee"
+
+
     ############### PROPERTIES ###############
     def _get_full_name(self):
         """
@@ -92,83 +90,3 @@ class UserWorker(AbstractBaseUser, PermissionsMixin):
     ############### METHODS ###############
     def __unicode__(self):
         return self.full_name
-
-
-class Project(models.Model):
-    name = models.CharField(max_length=140)
-    ptype = models.CharField(max_length=64)
-    description = models.TextField(max_length=1024)
-    pred_start_date = models.DateTimeField(null=True)
-    pred_end_date = models.DateTimeField(null=True)
-    real_start_date = models.DateTimeField(null=True)
-    real_end_date = models.DateTimeField(null=True)
-    created_by = models.ForeignKey(UserWorker, related_name='created_projects')
-
-
-class Sprint(models.Model):
-    name = models.CharField(max_length=140)
-    start_date = models.DateTimeField(null=True)
-    end_date = models.DateTimeField(null=True)
-    project = models.ForeignKey(Project, related_name='sprints')
-
-
-class Ttask(models.Model):
-    name = models.CharField(max_length=140)
-    ttype = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
-    pred_start_date = models.DateTimeField(null=True)
-    pred_end_date = models.DateTimeField(null=True)
-    real_start_date = models.DateTimeField(null=True)
-    real_end_date = models.DateTimeField(null=True)
-    parent_task = models.ForeignKey('Ttask', related_name='child_tasks')
-    sprint = models.ForeignKey(Sprint, related_name='ttasks')
-    created_by = models.ForeignKey(UserWorker, related_name='created_tasks')
-
-
-SCORE_CHOICES = zip(range(1, 10), range(1, 10))
-
-
-class Issue(models.Model): #TODO pensar si es buen nombre
-    seriousness = models.IntegerField(choices=SCORE_CHOICES, default=1)
-    name = models.CharField(max_length=140)
-    itype = models.CharField(max_length=64)
-    description = models.CharField(max_length=1024)
-    time_effect = models.DateTimeField(null=True)
-    ttask = models.ForeignKey(Ttask, related_name='issues')
-
-
-class Discussion(models.Model):
-    subject = models.CharField(max_length=140)
-    start_date = models.DateTimeField(default=datetime.datetime.now())
-    project = models.ForeignKey(Project, related_name='discussions')
-    sprint = models.ForeignKey(Sprint, related_name='discussions', null=True)
-    task = models.ForeignKey(Ttask, related_name='discussions', null=True)
-    started_by = models.ForeignKey(UserWorker, related_name='created_discussions')
-
-
-class Post(models.Model):
-    subject = models.CharField(max_length=140)
-    content = models.CharField(max_length=1024)
-    sender = models.ForeignKey(UserWorker, related_name='posts')
-    discussion = models.ForeignKey(Discussion, related_name='posts')
-    response_to = models.ForeignKey('Post', related_name='responses', null=True)
-
-
-class DiscussionSubscription(models.Model):
-    user = models.ForeignKey(UserWorker, related_name='subscribed_discussion')
-    discussion = models.ForeignKey(Discussion, related_name='subscribed_users')
-    last_read_post = models.ForeignKey(Post)
-    new_messages = models.BooleanField(default=False)
-
-
-class AssignedWorkerToTask(models.Model):
-    uworker = models.ForeignKey(UserWorker, related_name='task_assigned')
-    ttask = models.ForeignKey(Ttask, related_name='worker_assigned')
-    role = models.CharField(max_length=64)
-
-class AssignedWorkerToProject(models.Model):
-    uworker = models.ForeignKey(UserWorker, related_name='project_assigned')
-    project = models.ForeignKey(Project, related_name='worker_assigned')
-    role = models.CharField(max_length=64)
-
-

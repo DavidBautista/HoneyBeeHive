@@ -1,4 +1,4 @@
-from bee.models import UserWorker
+from bee.models import UserBee
 from django.utils.html import simple_email_re
 from django.core.exceptions import ObjectDoesNotExist
 from hashlib import sha512
@@ -23,7 +23,7 @@ def send_activation_mail(user):
 
 
 def activate_user(email, code):
-    user = UserWorker.objects.get(email=email)
+    user = UserBee.objects.get(email=email)
     print code
     print sha512("%s%s" % (SECRET_KEY, user.email)).hexdigest()
     if code == sha512("%s%s" % (SECRET_KEY, user.email)).hexdigest():
@@ -40,7 +40,7 @@ def activate_user(email, code):
 def is_valid_email(email):
     if simple_email_re.match(email):
         try:
-            UserWorker.objects.get(email=email)
+            UserBee.objects.get(email=email)
             return False
         except ObjectDoesNotExist:
             return True

@@ -1,5 +1,5 @@
 from django import forms
-from bee.models import UserWorker
+from bee.models import UserBee
 from auth_validation import send_activation_mail
 from django.utils.translation import ugettext_lazy as _
 import datetime
@@ -20,7 +20,7 @@ class UserCreationForm(forms.ModelForm):
     }
 
     class Meta:
-        model = UserWorker
+        model = UserBee
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -42,14 +42,14 @@ class RegisterForm(UserCreationForm):
     email = forms.EmailField(label="E-Mail")
 
     class Meta:
-        model = UserWorker
+        model = UserBee
         fields = ("email", "first_name", "last_name")
 
     def clean_email(self):
         email = self.cleaned_data["email"]
         try:
-            UserWorker.objects.get(email=email)
-        except UserWorker.DoesNotExist:
+            UserBee.objects.get(email=email)
+        except UserBee.DoesNotExist:
             return email
         raise forms.ValidationError("A user with that email address already exists.")
 

@@ -128,7 +128,7 @@ TEMPLATE_DIRS = (
     BASE_DIR
 )
 
-AUTH_USER_MODEL = 'bee.UserWorker'
+AUTH_USER_MODEL = 'bee.UserBee'
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/projects/'
 
