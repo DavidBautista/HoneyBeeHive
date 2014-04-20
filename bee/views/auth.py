@@ -4,34 +4,27 @@ from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from bee.models import UserBee
-from bee.forms.auth_forms import RegisterForm
+from bee.forms.auth_forms import RegisterForm, LoginForm
 from bee.forms.auth_validation import activate_user, send_activation_mail
+from HoneyBeeHive import settings
 
 
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            print "FORM VALID"
             new_user = form.save()
-            user = authenticate(email=request.POST.get('email'),
-                                password=request.POST.get('password1'))
-            #user.save()
-            if user is not None:
+            if new_user is not None:
                 return render_to_response(
                     "templates/bee/auth/activate_email.html",
                     {},
                     context_instance=RequestContext(request))
-        return render_to_response(
-            "templates/bee/auth/register.html",
-            {'form': form},
-            context_instance=RequestContext(request))
-    else:
-        form = RegisterForm()
-        return render_to_response(
-            "templates/bee/auth/register.html",
-            {'form': form},
-            context_instance=RequestContext(request))
+
+    else: form = RegisterForm()
+    return render_to_response(
+        "templates/bee/auth/register.html",
+        {'register_form': form},
+        context_instance=RequestContext(request))
 
 
 def activate(request):
@@ -50,22 +43,24 @@ def activate(request):
 
 
 def login_user(request):
-    #TODO tener en cuenta el "remember me"
-    error = ""
     if request.method == "POST":
-        user = authenticate(
-            email=request.POST.get('email'),
-            password=request.POST.get('password'))
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect(reverse('projects_list'))
-            error = "Check your email for an activation link."
-        else:
-            error = "Incorrect email or password."
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            login(request, login_form.cleaned_data['user'])
+            return HttpResponseRedirect(reverse(settings.USER_INDEX))
+    else:
+        login_form = LoginForm()
     return render_to_response(
         "templates/bee/auth/login.html",
-        {'error': error},
+        {'login_form': login_form},
+        context_instance=RequestContext(request))
+
+
+def login_colorbox(request):
+    login_form = LoginForm()
+    return render_to_response(
+        "templates/game/auth/_login_form.html",
+        {'login_form': login_form},
         context_instance=RequestContext(request))
 
 

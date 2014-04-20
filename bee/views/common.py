@@ -2,13 +2,15 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 
-from bee.forms.auth_forms import RegisterForm
+from bee.forms.auth_forms import RegisterForm, LoginForm
 from bee.decorators.auth import anonymous_required
 
 @anonymous_required
 def index(request):
+    login_form = LoginForm()
+    register_form = RegisterForm()
     return render_to_response('templates/bee/common/index.html',
-        {},
+        {'register_form': register_form, 'login_form': login_form},
         context_instance=RequestContext(request))
 
 

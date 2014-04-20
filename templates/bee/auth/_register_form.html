@@ -1,34 +1,43 @@
 {% load i18n %}
-<h3>{% trans "Register" %}</h3>
-{# TODO rehacer este formulario #}
-<form action="{% url "register" %}" class="form-horizontal" method="POST">
-  {% csrf_token %}
-  <div>
-    {{ form.first_name.errors }}
-    <label for="first_name">First name: </label>
-    {{ form.first_name }}
-  </div>
-  <div>
-    {{ form.last_name.errors }}
-    <label for="last_name">Last name: </label>
-    {{ form.last_name }}
-  </div>
 
-  <div>
-    {{ form.email.errors }}
-    <label for="id_email">E-Mail: </label>
-    {{ form.email }}
-  </div>
-  <div>
-    {{ form.password1.errors }}
-    <label for="id_password1">Password: </label>
-    {{ form.password1 }}
-  </div>
-  <div>
-    {{ form.password2.errors }}
-    <label for="id_password2">Repeat password: </label>
-    {{ form.password2 }}
-  </div>
-  <br>
-  <input class="btn btn-inverse" type="submit" name="submit" value="Register" />
-</form>
+<div id="register-form" class="panel panel-default text-center">
+    <div class="panel-heading"><h3 class="panel-title">{% trans "Register for free" %}</h3></div>
+    <div class="panel-body">
+      {% if register_form.non_field_errors %}
+        <div id="register_errors">
+          <span class="help-block form-field-error">{% for err in register_form.non_field_errors %}{{ err }}<br>{% endfor %}</span>
+        </div>
+      {% endif %}
+      <form role="form" action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group" style="position: relative">
+          {{ register_form.first_name }}
+          {% if register_form.first_name.errors %}<span class="help-block form-field-error">{% for err in register_form.first_name.errors %}{{ err }}<br>{% endfor %}</span>{% endif %}
+        </div>
+        <div class="form-group" style="position: relative">
+          {{ register_form.last_name }}
+          {% if register_form.last_name.errors %}<span class="help-block form-field-error">{% for err in register_form.last_name.errors %}{{ err }}<br>{% endfor %}</span>{% endif %}
+        </div>
+        <div class="form-group">
+          {{ register_form.email }}
+          {% if register_form.email.errors %}<span class="help-block form-field-error">{% for err in register_form.email.errors %}{{ err }}{% endfor %}</span>{% endif %}
+
+        </div>
+        <div class="form-group">
+          {{ register_form.password1 }}
+          {% if register_form.password1.errors %}<span class="help-block form-field-error">{% for err in register_form.password1.errors %}{{ err }}{% endfor %}</span>{% endif %}
+        </div>
+        <div class="form-group">
+          {{ register_form.password2 }}
+          {% if register_form.password2.errors %}<span class="help-block form-field-error">{% for err in register_form.password2.errors %}{{ err }}{% endfor %}</span>{% endif %}
+        </div>
+        <div class="checkbox auth-input"> {#TODO hacer esto bien #}
+          <label class="fs11">
+            <input type="checkbox">{% trans "I accept the T&C and the Privacy Policy." %}
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-default">{% trans "Register" %}</button>
+      </form>
+    </div>
+</div>

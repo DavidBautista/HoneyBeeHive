@@ -1,20 +1,26 @@
 {% load i18n %}
-<div class="panel panel-default">
-  <div class="panel-heading "><h1 class="panel-title text-center">{% trans "Login" %}</h1></div>
+<div class="panel panel-default panel-login  text-center">
+  <div class="panel-heading "><h1 class="panel-title">{% trans "Login" %}</h1></div>
   <div class="panel-body">
-    {% if error %}
-      <div class="alert alert-danger">{{ error }}</div>
+    {#    {% if error %}#}
+    {#      <div class="alert alert-danger">{{ error }}</div>#}
+    {#    {% endif %}#}
+    {% if login_form.non_field_errors %}
+      <div id="login_errors">
+        <span class="help-block form-field-error">{% for err in login_form.non_field_errors %}{{ err }}<br>{% endfor %}</span>
+      </div>
     {% endif %}
-{#    <form role="form" action="/{{ LANGUAGE_CODE }}/login/" method="POST">#}
     <form role="form" action="{% url 'login' %}" method="POST">
       {% csrf_token %}
       <div class="form-group">
-        <input type="text" name="email" class="input-lg" placeholder="Email" />
-      </div>
+        {{ login_form.email }}
+        {% if login_form.email.errors %}<span class="help-block form-field-error">{% for err in login_form.email.errors %}{{ err }}<br>{% endfor %}</span>{% endif %}      </div>
       <div class="form-group">
-        <input type="password" name="password" class="input-lg" placeholder="Password" />
+        {{ login_form.password }}
+        {% if login_form.password.errors %}<span class="help-block form-field-error">{% for err in login_form.password.errors %}{{ err }}{% endfor %}</span>{% endif %}
       </div>
-      <div class="checkbox">
+
+      <div class="checkbox"> {#TODO hacer esto bien #}
         <label>
           <input type="checkbox" name="remember" > {% trans "Remember me on this computer." %}
         </label>
@@ -23,7 +29,7 @@
     </form>
 
     <div class="small text-center top10">
-      <p>{% trans "Don't have a HoneyBeeHive account?" %}<br/><a href="/register/">{% trans "Register now" %}.</a></p>
+      <p>{% trans "Don't have a HoneyBeeHive account?" %}<br/><a href="{% url 'register' %}">{% trans "Register now" %}.</a></p>
 
     </div>
 
