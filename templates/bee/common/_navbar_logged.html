@@ -1,10 +1,4 @@
 {% load i18n %}
-<script type="text/javascript">
-  $(document).ready(function(){
-    $("#login_button").colorbox({innerHeight:300, scrolling:false});
-    $("#register_button").colorbox({innerHeight:380, scrolling:false});
-  });
-</script>
 <nav class="navbar navbar-default" role="navigation">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -23,14 +17,15 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
-        <li><a href="#">{% trans "Features" %}</a></li>
-        <li><a href="#">{% trans "Pricing" %}</a></li>
-        <li><a href="#">{% trans "Help & Community" %}</a></li>
-        <li><a href="#">{% trans "About us" %}</a></li>
+{#        <li><a href="#">{% trans "Features" %}</a></li>#}
+{#        <li><a href="#">{% trans "Pricing" %}</a></li>#}
+{#        <li><a href="#">{% trans "Help & Community" %}</a></li>#}
+{#        <li><a href="#">{% trans "About us" %}</a></li>#}
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="login-navbar-padding"><button id="login_button" href="{% url 'login_box' %}" class="btn btn-default">{% trans "Login" %}</button></li>
-        <li class="login-navbar-padding"><button id="register_button" href="{% url 'register_box' %}" class="btn btn-default">{% trans "Register" %}</button></li>
+        <li class="login-navbar-padding">
+          <div><a id="login_button" href="{% url 'logout' %}" class="btn btn-default">{% trans "Logout" %}</a></div>
+        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

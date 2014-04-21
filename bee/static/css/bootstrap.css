@@ -4,9 +4,6 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-input[type="text"] {
-  background-color: #fffef5 !important;
-}
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -396,7 +393,7 @@ h6 .small,
 .h6 .small {
   font-weight: normal;
   line-height: 1;
-  color: #999;
+  color: #ffba21;
 }
 h1,
 .h1,
@@ -567,7 +564,6 @@ a.bg-danger:hover {
 }
 .page-header {
   padding-bottom: 9px;
-  margin: 40px 0 20px;
   border-bottom: 1px solid #eee;
 }
 ul,
@@ -5041,8 +5037,8 @@ a.list-group-item-danger.active:focus {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #f5f5f5;
-  border: 1px solid #e3e3e3;
+  background-color: #fdf6a5;
+  border: 1px solid #fdf382;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
