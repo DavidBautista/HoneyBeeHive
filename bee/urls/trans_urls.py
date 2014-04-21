@@ -10,7 +10,9 @@ urlpatterns = patterns('',
 
     #AUTH
     url(r'^login/$', 'bee.views.auth.login_user', name='login'),
+    url(r'^login_box/$', 'bee.views.auth.login_colorbox', name='login_box'),
     url(r'^register/$', 'bee.views.auth.register',  name='register'),
+    url(r'^register_box/$', 'bee.views.auth.register_colorbox',  name='register_box'),
     url(r'^activate_email/$', 'bee.views.auth.activate', name='activate_email'),
 
     #PROJECTS, SPRINTS & TASKS

@@ -1,4 +1,10 @@
 {% load i18n %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#login_button").colorbox({innerHeight:300, scrolling:false});
+    $("#register_button").colorbox({innerHeight:380, scrolling:false});
+  });
+</script>
 <nav class="navbar navbar-default" role="navigation">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -41,7 +47,8 @@
       {#        <button type="submit" class="btn btn-default">Submit</button>#}
       {#      </form>#}
       <ul class="nav navbar-nav navbar-right">
-        <li class="login-navbar-padding"><button href="#" class="btn btn-default">Login</button></li>
+        <li class="login-navbar-padding"><button id="login_button" href="{% url 'login_box' %}" class="btn btn-default">{% trans "Login" %}</button></li>
+        <li class="login-navbar-padding"><button id="register_button" href="{% url 'register_box' %}" class="btn btn-default">{% trans "Register" %}</button></li>
         {#        <li class="dropdown">#}
         {#          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>#}
         {#          <ul class="dropdown-menu">#}

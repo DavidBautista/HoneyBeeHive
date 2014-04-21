@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-15 14:38+0000\n"
+"POT-Creation-Date: 2014-04-21 14:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,120 +18,157 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: HoneyBeeHive/settings.py:107
+#: HoneyBeeHive/settings.py:106
 msgid "English"
 msgstr "Inglés"
 
-#: HoneyBeeHive/settings.py:108
+#: HoneyBeeHive/settings.py:107
 msgid "German"
 msgstr "Alemán"
 
-#: HoneyBeeHive/settings.py:109
+#: HoneyBeeHive/settings.py:108
 msgid "Spanish"
 msgstr "Español"
 
-#: project_management/forms/auth_forms.py:10
+#: bee/forms/auth_forms.py:11 bee/forms/auth_forms.py:12
+#: bee/forms/auth_forms.py:80
+msgid "Email"
+msgstr "Email"
+
+#: bee/forms/auth_forms.py:16 bee/forms/auth_forms.py:17
+#: bee/forms/auth_forms.py:44 bee/forms/auth_forms.py:46
 msgid "Password"
 msgstr "Contraseña"
 
-#: project_management/forms/auth_forms.py:13
+#: bee/forms/auth_forms.py:20
+msgid "Your account is not active, please check your email."
+msgstr "Tu cuenta no ha sido activada, por favor revisa tu email."
+
+#: bee/forms/auth_forms.py:21
+msgid "Incorrect email or password."
+msgstr "Email o contraseña erróneos."
+
+#: bee/forms/auth_forms.py:49
 msgid "Password confirmation"
 msgstr "Confirmación de contraseña"
 
-#: project_management/forms/auth_forms.py:15
+#: bee/forms/auth_forms.py:50
+#, fuzzy
+msgid "Repeat password"
+msgstr "Contraseña"
+
+#: bee/forms/auth_forms.py:52
 msgid "Enter the same password as above, for verification."
 msgstr "Introduce la misma contraseña que arriba, para verificación."
 
-#: project_management/forms/auth_forms.py:18
+#: bee/forms/auth_forms.py:55
 msgid "A user with that username already exists."
 msgstr "Ya existe un usuario con este nombre"
 
-#: project_management/forms/auth_forms.py:19
+#: bee/forms/auth_forms.py:56
 msgid "The two password fields didn't match."
 msgstr "Las contraseñas no coinciden."
 
-#: project_management/forms/psttask_forms.py:11
+#: bee/forms/auth_forms.py:84 bee/forms/auth_forms.py:85
+#, fuzzy
+msgid "First name"
+msgstr "Nombre"
+
+#: bee/forms/auth_forms.py:89 bee/forms/auth_forms.py:90
+msgid "Last name"
+msgstr "Apellidos"
+
+#: bee/forms/psttask_forms.py:11
 msgid "Project name"
 msgstr "Nombre del proyecto"
 
-#: project_management/forms/psttask_forms.py:15
+#: bee/forms/psttask_forms.py:15
 msgid "Project type"
 msgstr "Tipo de proyecto"
 
-#: project_management/forms/psttask_forms.py:19
+#: bee/forms/psttask_forms.py:19
 msgid "Description"
 msgstr "Descripción"
 
-#: project_management/forms/psttask_forms.py:23
+#: bee/forms/psttask_forms.py:23
 msgid "Start date"
 msgstr "Fecha inicio"
 
-#: project_management/forms/psttask_forms.py:27
+#: bee/forms/psttask_forms.py:27
 msgid "End date"
 msgstr "Fecha fin"
 
-#: templates/project_management/auth/_login_form.html:3
+#: templates/bee/auth/_login_form.html:3
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: templates/project_management/auth/_login_form.html:19
+#: templates/bee/auth/_login_form.html:25
 msgid "Remember me on this computer."
 msgstr "Recuérdame en este ordenador."
 
-#: templates/project_management/auth/_login_form.html:26
+#: templates/bee/auth/_login_form.html:32
 msgid "Don't have a HoneyBeeHive account?"
 msgstr "No tienes una cuenta en HoneyBeeHive?"
 
-#: templates/project_management/auth/_login_form.html:26
+#: templates/bee/auth/_login_form.html:32
 msgid "Register now"
 msgstr "Regístrate ahora"
 
-#: templates/project_management/auth/_register_form.html:1
+#: templates/bee/auth/_register_form.html:4
+#, fuzzy
+msgid "Register for free"
+msgstr "Regístrate gratis"
+
+#: templates/bee/auth/_register_form.html:36
+msgid "I accept the T&C and the Privacy Policy."
+msgstr "Acepto los T&C y la Declaración de protección de datos."
+
+#: templates/bee/auth/_register_form.html:40
 msgid "Register"
 msgstr "Registro"
 
-#: templates/project_management/auth/activate_email.html:4
+#: templates/bee/auth/activate_email.html:5
 msgid "Account activation"
 msgstr "Activación de cuenta"
 
-#: templates/project_management/auth/activate_email.html:7
+#: templates/bee/auth/activate_email.html:8
 msgid "Check your email to activate your account."
 msgstr "Comprueba tu email para activar tu cuenta"
 
-#: templates/project_management/common/_navbar_anonym.html:20
+#: templates/bee/common/_navbar_anonym.html:26
 msgid "Features"
 msgstr "Características"
 
-#: templates/project_management/common/_navbar_anonym.html:21
+#: templates/bee/common/_navbar_anonym.html:27
 msgid "Pricing"
 msgstr "Precios"
 
-#: templates/project_management/common/_navbar_anonym.html:22
+#: templates/bee/common/_navbar_anonym.html:28
 msgid "Help & Community"
 msgstr "Ayuda y comunidad"
 
-#: templates/project_management/common/_navbar_anonym.html:23
+#: templates/bee/common/_navbar_anonym.html:29
 msgid "About us"
 msgstr "Quiénes somos"
 
-#: templates/project_management/psttasks/_project_box.html:9
+#: templates/bee/psttasks/_project_box.html:9
 msgid "View Project"
 msgstr "Ver proyecto"
 
-#: templates/project_management/psttasks/create_project.html:6
-#: templates/project_management/psttasks/projects.html:23
-#: templates/project_management/psttasks/projects.html:40
+#: templates/bee/psttasks/create_project.html:6
+#: templates/bee/psttasks/projects.html:23
+#: templates/bee/psttasks/projects.html:40
 msgid "Create new project"
 msgstr "Crear nuevo proyecto"
 
-#: templates/project_management/psttasks/projects.html:18
+#: templates/bee/psttasks/projects.html:18
 msgid "Your projects"
 msgstr "Tus proyectos"
 
-#: templates/project_management/psttasks/projects.html:37
+#: templates/bee/psttasks/projects.html:37
 msgid "You can create your own projects."
 msgstr "Puedes crear tus propios proyectos."
 
-#: templates/project_management/psttasks/projects.html:47
+#: templates/bee/psttasks/projects.html:47
 msgid "Ask your friends to be invited in their projects!"
 msgstr "Pide a tus amigos que te inviten a sus proyectos!"

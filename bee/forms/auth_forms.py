@@ -8,7 +8,7 @@ import datetime
 
 class LoginForm(forms.ModelForm):
     email = forms.EmailField(
-        label=_("Username"),
+        label=_("Email"),
         widget=forms.EmailInput(attrs={'placeholder': _("Email"),
                                        'class': 'form-control input-md margin-centered input-login'})
     )
@@ -17,7 +17,7 @@ class LoginForm(forms.ModelForm):
         widget=forms.PasswordInput(attrs={'placeholder': _("Password"),
                                           'class': 'form-control input-md margin-centered input-login'})
     )
-    error_messages = {'not_active': _("You don't have password."),
+    error_messages = {'not_active': _("Your account is not active, please check your email."),
                       'invalid': _("Incorrect email or password.")}
 
     class Meta:
