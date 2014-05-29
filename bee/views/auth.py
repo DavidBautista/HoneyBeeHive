@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidde
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
+from django.views.decorators.cache import cache_page
 from bee.models import UserBee
 from bee.forms.auth_forms import RegisterForm, LoginForm
 from bee.forms.auth_validation import activate_user, send_activation_mail
@@ -26,12 +27,14 @@ def register(request):
         {'register_form': form},
         context_instance=RequestContext(request))
 
+@cache_page(60*15)
 def register_colorbox(request):
     form = RegisterForm()
     return render_to_response(
         "templates/bee/auth/_register_form.html",
         {'register_form': form},
         context_instance=RequestContext(request))
+
 
 def activate(request):
     email = request.GET.get('email')
@@ -41,9 +44,11 @@ def activate(request):
         if activate_user(email,  code):
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
-            return HttpResponseRedirect(reverse('projects_list'))
+            return HttpResponseRedirect(reverse(settings.USER_INDEX))
         else:
             return HttpResponseForbidden()
+    elif user.is_active:
+        return HttpResponseRedirect(reverse(settings.USER_INDEX))
     else:
         return HttpResponse("Check your email")
 
@@ -62,6 +67,7 @@ def login_user(request):
         context_instance=RequestContext(request))
 
 
+@cache_page(60*15)
 def login_colorbox(request):
     login_form = LoginForm()
     return render_to_response(

@@ -80,12 +80,12 @@ class UserBee(AbstractBaseUser, PermissionsMixin):
         full_name = '%s %s' % (self.first_name, self.last_name)
         return full_name.strip()
 
-    def _get_short_name(self):
+    def get_short_name(self):
         """Returns the short name for the user."""
         return self.first_name
 
     full_name = property(_get_full_name)
-    short_name = property(_get_short_name)
+    short_name = property(get_short_name)
 
     ############### METHODS ###############
     def __unicode__(self):

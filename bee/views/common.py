@@ -1,11 +1,13 @@
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
+from django.views.decorators.cache import cache_page
 
 from bee.forms.auth_forms import RegisterForm, LoginForm
 from bee.decorators.auth import anonymous_required
 
 @anonymous_required
+@cache_page(60*15)
 def index(request):
     login_form = LoginForm()
     register_form = RegisterForm()
