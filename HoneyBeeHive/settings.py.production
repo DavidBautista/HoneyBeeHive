@@ -128,7 +128,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT ="/var/projects/hbh/static"
 
 TEMPLATE_DIRS = (
-    BASE_DIR
+    BASE_DIR,
 )
 
 AUTH_USER_MODEL = 'bee.UserBee'

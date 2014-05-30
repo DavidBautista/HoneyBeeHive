@@ -7,7 +7,7 @@ from bee.models.beetask import BeeTask
 
 class Discussion(models.Model):
     subject = models.CharField(max_length=140)
-    start_date = models.DateTimeField(default=datetime.datetime.now()) #todo utc
+    start_date = models.DateTimeField(auto_now_add=True)
     project = models.ForeignKey('Project', related_name='discussions')
     sprint = models.ForeignKey('Sprint', related_name='discussions', null=True)
     task = models.ForeignKey('BeeTask', related_name='discussions', null=True)
