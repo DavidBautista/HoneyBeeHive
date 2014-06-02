@@ -1,6 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils import timezone
+from hashlib import sha512
+from django.template import loader, Context
+from bee.tasks.auth_tasks import activation_mail_sender
+from HoneyBeeHive.settings import SECRET_KEY, CURRENT_HOST
+from django.utils.html import simple_email_re
+from django.core.exceptions import ObjectDoesNotExist
 import datetime
 
 
@@ -59,6 +65,7 @@ class UserBee(AbstractBaseUser, PermissionsMixin):
     country = models.CharField(max_length=50)
     birth_date = models.DateField(null=True, blank=True)
     date_joined = models.DateField()
+    default_language = models.CharField(max_length=10, default='en')
 
     email_active = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -90,3 +97,35 @@ class UserBee(AbstractBaseUser, PermissionsMixin):
     ############### METHODS ###############
     def __unicode__(self):
         return self.full_name
+
+    def send_activation_mail(self):
+        code = sha512("%s%s" % (SECRET_KEY, self.email)).hexdigest()
+        url = CURRENT_HOST + "/activate_email/?email=%s&code=%s" % (self.email, code)
+        print(url)
+        try:
+            activation_mail_sender.delay(self.email, self.default_language)
+        except Exception as e:
+            print e
+
+    @classmethod
+    def activate_user(cls, email, code):
+        user = UserBee.objects.get(email=email)
+        print code
+        print sha512("%s%s" % (SECRET_KEY, user.email)).hexdigest()
+        if code == sha512("%s%s" % (SECRET_KEY, user.email)).hexdigest():
+            user.email_active = True
+            user.is_active = True
+            user.save()
+            return True
+        else:
+            return False
+
+    @classmethod
+    def is_valid_email(email):
+        if simple_email_re.match(email):
+            try:
+                UserBee.objects.get(email=email)
+                return False
+            except ObjectDoesNotExist:
+                return True
+        return False

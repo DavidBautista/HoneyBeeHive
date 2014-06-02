@@ -1,7 +1,6 @@
 from django import forms
 from bee.models import UserBee
 from django.contrib.auth import authenticate
-from auth_validation import send_activation_mail
 from django.utils.translation import ugettext_lazy as _
 import datetime
 
@@ -107,7 +106,7 @@ class RegisterForm(UserCreationForm):
         user = super(RegisterForm, self).save(commit=False)
         user.email_active = False
         user.is_active = False
-        user.date_joined=datetime.datetime.now()
-        send_activation_mail(user)
+        user.date_joined = datetime.datetime.now()
+        user.send_activation_mail()
         user.save()
         return user

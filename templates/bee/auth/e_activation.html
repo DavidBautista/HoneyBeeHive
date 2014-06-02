@@ -1,4 +1,14 @@
-Hi {{ email }}, welcome to HoneyBeeHive,
-to activate your account click here: {{ url }}
-{#TODO #}
-
+{% extends "templates/bee/layouts/__base_email.html" %}
+{% load i18n %}
+{% block content %}
+<div>
+  <h2>{% trans "You've successfully signed up to HoneyBeeHive" %}</h2>
+  <div>
+    {% trans "To activate your account and start managing your projects," %} <a href="{{ CURRENT_HOST }}{{ url }}">{% trans "click here" %}</a>.
+    <br/>
+    <br/>
+    {% trans "Thanks" %},<br/>
+    HoneyBeeHive
+  </div>
+</div>
+{% endblock %}

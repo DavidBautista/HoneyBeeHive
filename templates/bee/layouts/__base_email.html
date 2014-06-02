@@ -1,0 +1,33 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="author" content="David Bautista">
+  <meta charset="UTF-8">
+</head>
+<body>
+<div id="container" style="background-color: #fefacd; color: #6b3506; width:630px; padding: 30px 20px 30px 50px;">
+  <div>
+    <span style="width: 185px;">
+      <img class="header-left" src="{{ CURRENT_HOST }}{{ STATIC_URL }}img/logo/logo_small.png">
+    </span>
+    <span style="width: 180px;">
+
+    </span>
+    <span style="width: 185px;">
+      <a class="header-right" href="{{ CURRENT_HOST }}">{{ PRETTY_CURRENT_HOST }}</a>
+    </span>
+  </div>
+  <br/>
+  {% block content %}
+  {% endblock %}
+  <br/>
+  <hr/>
+  <div id="footer">
+    {% trans "Follow us" %}
+  </div>
+</div>
+</body>
+</html>
+
+

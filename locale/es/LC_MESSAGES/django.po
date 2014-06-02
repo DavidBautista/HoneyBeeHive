@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-21 14:32+0000\n"
+"POT-Creation-Date: 2014-06-02 22:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,63 +18,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: HoneyBeeHive/settings.py:106
+#: HoneyBeeHive/settings.py:110
 msgid "English"
 msgstr "Inglés"
 
-#: HoneyBeeHive/settings.py:107
+#: HoneyBeeHive/settings.py:111
 msgid "German"
 msgstr "Alemán"
 
-#: HoneyBeeHive/settings.py:108
+#: HoneyBeeHive/settings.py:112
 msgid "Spanish"
 msgstr "Español"
 
-#: bee/forms/auth_forms.py:11 bee/forms/auth_forms.py:12
-#: bee/forms/auth_forms.py:80
+#: bee/forms/auth_forms.py:10 bee/forms/auth_forms.py:11
+#: bee/forms/auth_forms.py:79
 msgid "Email"
 msgstr "Email"
 
-#: bee/forms/auth_forms.py:16 bee/forms/auth_forms.py:17
-#: bee/forms/auth_forms.py:44 bee/forms/auth_forms.py:46
+#: bee/forms/auth_forms.py:15 bee/forms/auth_forms.py:16
+#: bee/forms/auth_forms.py:43 bee/forms/auth_forms.py:45
 msgid "Password"
 msgstr "Contraseña"
 
-#: bee/forms/auth_forms.py:20
+#: bee/forms/auth_forms.py:19
 msgid "Your account is not active, please check your email."
 msgstr "Tu cuenta no ha sido activada, por favor revisa tu email."
 
-#: bee/forms/auth_forms.py:21
+#: bee/forms/auth_forms.py:20
 msgid "Incorrect email or password."
 msgstr "Email o contraseña erróneos."
 
-#: bee/forms/auth_forms.py:49
+#: bee/forms/auth_forms.py:48
 msgid "Password confirmation"
 msgstr "Confirmación de contraseña"
 
-#: bee/forms/auth_forms.py:50
+#: bee/forms/auth_forms.py:49
 #, fuzzy
 msgid "Repeat password"
 msgstr "Contraseña"
 
-#: bee/forms/auth_forms.py:52
+#: bee/forms/auth_forms.py:51
 msgid "Enter the same password as above, for verification."
 msgstr "Introduce la misma contraseña que arriba, para verificación."
 
-#: bee/forms/auth_forms.py:55
+#: bee/forms/auth_forms.py:54
 msgid "A user with that username already exists."
 msgstr "Ya existe un usuario con este nombre"
 
-#: bee/forms/auth_forms.py:56
+#: bee/forms/auth_forms.py:55
 msgid "The two password fields didn't match."
 msgstr "Las contraseñas no coinciden."
 
-#: bee/forms/auth_forms.py:84 bee/forms/auth_forms.py:85
+#: bee/forms/auth_forms.py:83 bee/forms/auth_forms.py:84
 #, fuzzy
 msgid "First name"
 msgstr "Nombre"
 
-#: bee/forms/auth_forms.py:89 bee/forms/auth_forms.py:90
+#: bee/forms/auth_forms.py:88 bee/forms/auth_forms.py:89
 msgid "Last name"
 msgstr "Apellidos"
 
@@ -98,7 +98,14 @@ msgstr "Fecha inicio"
 msgid "End date"
 msgstr "Fecha fin"
 
+#: bee/tasks/auth_tasks.py:31
+#, fuzzy
+#| msgid "Don't have a HoneyBeeHive account?"
+msgid "Activate your HoneyBeeHive account"
+msgstr "No tienes una cuenta en HoneyBeeHive?"
+
 #: templates/bee/auth/_login_form.html:3
+#: templates/bee/common/_navbar_anonym.html:32
 msgid "Login"
 msgstr "Iniciar sesión"
 
@@ -124,6 +131,7 @@ msgid "I accept the T&C and the Privacy Policy."
 msgstr "Acepto los T&C y la Declaración de protección de datos."
 
 #: templates/bee/auth/_register_form.html:40
+#: templates/bee/common/_navbar_anonym.html:33
 msgid "Register"
 msgstr "Registro"
 
@@ -134,6 +142,22 @@ msgstr "Activación de cuenta"
 #: templates/bee/auth/activate_email.html:8
 msgid "Check your email to activate your account."
 msgstr "Comprueba tu email para activar tu cuenta"
+
+#: templates/bee/auth/e_activation.html:5
+msgid "You've successfully signed up to HoneyBeeHive"
+msgstr "Te has registrado correctamente en HoneyBeeHive"
+
+#: templates/bee/auth/e_activation.html:7
+msgid "To activate your account and start managing your projects,"
+msgstr "Para activar tu cuenta y empezar a gestionar tus proyectos,"
+
+#: templates/bee/auth/e_activation.html:7
+msgid "click here"
+msgstr "pulsa aquí"
+
+#: templates/bee/auth/e_activation.html:10
+msgid "Thanks"
+msgstr "Gracias"
 
 #: templates/bee/common/_navbar_anonym.html:26
 msgid "Features"
@@ -150,6 +174,14 @@ msgstr "Ayuda y comunidad"
 #: templates/bee/common/_navbar_anonym.html:29
 msgid "About us"
 msgstr "Quiénes somos"
+
+#: templates/bee/common/_navbar_logged.html:27
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+#: templates/bee/layouts/__base_email.html:27
+msgid "Follow us"
+msgstr "Síguenos"
 
 #: templates/bee/psttasks/_project_box.html:9
 msgid "View Project"
