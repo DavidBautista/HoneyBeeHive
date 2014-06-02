@@ -26,6 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 CURRENT_HOST = "192.168.1.121:8000"
+PRETTY_CURRENT_HOST = "www.localhost.com"
 
 # Application definition
 

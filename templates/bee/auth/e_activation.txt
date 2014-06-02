@@ -1,4 +1,7 @@
-Hi {{ email }}, welcome to HoneyBeeHive,
+{% trans "You've successfully signed up to HoneyBeeHive" %}
 to activate your account click here: {{ url }}
-{#TODO #}
+{% trans "To activate your account and start managing your projects," %}{% trans "click here" %},
+{{ CURRENT_HOST }}{{ url }}
 
+{% trans "Thanks" %},
+HoneyBeeHive

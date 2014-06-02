@@ -26,6 +26,7 @@ TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CURRENT_HOST = "https://vps63619.ovh.net"
+PRETTY_CURRENT_HOST = "www.localhost.com"
 
 # Application definition
 
