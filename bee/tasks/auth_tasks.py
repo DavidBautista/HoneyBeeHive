@@ -4,7 +4,7 @@ from HoneyBeeHive.settings import EMAIL_HOST_USER
 from celery import shared_task
 from hashlib import sha512
 from django.template import loader, Context
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 from HoneyBeeHive.settings import SECRET_KEY, CURRENT_HOST, PRETTY_CURRENT_HOST, STATIC_URL
 from django.utils.translation import activate
 

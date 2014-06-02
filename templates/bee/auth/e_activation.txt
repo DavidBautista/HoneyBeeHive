@@ -1,3 +1,4 @@
+{% load i18n %}
 {% trans "You've successfully signed up to HoneyBeeHive" %}
 to activate your account click here: {{ url }}
 {% trans "To activate your account and start managing your projects," %}{% trans "click here" %},
