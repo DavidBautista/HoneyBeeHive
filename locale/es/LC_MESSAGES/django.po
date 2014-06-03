@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-02 22:05+0000\n"
+"POT-Creation-Date: 2014-06-03 15:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,9 +53,8 @@ msgid "Password confirmation"
 msgstr "Confirmación de contraseña"
 
 #: bee/forms/auth_forms.py:49
-#, fuzzy
 msgid "Repeat password"
-msgstr "Contraseña"
+msgstr "Repite contraseña"
 
 #: bee/forms/auth_forms.py:51
 msgid "Enter the same password as above, for verification."
@@ -70,7 +69,6 @@ msgid "The two password fields didn't match."
 msgstr "Las contraseñas no coinciden."
 
 #: bee/forms/auth_forms.py:83 bee/forms/auth_forms.py:84
-#, fuzzy
 msgid "First name"
 msgstr "Nombre"
 
@@ -92,17 +90,15 @@ msgstr "Descripción"
 
 #: bee/forms/psttask_forms.py:23
 msgid "Start date"
-msgstr "Fecha inicio"
+msgstr "Fecha de inicio"
 
 #: bee/forms/psttask_forms.py:27
 msgid "End date"
-msgstr "Fecha fin"
+msgstr "Fecha de finalización"
 
 #: bee/tasks/auth_tasks.py:31
-#, fuzzy
-#| msgid "Don't have a HoneyBeeHive account?"
 msgid "Activate your HoneyBeeHive account"
-msgstr "No tienes una cuenta en HoneyBeeHive?"
+msgstr "Activa tu cuenta de HoneyBeeHive"
 
 #: templates/bee/auth/_login_form.html:3
 #: templates/bee/common/_navbar_anonym.html:32
@@ -122,7 +118,6 @@ msgid "Register now"
 msgstr "Regístrate ahora"
 
 #: templates/bee/auth/_register_form.html:4
-#, fuzzy
 msgid "Register for free"
 msgstr "Regístrate gratis"
 
@@ -144,18 +139,22 @@ msgid "Check your email to activate your account."
 msgstr "Comprueba tu email para activar tu cuenta"
 
 #: templates/bee/auth/e_activation.html:5
+#: templates/bee/auth/e_activation.txt:2
 msgid "You've successfully signed up to HoneyBeeHive"
 msgstr "Te has registrado correctamente en HoneyBeeHive"
 
 #: templates/bee/auth/e_activation.html:7
+#: templates/bee/auth/e_activation.txt:4
 msgid "To activate your account and start managing your projects,"
 msgstr "Para activar tu cuenta y empezar a gestionar tus proyectos,"
 
 #: templates/bee/auth/e_activation.html:7
+#: templates/bee/auth/e_activation.txt:4
 msgid "click here"
 msgstr "pulsa aquí"
 
 #: templates/bee/auth/e_activation.html:10
+#: templates/bee/auth/e_activation.txt:7
 msgid "Thanks"
 msgstr "Gracias"
 
@@ -192,6 +191,10 @@ msgstr "Ver proyecto"
 #: templates/bee/psttasks/projects.html:40
 msgid "Create new project"
 msgstr "Crear nuevo proyecto"
+
+#: templates/bee/psttasks/create_project.html:44
+msgid "Create project"
+msgstr "Crear proyecto"
 
 #: templates/bee/psttasks/projects.html:18
 msgid "Your projects"

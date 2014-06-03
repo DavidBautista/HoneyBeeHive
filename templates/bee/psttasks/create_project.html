@@ -2,11 +2,11 @@
 {% load i18n %}
 
 {% block content %}
-  <div class="page-header">
+  <div class="page-header" style="margin-bottom: 15px;">
     <h1>{% trans "Create new project" %}<small></small></h1>
   </div>
   <div class="row">
-    <div class="col-xs-8">
+    <div class="col-xs-12">
       <form action="{% url 'create_project' %}" method="POST" role="form">
         {% csrf_token %}
         <div class="row">
@@ -40,24 +40,21 @@
               </div>
             </div>
 
+            <input type="hidden" name="created_by_id" value="{{ user.id }}">
+            <input type="submit" class="btn btn-lg btn-info center-block" name="Submit" value="{% trans "Create project" %}">
           </div>
           <div class="col-xs-6">
-            {#TODO input de imagen #}
-            <img src="http://fakeimg.com/170x170/999999/fff.png?text=Project Image"/>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="panel panel-default">
-            <div class="panel-heading">{{ form.description.label }}</div>
-            <div class="panel-body">
-              {{ form.description }}
+            <div class="form-group">
+              <div class="panel panel-default">
+                <div class="panel-heading">{{ form.description.label }}</div>
+                <div class="panel-body">
+                  {{ form.description }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <input type="hidden" name="created_by_id" value="{{ user.id }}">
-        <input type="submit" class="btn btn-lg btn-info center-block" name="Submit" value="Submit">
       </form>
     </div>
 
