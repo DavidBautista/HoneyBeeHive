@@ -4,8 +4,6 @@ from django.views.generic import RedirectView
 from HoneyBeeHive import settings
 from django.contrib import admin
 
-admin.autodiscover()
-
 #url with language code prepend
 urlpatterns = i18n_patterns('',
     url(r'^$', 'bee.views.common.index', name='index'),
@@ -16,7 +14,6 @@ urlpatterns = i18n_patterns('',
 urlpatterns += patterns('',
     url(r'^', include('bee.urls.regular_urls')),
     (r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'img/favicon.ico')),
-    url(r'^admin/', include(admin.site.urls)),
-
+    # url(r'^admin/', include(admin.site.urls)),
 )
 
