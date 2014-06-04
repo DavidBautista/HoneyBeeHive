@@ -16,9 +16,9 @@ urlpatterns = patterns('',
     url(r'^activate_email/$', 'bee.views.auth.activate', name='activate_email'),
 
     #PROJECTS, SPRINTS & TASKS
-    url(r'^projects/$', 'bee.views.psttasks.projects', name='projects_list'),
-    url(r'^project/(?P<proj_id>\d+)/$', 'bee.views.psttasks.project', name='project'),
-    url(r'^create_project/$', 'bee.views.psttasks.create_project', name='create_project'),
+    url(r'^projects/$', 'bee.views.scrum_projects.projects', name='projects_list'),
+    url(r'^project/(?P<proj_id>\d+)/$', 'bee.views.scrum_projects.project', name='project'),
+    url(r'^create_project/$', 'bee.views.scrum_projects.create_project', name='create_project'),
 
     #PROFILE SUMMARY
 

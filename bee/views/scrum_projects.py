@@ -13,14 +13,14 @@ from django.contrib import messages
 @login_required
 def projects(request):
     pr_list = Project.objects.filter(created_by=request.user)
-    return render_to_response('templates/bee/psttasks/projects.html',
+    return render_to_response('templates/bee/scrum_projects/projects.html',
         {'projects': pr_list},
         context_instance=RequestContext(request))
 
 @login_required
 def project(request, proj_id):
     pr = Project.objects.get(id=proj_id)
-    return render_to_response('templates/bee/psttasks/project.html',
+    return render_to_response('templates/bee/scrum_projects/project.html',
         {'project': pr},
         context_instance=RequestContext(request))
 
@@ -44,7 +44,7 @@ def create_project(request):
         form = ProjectForm()
     #messages.success(request, "Project created")
 
-    return render_to_response('templates/bee/psttasks/create_project.html',
+    return render_to_response('templates/bee/scrum_projects/create_project.html',
         {'form': form, 'user': request.user},
         context_instance=RequestContext(request))
 

@@ -10,7 +10,8 @@ from bee.models.post import Post
 from bee.models.discussion_subscription import DiscussionSubscription
 from bee.models.assigned_worker_to_task import AssignedWorkerToTask
 from bee.models.assigned_worker_to_project import AssignedWorkerToProject
-
+from bee.models.user_story import UserStory
+from bee.models.user_story_acceptance_criteria import AcceptanceCriteria
 
 def __getitem__(self, item):
     return getattr(self, item)
