@@ -15,10 +15,20 @@ urlpatterns = patterns('',
     url(r'^register_box/$', 'bee.views.auth.register_colorbox',  name='register_box'),
     url(r'^activate_email/$', 'bee.views.auth.activate', name='activate_email'),
 
-    #PROJECTS, SPRINTS & TASKS
+    #PROJECTS
     url(r'^projects/$', 'bee.views.scrum_projects.projects', name='projects_list'),
-    url(r'^project/(?P<proj_id>\d+)/$', 'bee.views.scrum_projects.project', name='project'),
     url(r'^create_project/$', 'bee.views.scrum_projects.create_project', name='create_project'),
+
+    url(r'^project/(?P<proj_id>\d+)/$', 'bee.views.scrum_projects.project', name='project'),
+    url(r'^project/(?P<proj_id>\d+)/user_stories/$', 'bee.views.scrum_projects.user_stories', name='user_stories'),
+    url(r'^project/(?P<proj_id>\d+)/gantt_diagram/$', 'bee.views.scrum_projects.gantt_diagram', name='gantt_diagram'),
+    url(r'^project/(?P<proj_id>\d+)/sprints/$', 'bee.views.scrum_projects.sprints', name='sprints'),
+    url(r'^project/(?P<proj_id>\d+)/niko_calendar/$', 'bee.views.scrum_projects.niko_calendar', name='niko_calendar'),
+    url(r'^project/(?P<proj_id>\d+)/admin_project/$', 'bee.views.scrum_projects.admin_project', name='admin_project'),
+
+
+
+    #SPRINTS & TASKS
 
     #PROFILE SUMMARY
 

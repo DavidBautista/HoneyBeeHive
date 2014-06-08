@@ -1,0 +1,9 @@
+{% load i18n %}
+<div class="btn-group-vertical">
+  <a href="{% url 'project' proj_id=project.id %}" class="btn btn-light btn-lg {% if request.resolver_match.url_name == 'project' %}active{% endif %}">{% trans "Overview" %}</a>
+  <a href="{% url 'user_stories' proj_id=project.id %}" class="btn btn-light btn-lg {% if request.resolver_match.url_name == 'user_stories' %}active{% endif %}">{% trans "User stories" %}</a>
+  <a href="{% url 'gantt_diagram' proj_id=project.id %}" class="btn btn-light btn-lg {% if request.resolver_match.url_name == 'gantt_diagram' %}active{% endif %}">{% trans "Gantt diagram" %}</a>
+  <a href="{% url 'sprints' proj_id=project.id %}" class="btn btn-light btn-lg {% if request.resolver_match.url_name == 'sprints' %}active{% endif %}">{% trans "Sprints" %}</a>
+  <a href="{% url 'niko_calendar' proj_id=project.id %}" class="btn btn-light btn-lg {% if request.resolver_match.url_name == 'niko_calendar' %}active{% endif %}">{% trans "Niko calendar" %}</a>
+  <a href="{% url 'admin_project' proj_id=project.id %}" class="btn btn-light btn-lg {% if request.resolver_match.url_name == 'admin_project' %}active{% endif %}">{% trans "Admin" %}</a>
+</div>

@@ -2283,6 +2283,47 @@ fieldset[disabled] .btn-danger.active {
   color: #d9534f;
   background-color: #fff;
 }
+.btn-light {
+  color: #6b3506;
+  background-color: #ffe8a3;
+  border-color: #ffba21;
+}
+.btn-light:hover,
+.btn-light:focus,
+.btn-light:active,
+.btn-light.active,
+.open .dropdown-toggle.btn-light {
+  color: #6b3506;
+  background-color: #ffde7a;
+  border-color: #e39c00;
+}
+.btn-light:active,
+.btn-light.active,
+.open .dropdown-toggle.btn-light {
+  background-image: none;
+}
+.btn-light.disabled,
+.btn-light[disabled],
+fieldset[disabled] .btn-light,
+.btn-light.disabled:hover,
+.btn-light[disabled]:hover,
+fieldset[disabled] .btn-light:hover,
+.btn-light.disabled:focus,
+.btn-light[disabled]:focus,
+fieldset[disabled] .btn-light:focus,
+.btn-light.disabled:active,
+.btn-light[disabled]:active,
+fieldset[disabled] .btn-light:active,
+.btn-light.disabled.active,
+.btn-light[disabled].active,
+fieldset[disabled] .btn-light.active {
+  background-color: #ffe8a3;
+  border-color: #ffba21;
+}
+.btn-light .badge {
+  color: #ffe8a3;
+  background-color: #6b3506;
+}
 .btn-link {
   font-weight: normal;
   color: #428bca;

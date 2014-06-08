@@ -30,12 +30,13 @@
 
 </head>
 <body>
-
-{% if user.is_authenticated %}
-  {% include "templates/bee/common/_navbar_logged.html" %}
-{% else %}
-  {% include "templates/bee/common/_navbar_anonym.html" %}
-{% endif %}
+{% block navbar %}
+  {% if user.is_authenticated %}
+    {% include "templates/bee/common/_navbar_logged.html" %}
+  {% else %}
+    {% include "templates/bee/common/_navbar_anonym.html" %}
+  {% endif %}
+{% endblock %}
 {% if messages %}
   <ul class="messages">
     {% for message in messages %}

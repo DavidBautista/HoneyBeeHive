@@ -1,8 +1,5 @@
 {% extends "templates/bee/layouts/__base_with_left_menu.html" %}
 {% load i18n %}
-
-{% block title %}HoneyBeeHive{% endblock %}
-
 {% block styles %}
 
 {% endblock %}
@@ -14,6 +11,6 @@
 
 {% block right_content %}
   <div class="well page-header">
-    <h1>{{ project.name }} <small>{% trans 'Project overview' %}</small></h1>
-  </div>  <p>{{ project.description }}</p>
+    <h1>{{ project.name }} <small>{% trans 'Administration' %}</small></h1>
+  </div>
 {% endblock %}

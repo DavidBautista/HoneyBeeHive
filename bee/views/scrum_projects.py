@@ -48,3 +48,42 @@ def create_project(request):
         {'form': form, 'user': request.user},
         context_instance=RequestContext(request))
 
+
+@login_required
+def user_stories(request, proj_id):
+    pr = Project.objects.get(id=proj_id)
+    return render_to_response('templates/bee/scrum_projects/user_stories.html',
+        {'project': pr},
+        context_instance=RequestContext(request))
+
+
+@login_required
+def gantt_diagram(request, proj_id):
+    pr = Project.objects.get(id=proj_id)
+    return render_to_response('templates/bee/scrum_projects/gantt_diagram.html',
+        {'project': pr},
+        context_instance=RequestContext(request))
+
+
+@login_required
+def sprints(request, proj_id):
+    pr = Project.objects.get(id=proj_id)
+    return render_to_response('templates/bee/scrum_projects/sprints.html',
+        {'project': pr},
+        context_instance=RequestContext(request))
+
+
+@login_required
+def niko_calendar(request, proj_id):
+    pr = Project.objects.get(id=proj_id)
+    return render_to_response('templates/bee/scrum_projects/niko_calendar.html',
+        {'project': pr},
+        context_instance=RequestContext(request))
+
+
+@login_required
+def admin_project(request, proj_id):
+    pr = Project.objects.get(id=proj_id)
+    return render_to_response('templates/bee/scrum_projects/admin_project.html',
+        {'project': pr},
+        context_instance=RequestContext(request))
