@@ -21,6 +21,10 @@ urlpatterns = patterns('',
 
     url(r'^project/(?P<proj_id>\d+)/$', 'bee.views.scrum_projects.project', name='project'),
     url(r'^project/(?P<proj_id>\d+)/user_stories/$', 'bee.views.scrum_projects.user_stories', name='user_stories'),
+    url(r'^project/(?P<proj_id>\d+)/create_user_story/$', 'bee.views.scrum_projects.create_user_story', name='create_user_story'),
+    url(r'^project/(?P<proj_id>\d+)/new_user_story/$', 'bee.views.scrum_projects.new_user_story', name='new_user_story'),
+
+
     url(r'^project/(?P<proj_id>\d+)/gantt_diagram/$', 'bee.views.scrum_projects.gantt_diagram', name='gantt_diagram'),
     url(r'^project/(?P<proj_id>\d+)/sprints/$', 'bee.views.scrum_projects.sprints', name='sprints'),
     url(r'^project/(?P<proj_id>\d+)/niko_calendar/$', 'bee.views.scrum_projects.niko_calendar', name='niko_calendar'),

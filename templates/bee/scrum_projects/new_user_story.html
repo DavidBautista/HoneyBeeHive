@@ -1,0 +1,44 @@
+{% extends "templates/bee/layouts/__base_with_left_menu.html" %}
+{% load i18n %}
+{% block styles %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block right_content %}
+  <div class="well page-header">
+    <h1>{{ project.name }} <small>{% trans 'Create user story' %}</small></h1>
+  </div>
+  <div>
+    <div class="row">
+      <div class="col-xs-12">
+
+        <form action="{% url 'create_user_story' proj_id=project.id %}" method="POST" role="form">
+          {% csrf_token %}
+          <div class="form-group">
+
+            <div class="input-group" style=" margin-bottom: 15px;">
+              <label class="control-label input-group-addon user-story">{{ user_story_form.who.label }}</label>
+              {{ user_story_form.who }}
+            </div>
+
+            <div class="input-group" style=" margin-bottom: 15px;">
+              <label class="control-label input-group-addon user-story">{{ user_story_form.what.label }}</label>
+              {{ user_story_form.what }}
+            </div>
+
+            <div class="input-group" style=" margin-bottom: 15px;">
+              <label class="control-label input-group-addon user-story">{{ user_story_form.why.label }}</label>
+              {{ user_story_form.why }}
+            </div>
+          </div>
+          <input type="submit" class="btn btn-lg btn-default center-block" name="Submit" value="{% trans "Create user story" %}">
+        </form>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}

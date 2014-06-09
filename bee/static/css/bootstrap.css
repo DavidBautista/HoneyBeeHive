@@ -3419,7 +3419,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   line-height: 1;
   color: #9b4d09;
   text-align: center;
-  background-color: #eee;
+  background-color: #ffd556;
   border: 1px solid #6b3506;
   border-radius: 4px;
 }
@@ -4324,11 +4324,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   top: -1px;
 }
 .label-default {
-  background-color: #999;
+  background-color: #ffd556;
 }
 .label-default[href]:hover,
 .label-default[href]:focus {
-  background-color: #808080;
+  background-color: #ffc823;
 }
 .label-primary {
   background-color: #428bca;

@@ -13,4 +13,9 @@
   <div class="well page-header">
     <h1>{{ project.name }} <small>{% trans 'User stories' %}</small></h1>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
+        <a href="{% url 'new_user_story' proj_id=project.id %}">{% trans "New" %}</a>
+    </div>
+  </div>
 {% endblock %}

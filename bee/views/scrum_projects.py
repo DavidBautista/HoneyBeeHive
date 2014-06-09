@@ -3,9 +3,9 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render_to_response
-from django.views.decorators.http import require_POST, require_http_methods
-from bee.models import Project
-from bee.forms.psttask_forms import ProjectForm
+from django.views.decorators.http import require_POST, require_GET, require_http_methods
+from bee.models import Project, UserStory
+from bee.forms.projects_forms import ProjectForm, UserStoryForm
 import pprint
 from django.contrib import messages
 
@@ -55,6 +55,35 @@ def user_stories(request, proj_id):
     return render_to_response('templates/bee/scrum_projects/user_stories.html',
         {'project': pr},
         context_instance=RequestContext(request))
+
+
+@login_required
+@require_GET
+def new_user_story(request, proj_id):
+    form = UserStoryForm()
+    pr = Project.objects.get(id=proj_id)
+    return render_to_response('templates/bee/scrum_projects/new_user_story.html',
+        {'project': pr, 'user_story_form': form},
+        context_instance=RequestContext(request))
+
+
+@login_required
+@require_POST
+def create_user_story(request, proj_id):
+    pr = Project.objects.get(id=proj_id)
+    user_story = UserStory(owner=request.user, project=pr)
+    form = UserStoryForm(request.POST, instance=user_story)
+    if form.is_valid():
+        user_story = form.save()
+        #TODO messages.success(request, "user-story created")
+        return HttpResponseRedirect(reverse('user_stories', kwargs={'proj_id': pr.id}))
+    else:
+        return render_to_response('templates/bee/scrum_projects/new_user_story.html',
+        {'project': pr, 'user_story_form': form},
+        context_instance=RequestContext(request))
+
+
+
 
 
 @login_required
