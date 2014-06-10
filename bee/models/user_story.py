@@ -8,7 +8,7 @@ class UserStory(models.Model):
     who = models.CharField(max_length=255)
     what = models.CharField(max_length=255)
     owner = models.ForeignKey('UserBee')
-    project = models.ForeignKey('Project')
+    project = models.ForeignKey('Project', related_name='user_story')
     ## acceptance criterias
 
     class Meta:

@@ -11,11 +11,20 @@
 
 {% block right_content %}
   <div class="well page-header">
-    <h1>{{ project.name }} <small>{% trans 'User stories' %}</small></h1>
+    <h1>{{ project.name }} <small>{% trans 'User stories' %}</small><a href="{% url 'new_user_story' proj_id=project.id %}" class="btn btn-default pull-right">{% trans "New User Story" %}</a></h1>
   </div>
   <div class="row">
     <div class="col-xs-12">
-        <a href="{% url 'new_user_story' proj_id=project.id %}">{% trans "New" %}</a>
+      {% for user_story in project.user_story.all %}
+      <div class="well">
+        <p><strong>{% trans "As a" %}</strong> {{ user_story.who }},</p>
+        <p><strong>{% trans "I want" %}</strong> {{ user_story.what }},</p>
+        <p><strong>{% trans "so that I can" %}</strong> {{ user_story.why }},</p>
+        <button type="button" class="btn btn-light" data-toggle="collapse" data-target="#acceptance-criteria-{{ user_story.id }}-{{ forloop.counter }}">{% trans "Acceptance criterias" %}</button>{# TODO #}
+        <a class="btn btn-light" href="#">{% trans "New acceptance criteria" %}</a>{# TODO #}
+        <div id="acceptance-criteria-{{ user_story.id }}-{{ forloop.counter }}" class="collapse out">void criteria</div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 {% endblock %}

@@ -52,6 +52,7 @@ def create_project(request):
 @login_required
 def user_stories(request, proj_id):
     pr = Project.objects.get(id=proj_id)
+    print pr.user_story.all()
     return render_to_response('templates/bee/scrum_projects/user_stories.html',
         {'project': pr},
         context_instance=RequestContext(request))
@@ -70,6 +71,7 @@ def new_user_story(request, proj_id):
 @login_required
 @require_POST
 def create_user_story(request, proj_id):
+    #TODO comprobar permisos usuario
     pr = Project.objects.get(id=proj_id)
     user_story = UserStory(owner=request.user, project=pr)
     form = UserStoryForm(request.POST, instance=user_story)
