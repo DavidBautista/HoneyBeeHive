@@ -15,5 +15,6 @@ urlpatterns += patterns('',
     url(r'^', include('bee.urls.regular_urls')),
     (r'^favicon\.ico$', RedirectView.as_view(url=settings.STATIC_URL + 'img/favicon.ico')),
     # url(r'^admin/', include(admin.site.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 )
 

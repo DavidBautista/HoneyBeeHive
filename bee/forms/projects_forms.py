@@ -57,3 +57,21 @@ class UserStoryForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ['why', 'who', 'what', ]
+
+
+class SprintForm(forms.ModelForm):
+    name = forms.CharField(
+        label=_("Sprint name"),
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    start_date = forms.DateField(
+        label=_('Start date'),
+        widget=Html5DateInput(attrs={'class': 'form-control'})
+    )
+    end_date = forms.DateField(
+        label=_('End date'),
+        widget=Html5DateInput(attrs={'class': 'form-control'})
+    )
+    class Meta:
+        model = Project
+        fields = ['name', 'start_date', 'end_date']

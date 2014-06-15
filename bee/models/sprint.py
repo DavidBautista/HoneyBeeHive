@@ -1,6 +1,7 @@
 from django.db import models
 from bee.models.project import Project
 
+
 class Sprint(models.Model):
     name = models.CharField(max_length=140)
     start_date = models.DateTimeField(null=True)
@@ -9,3 +10,5 @@ class Sprint(models.Model):
 
     class Meta:
         app_label="bee"
+
+from tastypie import compat

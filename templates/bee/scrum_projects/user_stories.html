@@ -19,7 +19,7 @@
       <div class="well">
         <p><strong>{% trans "As a" %}</strong> {{ user_story.who }},</p>
         <p><strong>{% trans "I want" %}</strong> {{ user_story.what }},</p>
-        <p><strong>{% trans "so that I can" %}</strong> {{ user_story.why }},</p>
+        <p><strong>{% trans "so that I can" %}</strong> {{ user_story.why }}.</p>
         <button type="button" class="btn btn-light" data-toggle="collapse" data-target="#acceptance-criteria-{{ user_story.id }}">{% trans "Acceptance criterias" %}</button>{# TODO #}
         <a class="btn btn-light" href="#">{% trans "New acceptance criteria" %}</a>{# TODO #}
         <div id="acceptance-criteria-{{ user_story.id }}" class="collapse out">void criteria</div>

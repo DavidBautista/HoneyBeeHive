@@ -5,9 +5,10 @@ from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadReque
 from django.shortcuts import render_to_response
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
 from bee.models import Project, UserStory
-from bee.forms.projects_forms import ProjectForm, UserStoryForm
+from bee.forms.projects_forms import ProjectForm, UserStoryForm, SprintForm
 import pprint
 from django.contrib import messages
+import json
 
 
 @login_required
@@ -84,9 +85,6 @@ def create_user_story(request, proj_id):
         context_instance=RequestContext(request))
 
 
-
-
-
 @login_required
 def gantt_diagram(request, proj_id):
     pr = Project.objects.get(id=proj_id)
@@ -98,9 +96,34 @@ def gantt_diagram(request, proj_id):
 @login_required
 def sprints(request, proj_id):
     pr = Project.objects.get(id=proj_id)
+    project_sprints = pr.sprints.order_by('id')
     return render_to_response('templates/bee/scrum_projects/sprints.html',
-        {'project': pr},
+        {'project': pr, 'sprints': project_sprints},
         context_instance=RequestContext(request))
+
+
+def create_sprint(request, proj_id):
+    form = SprintForm() #todo
+    pr = Project.objects.get(id=proj_id)
+    result = {"function": "testfunc", "params":{"ola":"ke", "ase":"na"}}
+    pprint.pprint(json.dumps(result))
+    return HttpResponse(json.dumps(result), content_type="application/json")
+
+
+def create_sprint_colorbox(request, proj_id):
+    form = SprintForm()
+    pr = Project.objects.get(id=proj_id)
+    return render_to_response('templates/bee/scrum_projects/_sprint_creation_form.html',
+        {'project': pr, 'sprint_form': form},
+        context_instance=RequestContext(request))
+
+
+def create_sprint_js(request, proj_id):
+    pr = Project.objects.get(id=proj_id)
+    return render_to_response('templates/bee/scrum_projects/_create_sprint.js',
+        {'project': pr}, content_type='text/x-javascript',
+        context_instance=RequestContext(request))
+
 
 
 @login_required
