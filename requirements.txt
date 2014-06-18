@@ -7,4 +7,4 @@ wsgiref>=0.1.2
 django-celery-with-redis>=3.0
 django-redis-cache>=0.13.0
 python-dateutil=1.5
-djangorestframework>=2.3
+django-tastypie==0.11.0

@@ -178,3 +178,5 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_IMPORTS = ('bee.tasks.auth_tasks', )
 
 #El worker de celery de momento se arranca con celery -A HoneyBeeHive worker -l info
+
+TASTYPIE_DEFAULT_FORMATS = ['json']

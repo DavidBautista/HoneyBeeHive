@@ -10,5 +10,3 @@ class Sprint(models.Model):
 
     class Meta:
         app_label="bee"
-
-from tastypie import compat

@@ -5,16 +5,40 @@
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript">
-  $(document).ready(function(){
-    $("#create_sprint").colorbox({innerHeight:300, scrolling:false});
-  });
-</script>
+
+  <script type="text/javascript" src="{{ STATIC_URL }}js/bee/project_sprints.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#create_sprint").colorbox({innerHeight:300, scrolling:false});
+
+      var callview= new ProjectSprints.SprintsCallView({el:"#sprints"});
+      callview.load({'project': {{ project.id }} });
+    });
+  </script>
+
+
+
+
 {% endblock %}
 
 
 {% block right_content %}
+  <script id="sprint-overview-template" type="text/template">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"></h3>
+      </div>
+      <div class="panel-body">
+        <%= name %>
+      </div>
+    </div>
+  </script>
   <div class="well page-header">
     <h1>{{ project.name }} <small>{% trans 'Sprints' %}</small><a id="create_sprint" href="{% url 'create_sprint_colorbox' proj_id=project.id %}" class="btn btn-default pull-right">{% trans "New Sprint" %}</a></h1>
   </div>
+  <div class="row">
+    <div class="col-xs-12" id="sprints"></div>
+  </div>
+
 {% endblock %}

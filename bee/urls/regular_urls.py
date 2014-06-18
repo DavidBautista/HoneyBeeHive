@@ -10,4 +10,8 @@ urlpatterns = patterns('',
     #PROFILE SUMMARY
 
     #MESSAGING & DISCUSSION
+
+    #API
+    url(r'^api/', include('bee.api.urls'))
+
 )
