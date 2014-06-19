@@ -28,7 +28,6 @@ urlpatterns = patterns('',
 
     url(r'^project/(?P<proj_id>\d+)/sprints/$', 'bee.views.scrum_projects.sprints', name='sprints'),
     url(r'^project/(?P<proj_id>\d+)/create_sprint/cb/$', 'bee.views.scrum_projects.create_sprint_colorbox', name='create_sprint_colorbox'),
-    url(r'^project/(?P<proj_id>\d+)/create_sprint/$', 'bee.views.scrum_projects.create_sprint', name='create_sprint'),
     url(r'^project/(?P<proj_id>\d+)/create_sprint_js/$', 'bee.views.scrum_projects.create_sprint_js', name='create_sprint_js'),
 
 

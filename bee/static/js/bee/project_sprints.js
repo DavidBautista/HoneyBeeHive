@@ -1,11 +1,12 @@
 
 var ProjectSprints = (function () {
   var self = {};
+  self.resetDom = false;
   self.Sprint = Backbone.Model.extend();
   self.Sprints = Backbone.Collection.extend({
     parse: function (resp) {
       this.meta = resp.meta;
-      return resp;
+      return resp.objects;
     },
     model: self.Sprint,
     url: '/api/bee/0.1.0/sprint/'
@@ -30,26 +31,31 @@ var ProjectSprints = (function () {
     },
 
     renderRows: function (rows) {
-      rows.each(this.renderInfo);
+      if(rows.length==0)
+        this.noData();
+      else
+        rows.each(this.renderInfo);
     },
 
     renderInfo: function (rep) {
       console.info("renderinfo", rep);
-      rep.attributes.lines_list = self.lines_list;
-      rep.attributes.lines_units = self.lines_units;
       var view = new self.SprintView({
         model: rep
       });
       this.$el.append(view.render().el);
     },
-
+    noData: function(){
+      this.$el.append($('#no-sprints-in-project').html());
+      $("#create_sprint-link").colorbox({innerHeight:300, scrolling:false});
+      self.resetDom = true;
+    },
     load: function (data) {
       this.sprints.fetch({
         reset: true,
         data: data,
         type: "GET",
-        success: function () {
-          console.info('Fetched sprints');
+        success: function (model, resp) {
+          console.info('Fetched sprints', model, resp);
         },
         error: function (model, resp) {
           console.error('Could not load sprints', model, resp);
@@ -65,10 +71,3 @@ var ProjectSprints = (function () {
 $(document).ready(function() {
   ProjectSprints = ProjectSprints();
 });
-
-// data['csrfmiddlewaretoken'] = data[0]['csrfmiddlewaretoken'];
-//            for (i = 0; i < formdom.length; i++) {
-//                data[i] = JSON.stringify(data[i]);
-//            }
-//var callview= new window.marenostrum.simulator1vs1.SimulationReportCallView({el:"#battle_result"});
-//            callview.load(data);

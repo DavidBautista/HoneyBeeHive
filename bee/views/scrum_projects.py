@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render_to_response
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
-from bee.models import Project, UserStory
+from bee.models import Project, UserStory, Sprint
 from bee.forms.projects_forms import ProjectForm, UserStoryForm, SprintForm
 import pprint
 from django.contrib import messages
@@ -101,15 +101,6 @@ def sprints(request, proj_id):
         {'project': pr, 'sprints': project_sprints},
         context_instance=RequestContext(request))
 
-
-def create_sprint(request, proj_id):
-    form = SprintForm() #todo
-    pr = Project.objects.get(id=proj_id)
-    result = {"function": "testfunc", "params":{"ola":"ke", "ase":"na"}}
-    pprint.pprint(json.dumps(result))
-    return HttpResponse(json.dumps(result), content_type="application/json")
-
-
 def create_sprint_colorbox(request, proj_id):
     form = SprintForm()
     pr = Project.objects.get(id=proj_id)
@@ -120,9 +111,19 @@ def create_sprint_colorbox(request, proj_id):
 
 def create_sprint_js(request, proj_id):
     pr = Project.objects.get(id=proj_id)
-    return render_to_response('templates/bee/scrum_projects/_create_sprint.js',
-        {'project': pr}, content_type='text/x-javascript',
-        context_instance=RequestContext(request))
+    reset_dom = 'true' if pr.sprints.count() == 0 else 'false'
+    spr = Sprint(project=pr)
+    form = SprintForm(request.POST, instance=spr)
+    #todo revisar permisos
+    if form.is_valid():
+        spr = form.save()
+        return render_to_response('templates/bee/scrum_projects/_create_sprint.js',
+            {'project': pr, 'sprint': spr, 'reset_dom':reset_dom}, content_type='text/x-javascript',
+            context_instance=RequestContext(request))
+    else:
+        return render_to_response('templates/bee/scrum_projects/_create_sprint_error.js',
+                {'project': pr, 'sprint': spr}, content_type='text/x-javascript',
+                context_instance=RequestContext(request))
 
 
 
