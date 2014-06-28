@@ -20,16 +20,19 @@
           {% csrf_token %}
           <div class="form-group">
 
+            {% if user_story_form.who.errors %}<span class="help-block form-field-error mt15">{% for err in user_story_form.who.errors %}{{ err }}{% endfor %}</span>{% endif %}
             <div class="input-group" style=" margin-bottom: 15px;">
               <label class="control-label input-group-addon user-story">{{ user_story_form.who.label }}</label>
               {{ user_story_form.who }}
             </div>
 
+            {% if user_story_form.what.errors %}<span class="help-block form-field-error mt15">{% for err in user_story_form.what.errors %}{{ err }}{% endfor %}</span>{% endif %}
             <div class="input-group" style=" margin-bottom: 15px;">
               <label class="control-label input-group-addon user-story">{{ user_story_form.what.label }}</label>
               {{ user_story_form.what }}
             </div>
 
+            {% if user_story_form.why.errors %}<span class="help-block form-field-error mt15">{% for err in user_story_form.why.errors %}{{ err }}{% endfor %}</span>{% endif %}
             <div class="input-group" style=" margin-bottom: 15px;">
               <label class="control-label input-group-addon user-story">{{ user_story_form.why.label }}</label>
               {{ user_story_form.why }}
