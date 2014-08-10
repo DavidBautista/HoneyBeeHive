@@ -5,12 +5,86 @@
 {% endblock %}
 
 {% block scripts %}
-
+<script src="{{ STATIC_URL }}js/bee/admin_project.js"></script>
 {% endblock %}
 
 
 {% block right_content %}
+  <script id="project-worker-overview-template" type="text/template">
+    <tr>
+      <td><%= name %></td>
+      <td><%= role %></td>
+      <td>{# TODO permissions #}</td>
+      {#<td> TODO actions: change permissions, change roles and delete </td>#}
+    </tr>
+  </script>
+
+  <script id="no-sprints-in-project" type="text/template">
+    <div>
+      {% trans "You don't have any Sprint in this project," %} <a id="create_sprint-link" href="{% url 'create_sprint_colorbox' proj_id=project.id %}">{% trans "create a new Sprint." %}</a>
+    </div>
+  </script>
+
+
+
   <div class="well page-header">
     <h1>{{ project.name }} <small>{% trans 'Administration' %}</small></h1>
   </div>
+
+  <div>
+    <div class="row">
+
+      <div id="project-workers" class="col-xs-12">
+        <table class="table table-striped">
+          <caption><h1>{% trans "Contributors" %}</h1></caption>
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Permissions</th>
+            {# <th></th> #}
+          </tr>
+          </thead>
+          <tbody id="workers-assigned-table">
+          {% for uworker in project.worker_assigned.all %}
+            <tr>
+              <td>{{ uworker.uworker.name }}</td>
+              <td>{{ uworker.role }}</td>
+              <td>{{ uworker.permission_level }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="add-worker-to-project" class="row add-worker-to-project" style="display: none;">
+      <div class="alert alert-danger fade in" role="alert" style="display: none;">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+        <strong>{% trans "Error." %}</strong> aqui ira el error del djangoform
+      </div>
+      <form id="add-project-worker-form" class="ajax-form-script" action="{% url 'add_participant_to_project' proj_id=project.id  %}" method="post">
+        {% csrf_token %}
+        <div class="col-xs-4">
+          {{ add_participant_form.uworker }}
+        </div>
+        <div class="col-xs-3">
+          {{ add_participant_form.role }}
+        </div>
+        <div class="col-xs-3">
+          {{ add_participant_form.permissions }}
+        </div>
+        <div class="col-xs-2">
+          <input class="btn btn-default" type="submit" value="Add"/>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12" style="padding-top: 10px;">
+      <button id="add-participant-button" class="btn btn-default" onclick=''>Añadir usuarios</button>
+      <button class="btn btn-default" onclick='$(".add-worker-to-project .alert").show(); setTimeout(function(){$(".add-worker-to-project .alert").alert("close");}, 5000);'>error formulario</button>
+    </div>
+  </div>
 {% endblock %}
+
+{# $(".add-worker-to-project .alert").alert(); #}

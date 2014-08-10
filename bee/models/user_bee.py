@@ -8,7 +8,7 @@ from HoneyBeeHive.settings import SECRET_KEY, CURRENT_HOST
 from django.utils.html import simple_email_re
 from django.core.exceptions import ObjectDoesNotExist
 import datetime
-
+from assigned_worker_to_project import AssignedWorkerToProject
 
 #####################################################################################
 #####################################################################################
@@ -91,12 +91,12 @@ class UserBee(AbstractBaseUser, PermissionsMixin):
         """Returns the short name for the user."""
         return self.first_name
 
-    full_name = property(_get_full_name)
+    name = property(_get_full_name)
     short_name = property(get_short_name)
 
     ############### METHODS ###############
     def __unicode__(self):
-        return self.full_name
+        return self.name
 
     def send_activation_mail(self):
         code = sha512("%s%s" % (SECRET_KEY, self.email)).hexdigest()
@@ -129,3 +129,36 @@ class UserBee(AbstractBaseUser, PermissionsMixin):
             except ObjectDoesNotExist:
                 return True
         return False
+
+    def has_read_permission(self, project):
+        try:
+            awtp = AssignedWorkerToProject.objects.get(uworker=self, project=project)
+            if awtp.permissions in [1, 2, 3]:
+                return True
+            else:
+                return False
+        except AssignedWorkerToProject.DoesNotExist:
+            return False
+
+    def has_write_permission(self, project):
+        try:
+            awtp = AssignedWorkerToProject.objects.get(uworker=self, project=project)
+            if awtp.permissions in [2, 3]:
+                return True
+            else:
+                return False
+        except AssignedWorkerToProject.DoesNotExist:
+            return False
+
+    def has_admin_permission(self, project):
+        print "asdf"
+        try:
+            print "asdf2", self.id, project.id
+            awtp = AssignedWorkerToProject.objects.get(uworker=self, project=project)
+            print awtp.permissions
+            if awtp.permissions in [3]:
+                return True
+            else:
+                return False
+        except AssignedWorkerToProject.DoesNotExist:
+            return False

@@ -1,5 +1,5 @@
 from django.db import models
-from user_bee import UserBee
+#from bee.models.user_bee import UserBee
 from _enums import PROJECT_METODOLOGES
 
 

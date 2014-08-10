@@ -4,8 +4,8 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render_to_response
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
-from bee.models import Project, UserStory, Sprint
-from bee.forms.projects_forms import ProjectForm, UserStoryForm, SprintForm
+from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject
+from bee.forms.projects_forms import ProjectForm, UserStoryForm, SprintForm, AddParticipantToProjectForm
 import pprint
 from django.contrib import messages
 import json
@@ -37,6 +37,8 @@ def create_project(request):
         if form.is_valid():
             #the project data is valid
             new_project = form.save()
+            #todo testear
+            AssignedWorkerToProject.objects.create(uworker=request.user, project=new_project, role="owner", permissions=3)
             #TODO messages.success(request, "project created")
             return HttpResponseRedirect(reverse('project', kwargs={'proj_id': new_project.id}))
         #the project data is not valid
@@ -138,6 +140,24 @@ def niko_calendar(request, proj_id):
 @login_required
 def admin_project(request, proj_id):
     pr = Project.objects.get(id=proj_id)
+    form = AddParticipantToProjectForm()
     return render_to_response('templates/bee/scrum_projects/admin_project.html',
-        {'project': pr},
+        {'project': pr, 'add_participant_form': form},
         context_instance=RequestContext(request))
+
+@login_required
+def add_participant_to_project(request, proj_id):
+    pr = Project.objects.get(id=proj_id)
+    awtp = AssignedWorkerToProject(project=pr)
+    if request.user.has_admin_permission(pr):
+        print "entra"
+        form = AddParticipantToProjectForm(request.POST, instance=awtp)
+        if form.is_valid():
+            awtp = form.save()
+            return render_to_response('templates/bee/scrum_projects/_add_participant_to_project.js',
+                    {'project': pr, 'awtp': awtp}, content_type='text/x-javascript',
+                    context_instance=RequestContext(request))
+
+    return render_to_response('templates/bee/scrum_projects/_add_participant_to_project_error.js',
+            {'project': pr, 'awtp': awtp}, content_type='text/x-javascript',
+            context_instance=RequestContext(request))

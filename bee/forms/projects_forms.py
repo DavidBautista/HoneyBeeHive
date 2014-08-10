@@ -1,5 +1,5 @@
 from django import forms
-from bee.models import Project, UserStory
+from bee.models import Project, UserStory, WORKERS_PERMISSIONS, UserBee, AssignedWorkerToProject
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -75,3 +75,38 @@ class SprintForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ['name', 'start_date', 'end_date']
+
+
+class AddParticipantToProjectForm(forms.ModelForm):
+    uworker = forms.EmailField(
+        label=_("Email"),
+        widget=forms.EmailInput(attrs={'placeholder': _("email"), 'class': 'form-control'})
+    )
+    role = forms.CharField(
+        label=_("Role"),
+        widget=forms.TextInput(attrs={'placeholder': _("role"), 'class': 'form-control'})
+    )
+    permissions = forms.ChoiceField(
+        label=_('End date'),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        choices=WORKERS_PERMISSIONS
+    )
+
+    def clean_uworker(self):
+
+        email = self.cleaned_data["uworker"]
+        try:
+            ub = UserBee.objects.get(email=email)
+            try:
+                #print self.instance.project.id, "asdf", self.project.id
+                AssignedWorkerToProject.objects.get(uworker=ub, project=self.instance.project)
+                raise forms.ValidationError("This user already works in this project.")
+            except AssignedWorkerToProject.DoesNotExist as e:
+                print e.message
+                return ub
+        except UserBee.DoesNotExist:
+            raise forms.ValidationError("This user doesn't exist.")
+
+    class Meta:
+        model = Project
+        fields = ['uworker', 'role', 'permissions']

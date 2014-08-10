@@ -7,4 +7,11 @@ PROJECT_METODOLOGES = (
     (u'Traditional', u'Traditional'),
     (u'Kanvas', u'Kanvas'),
 )
+
+WORKERS_PERMISSIONS = (
+    (1, u'Read'),
+    (2, u'Write'),
+    (3, u'Admin'),
+)
+
 # models.SmallIntegerField(choices=((1, '1960-1969'), 2, '1970 - 1970))

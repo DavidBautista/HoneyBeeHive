@@ -33,6 +33,7 @@ urlpatterns = patterns('',
 
     url(r'^project/(?P<proj_id>\d+)/niko_calendar/$', 'bee.views.scrum_projects.niko_calendar', name='niko_calendar'),
     url(r'^project/(?P<proj_id>\d+)/admin_project/$', 'bee.views.scrum_projects.admin_project', name='admin_project'),
+    url(r'^project/(?P<proj_id>\d+)/add_participant_to_project/$', 'bee.views.scrum_projects.add_participant_to_project', name='add_participant_to_project'),
 
 
 
