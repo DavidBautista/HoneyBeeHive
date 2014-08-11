@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST, require_GET, require_http_methods
+from bee.decorators.permissions import check_project_admin_js
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render_to_response
-from django.views.decorators.http import require_POST, require_GET, require_http_methods
 from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject
 from bee.forms.projects_forms import ProjectForm, UserStoryForm, SprintForm, AddParticipantToProjectForm
 import pprint
@@ -145,18 +146,20 @@ def admin_project(request, proj_id):
         {'project': pr, 'add_participant_form': form},
         context_instance=RequestContext(request))
 
+
 @login_required
+@check_project_admin_js
 def add_participant_to_project(request, proj_id):
     pr = Project.objects.get(id=proj_id)
     awtp = AssignedWorkerToProject(project=pr)
-    if request.user.has_admin_permission(pr):
-        print "entra"
-        form = AddParticipantToProjectForm(request.POST, instance=awtp)
-        if form.is_valid():
-            awtp = form.save()
-            return render_to_response('templates/bee/scrum_projects/_add_participant_to_project.js',
-                    {'project': pr, 'awtp': awtp}, content_type='text/x-javascript',
-                    context_instance=RequestContext(request))
+    #if request.user.has_admin_permission(pr):
+    print "entra"
+    form = AddParticipantToProjectForm(request.POST, instance=awtp)
+    if form.is_valid():
+        awtp = form.save()
+        return render_to_response('templates/bee/scrum_projects/_add_participant_to_project.js',
+                {'project': pr, 'awtp': awtp}, content_type='text/x-javascript',
+                context_instance=RequestContext(request))
 
     return render_to_response('templates/bee/scrum_projects/_add_participant_to_project_error.js',
             {'project': pr, 'awtp': awtp}, content_type='text/x-javascript',

@@ -151,9 +151,7 @@ class UserBee(AbstractBaseUser, PermissionsMixin):
             return False
 
     def has_admin_permission(self, project):
-        print "asdf"
         try:
-            print "asdf2", self.id, project.id
             awtp = AssignedWorkerToProject.objects.get(uworker=self, project=project)
             print awtp.permissions
             if awtp.permissions in [3]:
