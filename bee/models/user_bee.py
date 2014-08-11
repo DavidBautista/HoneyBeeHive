@@ -9,6 +9,7 @@ from django.utils.html import simple_email_re
 from django.core.exceptions import ObjectDoesNotExist
 import datetime
 from assigned_worker_to_project import AssignedWorkerToProject
+from project import Project
 
 #####################################################################################
 #####################################################################################
@@ -106,6 +107,11 @@ class UserBee(AbstractBaseUser, PermissionsMixin):
             activation_mail_sender.delay(self.email, self.default_language)
         except Exception as e:
             print e
+
+    def get_projects_participant_list(self):
+        return Project.objects.raw("SELECT pr.* FROM bee_project as pr inner join bee_assignedworkertoproject as ad "
+                                   "on pr.id=ad.project_id  WHERE ad.uworker_id=%s AND created_by_id!=%s",
+                                   [self.id, self.id])
 
     @classmethod
     def activate_user(cls, email, code):

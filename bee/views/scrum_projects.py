@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
-from bee.decorators.permissions import check_project_admin_js
+from bee.decorators.permissions import check_project_read_js, check_project_read, check_project_write, \
+    check_project_write_js, check_project_admin_js, check_project_admin
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
@@ -14,18 +15,12 @@ import json
 
 @login_required
 def projects(request):
-    pr_list = Project.objects.filter(created_by=request.user)
+    pr_owner_list = list(Project.objects.filter(created_by=request.user))
+    pr_participant_list = list(request.user.get_projects_participant_list())
+    print pr_participant_list, pr_owner_list
     return render_to_response('templates/bee/scrum_projects/projects.html',
-        {'projects': pr_list},
+        {'projects_owner': pr_owner_list, 'projects_participant':pr_participant_list},
         context_instance=RequestContext(request))
-
-@login_required
-def project(request, proj_id):
-    pr = Project.objects.get(id=proj_id)
-    return render_to_response('templates/bee/scrum_projects/project.html',
-        {'project': pr},
-        context_instance=RequestContext(request))
-
 
 
 @login_required
@@ -54,6 +49,16 @@ def create_project(request):
 
 
 @login_required
+@check_project_read
+def project(request, proj_id):
+    pr = Project.objects.get(id=proj_id)
+    return render_to_response('templates/bee/scrum_projects/project.html',
+        {'project': pr},
+        context_instance=RequestContext(request))
+
+
+@login_required
+@check_project_read
 def user_stories(request, proj_id):
     pr = Project.objects.get(id=proj_id)
     return render_to_response('templates/bee/scrum_projects/user_stories.html',
@@ -63,6 +68,7 @@ def user_stories(request, proj_id):
 
 @login_required
 @require_GET
+@check_project_write
 def new_user_story(request, proj_id):
     form = UserStoryForm()
     pr = Project.objects.get(id=proj_id)
@@ -73,6 +79,7 @@ def new_user_story(request, proj_id):
 
 @login_required
 @require_POST
+@check_project_write
 def create_user_story(request, proj_id):
     #TODO comprobar permisos usuario
     pr = Project.objects.get(id=proj_id)
@@ -89,6 +96,7 @@ def create_user_story(request, proj_id):
 
 
 @login_required
+@check_project_admin
 def gantt_diagram(request, proj_id):
     pr = Project.objects.get(id=proj_id)
     return render_to_response('templates/bee/scrum_projects/gantt_diagram.html',
@@ -97,6 +105,7 @@ def gantt_diagram(request, proj_id):
 
 
 @login_required
+@check_project_read
 def sprints(request, proj_id):
     pr = Project.objects.get(id=proj_id)
     project_sprints = pr.sprints.order_by('id')
@@ -104,6 +113,9 @@ def sprints(request, proj_id):
         {'project': pr, 'sprints': project_sprints},
         context_instance=RequestContext(request))
 
+
+@login_required
+@check_project_admin
 def create_sprint_colorbox(request, proj_id):
     form = SprintForm()
     pr = Project.objects.get(id=proj_id)
@@ -112,6 +124,8 @@ def create_sprint_colorbox(request, proj_id):
         context_instance=RequestContext(request))
 
 
+@login_required
+@check_project_admin_js
 def create_sprint_js(request, proj_id):
     pr = Project.objects.get(id=proj_id)
     reset_dom = 'true' if pr.sprints.count() == 0 else 'false'
@@ -131,6 +145,7 @@ def create_sprint_js(request, proj_id):
 
 
 @login_required
+@check_project_admin
 def niko_calendar(request, proj_id):
     pr = Project.objects.get(id=proj_id)
     return render_to_response('templates/bee/scrum_projects/niko_calendar.html',
@@ -139,6 +154,7 @@ def niko_calendar(request, proj_id):
 
 
 @login_required
+@check_project_admin
 def admin_project(request, proj_id):
     pr = Project.objects.get(id=proj_id)
     form = AddParticipantToProjectForm()
