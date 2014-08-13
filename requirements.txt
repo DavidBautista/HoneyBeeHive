@@ -1,4 +1,4 @@
-Django>=1.7b4
+Django>=1.7c2
 MySQL-python>=1.2.3
 anyjson>=0.3.3
 django-celery>=3.1.9
