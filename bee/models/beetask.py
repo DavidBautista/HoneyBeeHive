@@ -10,6 +10,7 @@ class BeeTask(models.Model):
     pred_end_date = models.DateTimeField(null=True)
     real_start_date = models.DateTimeField(null=True)
     real_end_date = models.DateTimeField(null=True)
+    time_prevision = models.TimeField(null=True)
     parent_task = models.ForeignKey('BeeTask', related_name='child_tasks')
     sprint = models.ForeignKey('Sprint', related_name='ttasks')
     created_by = models.ForeignKey('UserBee', related_name='created_tasks')

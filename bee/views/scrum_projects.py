@@ -81,7 +81,6 @@ def new_user_story(request, proj_id):
 @require_POST
 @check_project_write
 def create_user_story(request, proj_id):
-    #TODO comprobar permisos usuario
     pr = Project.objects.get(id=proj_id)
     user_story = UserStory(owner=request.user, project=pr)
     form = UserStoryForm(request.POST, instance=user_story)
@@ -143,7 +142,6 @@ def create_sprint_js(request, proj_id):
                 context_instance=RequestContext(request))
 
 
-
 @login_required
 @check_project_admin
 def niko_calendar(request, proj_id):
@@ -165,11 +163,9 @@ def admin_project(request, proj_id):
 
 @login_required
 @check_project_admin_js
-def add_participant_to_project(request, proj_id):
+def add_participant_to_project(request, proj_id): #todo mostrar error al fallar
     pr = Project.objects.get(id=proj_id)
     awtp = AssignedWorkerToProject(project=pr)
-    #if request.user.has_admin_permission(pr):
-    print "entra"
     form = AddParticipantToProjectForm(request.POST, instance=awtp)
     if form.is_valid():
         awtp = form.save()

@@ -109,8 +109,8 @@ class UserBee(AbstractBaseUser, PermissionsMixin):
             print e
 
     def get_projects_participant_list(self):
-        return Project.objects.raw("SELECT pr.* FROM bee_project as pr inner join bee_assignedworkertoproject as ad "
-                                   "on pr.id=ad.project_id  WHERE ad.uworker_id=%s AND created_by_id!=%s",
+        return Project.objects.raw("SELECT pr.* FROM bee_project as pr LEFT JOIN bee_assignedworkertoproject AS ad "
+                                   "ON pr.id=ad.project_id  WHERE ad.uworker_id=%s AND created_by_id!=%s",
                                    [self.id, self.id])
 
     @classmethod
@@ -159,7 +159,6 @@ class UserBee(AbstractBaseUser, PermissionsMixin):
     def has_admin_permission(self, project):
         try:
             awtp = AssignedWorkerToProject.objects.get(uworker=self, project=project)
-            print awtp.permissions
             if awtp.permissions in [3]:
                 return True
             else:
