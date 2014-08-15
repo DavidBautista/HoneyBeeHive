@@ -35,9 +35,9 @@
 <body>
 {% block navbar %}
   {% if user.is_authenticated %}
-    {% include "templates/bee/common/_navbar_logged.html" %}
+    {% include "bee/common/_navbar_logged.html" %}
   {% else %}
-    {% include "templates/bee/common/_navbar_anonym.html" %}
+    {% include "bee/common/_navbar_anonym.html" %}
   {% endif %}
 {% endblock %}
 {% if messages %}

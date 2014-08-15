@@ -18,14 +18,14 @@ def register(request):
             new_user = form.save()
             if new_user is not None:
                 return render_to_response(
-                    "templates/bee/auth/activate_email.html",
+                    "bee/auth/activate_email.html",
                     {},
                     context_instance=RequestContext(request))
 
     else:
         form = RegisterForm()
     return render_to_response(
-        "templates/bee/auth/register.html",
+        "bee/auth/register.html",
         {'register_form': form},
         context_instance=RequestContext(request))
 
@@ -34,7 +34,7 @@ def register(request):
 def register_colorbox(request):
     form = RegisterForm()
     return render_to_response(
-        "templates/bee/auth/_register_form.html",
+        "bee/auth/_register_form.html",
         {'register_form': form},
         context_instance=RequestContext(request))
 
@@ -65,7 +65,7 @@ def login_user(request):
     else:
         login_form = LoginForm()
     return render_to_response(
-        "templates/bee/auth/login.html",
+        "bee/auth/login.html",
         {'login_form': login_form},
         context_instance=RequestContext(request))
 
@@ -74,7 +74,7 @@ def login_user(request):
 def login_colorbox(request):
     login_form = LoginForm()
     return render_to_response(
-        "templates/bee/auth/_login_form.html",
+        "bee/auth/_login_form.html",
         {'login_form': login_form},
         context_instance=RequestContext(request))
 
