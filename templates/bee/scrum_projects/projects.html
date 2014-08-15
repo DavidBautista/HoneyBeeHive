@@ -27,10 +27,10 @@
   <div class="row">
     {% if projects_owner or projects_participant %}
       {% for project in projects_owner %}
-        {% include "templates/bee/scrum_projects/_project_box.html" %}
+        {% include "bee/scrum_projects/_project_box.html" %}
       {% endfor %}
       {% for project in projects_participant %}
-        {% include "templates/bee/scrum_projects/_project_box.html" %}
+        {% include "bee/scrum_projects/_project_box.html" %}
       {% endfor %}
     {% else %}
       <div class="col-xs-6">

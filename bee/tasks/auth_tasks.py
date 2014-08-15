@@ -16,8 +16,8 @@ def activation_mail_sender(email, lang_code):
         url = "/activate_email/?email=%s&code=%s" % (email, code)
         print(url)
         activate(lang_code)
-        template_text = loader.get_template('templates/bee/auth/e_activation.txt')
-        template_html = loader.get_template('templates/bee/auth/e_activation.html')
+        template_text = loader.get_template('bee/auth/e_activation.txt')
+        template_html = loader.get_template('bee/auth/e_activation.html')
         context = Context({
             'email': email,
             'url': url,

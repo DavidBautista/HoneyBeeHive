@@ -12,7 +12,7 @@ def check_project_admin_js(view):
     def inner(request, proj_id, *args, **kwargs):
         pr = Project.objects.get(id=proj_id)
         if not request.user.has_admin_permission(pr):
-            return render_to_response('templates/bee/common/_permission_error.js',
+            return render_to_response('bee/common/_permission_error.js',
                         {'project': pr}, content_type='text/x-javascript',
                         context_instance=RequestContext(request))
         return view(request, proj_id, *args, **kwargs)
@@ -24,7 +24,7 @@ def check_project_write_js(view):
     def inner(request, proj_id, *args, **kwargs):
         pr = Project.objects.get(id=proj_id)
         if not request.user.has_write_permission(pr):
-            return render_to_response('templates/bee/common/_permission_error.js',
+            return render_to_response('bee/common/_permission_error.js',
                         {'project': pr}, content_type='text/x-javascript',
                         context_instance=RequestContext(request))
         return view(request, proj_id, *args, **kwargs)
