@@ -98,14 +98,13 @@ class AddParticipantToProjectForm(forms.ModelForm):
         try:
             ub = UserBee.objects.get(email=email)
             try:
-                #print self.instance.project.id, "asdf", self.project.id
                 AssignedWorkerToProject.objects.get(uworker=ub, project=self.instance.project)
-                raise forms.ValidationError("This user already works in this project.")
+                raise forms.ValidationError(_("This user already works in this project."))
             except AssignedWorkerToProject.DoesNotExist as e:
                 print e.message
                 return ub
         except UserBee.DoesNotExist:
-            raise forms.ValidationError("This user doesn't exist.")
+            raise forms.ValidationError(_("This user doesn't exist."))
 
     class Meta:
         model = Project
