@@ -24,13 +24,20 @@
 
 {% block right_content %}
   <script id="task-overview-template" type="text/template">
-    <div class="row">
+    <div class="row task-row task-row-<%=id%>">
       <div class="col-xs-2"><%=name%></div>
       <div class="col-xs-2"><%=pred_start_date%></div>
       <div class="col-xs-2"><%=pred_end_date%></div>
-      <div class="col-xs-2"><%=time_prevision%></div>
-      <div class="col-xs-2">0</div>
-      <div class="col-xs-2">icons</div>
+      <div class="col-xs-1"><%=time_prevision%></div>
+      <div class="col-xs-1">0</div>
+      <div class="col-xs-4">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default" title="{% trans 'incidences' %}"><span class="glyphicon glyphicon-warning-sign"></span> </button>
+          <a type="button" class="btn btn-default" title="{% trans 'discussions' %}"><span class="glyphicon glyphicon-comment"></span> </a>
+          <button type="button" class="btn btn-default" title="{% trans 'description' %}"><span class="glyphicon glyphicon-list-alt"></span> </button>
+          <button type="button" class="btn btn-default" title="{% trans 'start work' %}"><span class="glyphicon glyphicon-time"></span></button>
+        </div>
+      </div>
     </div>
   </script>
 
