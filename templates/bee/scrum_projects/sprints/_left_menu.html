@@ -4,6 +4,7 @@
   {% if user|can_read:project.id %}
   <a href="{% url 'sprint_overview' proj_id=project.id spr_id=sprint.id %}" class="btn btn-light btn-lg {% if request.resolver_match.url_name == 'sprint_overview' %}active{% endif %}">{% trans "Overview" %}</a>
   <a href="{% url 'tasks' proj_id=project.id spr_id=sprint.id %}" class="btn btn-light btn-lg {% if request.resolver_match.url_name == 'tasks' %}active{% endif %}">{% trans "Tasks" %}</a>
+  <a href="{% url 'sprint_discussions' proj_id=project.id spr_id=sprint.id %}" class="btn btn-light btn-lg {% if request.resolver_match.url_name == 'sprint_discussions' %}active{% endif %}">{% trans "Discussions" %}</a>
   {% endif %}
   {% if user|can_admin:project.id %}
   {% endif %}
