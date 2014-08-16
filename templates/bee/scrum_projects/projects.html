@@ -16,7 +16,7 @@
     <div class="col-xs-12">
       <div class="well page-header">
         <h1>{% trans "Your projects" %}<small><!--Subtext for header--></small>
-      {% if projects %}
+      {% if projects_owner or projects_participant %}
         <a href="{% url 'create_project' %}" class="btn btn-default pull-right">{% trans "Create new project" %}</a>
       {% endif %}
         </h1>

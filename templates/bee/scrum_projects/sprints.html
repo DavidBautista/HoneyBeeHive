@@ -1,5 +1,6 @@
 {% extends "bee/layouts/__base_with_left_menu.html" %}
 {% load i18n %}
+{% load permissions %}
 {% block styles %}
 
 {% endblock %}
@@ -10,8 +11,9 @@
 
   <script type="text/javascript">
     $(document).ready(function(){
+      {% if user|can_write:project.id %}
       $("#create_sprint").colorbox({innerHeight:300, scrolling:false});
-
+      {% endif %}
       var callview= new ProjectSprints.SprintsCallView({el:"#sprints"});
       callview.load({'project': {{ project.id }} });
     });
@@ -33,12 +35,12 @@
 
   <script id="no-sprints-in-project" type="text/template">
     <div>
-      {% trans "You don't have any Sprint in this project," %} <a id="create_sprint-link" href="{% url 'create_sprint_colorbox' proj_id=project.id %}">{% trans "create a new Sprint." %}</a>
+      {% trans "There are no Sprints in this project," %} {% if user|can_write:project.id %}<a id="create_sprint-link" href="{% url 'create_sprint_colorbox' proj_id=project.id %}">{% trans "create a new Sprint." %}</a>{% endif %}
     </div>
   </script>
 
   <div class="well page-header">
-    <h1>{{ project.name }} <small>{% trans 'Sprints' %}</small><a id="create_sprint" href="{% url 'create_sprint_colorbox' proj_id=project.id %}" class="btn btn-default pull-right">{% trans "New Sprint" %}</a></h1>
+    <h1>{{ project.name }} <small>{% trans 'Sprints' %}</small>{% if user|can_write:project.id %}<a id="create_sprint" href="{% url 'create_sprint_colorbox' proj_id=project.id %}" class="btn btn-default pull-right">{% trans "New Sprint" %}</a>{% endif %}</h1>
   </div>
   <div class="row">
     <div class="col-xs-12" id="sprints"></div>

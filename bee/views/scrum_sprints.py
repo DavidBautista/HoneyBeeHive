@@ -48,12 +48,13 @@ def create_task_colorbox(request, proj_id, spr_id):
 def create_task_js(request, proj_id, spr_id):
     pr = Project.objects.get(id=proj_id)
     spr = Sprint.objects.get(id=spr_id)
+    reset_dom = 'true' if spr.ttasks.count() == 0 else 'false'
     taskObj = BeeTask(sprint=spr, created_by=request.user)
     task_form = TaskCreationForm(request.POST, instance=taskObj)
     if task_form.is_valid():
         new_task = task_form.save()
         return render_to_response('bee/scrum_projects/_create_task.js',
-            {'project': pr, 'sprint': spr, 'new_task': new_task}, content_type='text/x-javascript',
+            {'project': pr, 'sprint': spr, 'new_task': new_task, 'reset_dom':reset_dom}, content_type='text/x-javascript',
             context_instance=RequestContext(request))
     else:
         task_form.save()

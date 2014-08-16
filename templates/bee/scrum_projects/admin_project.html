@@ -1,5 +1,6 @@
 {% extends "bee/layouts/__base_with_left_menu.html" %}
 {% load i18n %}
+{% load permissions %}
 {% block styles %}
 
 {% endblock %}
@@ -18,14 +19,6 @@
       {#<td> TODO actions: change permissions, change roles and delete </td>#}
     </tr>
   </script>
-
-  <script id="no-sprints-in-project" type="text/template">
-    <div>
-      {% trans "You don't have any Sprint in this project," %} <a id="create_sprint-link" href="{% url 'create_sprint_colorbox' proj_id=project.id %}">{% trans "create a new Sprint." %}</a>
-    </div>
-  </script>
-
-
 
   <div class="well page-header">
     <h1>{{ project.name }} <small>{% trans 'Administration' %}</small></h1>

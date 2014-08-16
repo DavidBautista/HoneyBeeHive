@@ -38,7 +38,7 @@ var ProjectSprints = (function () {
     },
 
     renderInfo: function (rep) {
-      console.info("renderinfo", rep);
+      //console.info("renderinfo", rep);
       var view = new self.SprintView({
         model: rep
       });
@@ -46,8 +46,8 @@ var ProjectSprints = (function () {
     },
     noData: function(){
       this.$el.append($('#no-sprints-in-project').html());
-      $("#create_sprint-link").colorbox({innerHeight:300, scrolling:false});
       self.resetDom = true;
+      try {$("#create_sprint-link").colorbox({innerHeight:300, scrolling:false});} catch (Exception) {}
     },
     load: function (data) {
       this.sprints.fetch({

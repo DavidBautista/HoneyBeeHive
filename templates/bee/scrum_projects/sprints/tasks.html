@@ -13,16 +13,34 @@
 
   <script type="text/javascript">
     $(document).ready(function(){
-      $("#create_task").colorbox({innerHeight:600,scrolling:false});
+     {% if user|can_write:project.id %} $("#create_task").colorbox({innerHeight:600,scrolling:false});{% endif %}
 
-      //var callview= new SprintTasks.TasksCallView({el:"#tasks"});
-      //callview.load({'project': {{ project.id }}, 'sprint':"{{ sprint.id }}" });
+      var callview= new SprintTasks.TasksCallView({el:"#tasks"});
+      callview.load({'sprint':"{{ sprint.id }}" });
     });
   </script>
 {% endblock %}
 
 
 {% block right_content %}
+  <script id="task-overview-template" type="text/template">
+    <div class="row">
+      <div class="col-xs-2"><%=name%></div>
+      <div class="col-xs-2"><%=pred_start_date%></div>
+      <div class="col-xs-2"><%=pred_end_date%></div>
+      <div class="col-xs-2"><%=time_prevision%></div>
+      <div class="col-xs-2">0</div>
+      <div class="col-xs-2">icons</div>
+    </div>
+  </script>
+
+  <script id="no-tasks-in-sprint" type="text/template">
+    <div>
+      {% trans "There are no Tasks in this sprint." %} {% if user|can_write:project.id %}<a id="create_sprint-link" href="{% url 'create_task_colorbox' proj_id=project.id spr_id=sprint.id %}">{% trans "Create a new Task." %}</a>{% endif %}
+    </div>
+  </script>
+
+
   <div class="well page-header">
     <h1>{{ sprint.name }} <small>{% trans 'Sprint tasks' %}</small>{% if user|can_write:project.id %}<a id="create_task" href="{% url 'create_task_colorbox' proj_id=project.id spr_id=sprint.id %}" class="btn btn-default pull-right">{% trans "New Task" %}</a>{% endif %}</h1>
 
