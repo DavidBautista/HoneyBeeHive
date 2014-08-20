@@ -1,5 +1,5 @@
 console.info("task created");
-$(function(){
+(function(){
   if('{{reset_dom}}'=='true'){
     $('#tasks').html("");
   }

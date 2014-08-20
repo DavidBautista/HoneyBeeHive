@@ -1,4 +1,4 @@
-$(function(){
+(function(){
   if('{{reset_dom}}'=='true'){
     $('#sprints').html("");
   }
