@@ -1,0 +1,38 @@
+{% load i18n %}
+<div class="panel panel-default panel-login  text-center">
+  <div class="panel-heading "><h1 class="panel-title">{% trans "Login" %}</h1></div>
+  <div class="panel-body">
+    {% if task %}
+      <form class="ajax-form-script" role="form" action="{% url 'create_task_discussion_js' proj_id=project.id spr_id=sprint.id task_id=task.id %}" method="POST">
+    {% elif sprint %}
+      <form class="ajax-form-script" role="form" action="{% url 'create_sprint_discussion_js' proj_id=project.id spr_id=sprint.id %}" method="POST">
+    {% else %}
+      <form class="ajax-form-script" role="form" action="{% url 'create_project_discussion_js' proj_id=project.id %}" method="POST">
+    {% endif %}
+      {% csrf_token %}
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon create-project-span"><label for="subject">{% trans 'Subject' %}</label></span>
+          <input id="subject" type="text" class="form-control" name="subject" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="panel panel-default">
+          <div class="panel-heading"><label for="content">{% trans 'Content' %}</label></div>
+          <div class="panel-body">
+            <textarea id="content" name="content"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-default center-block">Submit</button>
+    </form>
+
+    <div class="small text-center top10">
+      <p>{% trans "Don't have a HoneyBeeHive account?" %}<br/><a href="{% url 'register' %}">{% trans "Register now" %}.</a></p>
+
+    </div>
+
+  </div>
+</div>

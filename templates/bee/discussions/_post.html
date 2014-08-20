@@ -1,0 +1,8 @@
+{% if discussion_post %}
+  <div class="row">
+    <div class="col-xs-12">
+      <small>{{ discussion_post.sender.name }} on {{ discussion_post.date|date:"SHORT_DATETIME_FORMAT" }}</small>
+      <p>{{ discussion_post.content }}</p>
+    </div>
+  </div>
+{% endif %}

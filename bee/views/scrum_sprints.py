@@ -62,4 +62,3 @@ def create_task_js(request, proj_id, spr_id):
         return render_to_response('bee/scrum_projects/_create_task_error.js',
                 {'project': pr, 'sprint': spr, 'task_form':task_form}, content_type='text/x-javascript',
                 context_instance=RequestContext(request))
-    pass

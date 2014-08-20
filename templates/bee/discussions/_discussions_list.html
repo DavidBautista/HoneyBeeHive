@@ -1,0 +1,9 @@
+{% if discussion_list %}
+  <div id="discussions-list">
+  {% for discussion in discussion_list %}
+    {% include 'bee/discussions/_discussion_overview.html' %}
+  {% endfor %}
+  </div>
+{% else %}
+  No discussions, create a new one
+{% endif %}

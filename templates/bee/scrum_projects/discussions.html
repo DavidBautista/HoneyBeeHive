@@ -8,18 +8,22 @@
 {% endblock %}
 
 {% block scripts %}
-
+  <script type="application/javascript">
+      $(document).ready(function() {
+        $("#create_discussion").colorbox({innerHeight: 300, scrolling: false});
+      });
+  </script>
 {% endblock %}
 
 
 {% block right_content %}
   <div class="well page-header">
-    <h1>{{ project.name }} <small>{% trans 'Project discussions' %}</small></h1>
+    <h1>{{ project.name }}<br> <small>{% trans 'Project discussions' %}</small><a id="create_discussion" class="btn btn-default pull-right" href="{% url 'create_project_discussion_colorbox' proj_id=project.id %}">{% trans "New Discussion" %}</a></h1>
   </div>
 
   <div class="row">
     <div class="col-xs-12">
-      lista de discusiones del proyecto
+      {% include 'bee/discussions/_discussions_list.html' %}
     </div>
   </div>
 {% endblock %}

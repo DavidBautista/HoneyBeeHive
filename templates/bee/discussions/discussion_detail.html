@@ -1,0 +1,63 @@
+{% extends 'bee/layouts/__base_bootstrap.html' %}
+{% load i18n %}
+{% block content %}
+  <div class="well page-header">
+    <h1>{% trans 'Discussion' %} <small>{{ discussion.subject }}</small></h1>
+    <small>{% trans 'started on' %} {{  discussion.start_date|date:"SHORT_DATETIME_FORMAT" }}</small>
+  </div>
+  <div class="row" style="margin-bottom: 15px;">
+    <div class="col-xs-12">
+      {% trans 'Related discussions: ' %}
+      <a href="{% url 'project_discussions' proj_id=discussion.project_id %}">{% trans 'project' %}</a>
+      {% if discussion.sprint_id %}
+        <a href="{% url 'sprint_discussions' proj_id=discussion.project_id spr_id=discussion.sprint_id %}">{% trans 'sprint' %}</a>
+      {% endif %}
+      {% if discussion.task_id %}
+        <a href="{% url 'task_discussions' proj_id=discussion.project_id spr_id=discussion.sprint_id task_id=discussion.task_id %}">{% trans 'task' %}</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 15px;">
+    <div class="col-xs-12" id="posts-list" style="max-height:350px; overflow:auto;">
+      {% for discussion_post in post_list %}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <small>{{ discussion_post.sender.name }} on {{ discussion_post.date|date:"SHORT_DATETIME_FORMAT" }}</small>
+          </div>
+          <div class="panel-body">
+            <p>{{ discussion_post.content }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="well">
+        {% if task_form.non_field_errors %}
+          <div id="login_errors">
+            <span class="help-block form-field-error">{% for err in task_form.non_field_errors %}{{ err }}<br>{% endfor %}</span>
+          </div>
+        {% endif %}
+        <form class="ajax-form-script" action="{% url 'comment_in_discussion' proj_id=project.id dis_id=discussion.id %}" method="POST" role="form">
+          {% csrf_token %}
+          {{ comment_form.content }}
+          <br>
+          <input type="submit" class="btn btn-default center-block" name="Submit" value="{% trans "Comment" %}">
+        </form>
+      </div>
+    </div>
+
+  <script id="post-overview-template" type="text/template">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <small><%=sendername%> on <%=date%></small>
+      </div>
+      <div class="panel-body">
+        <p><%=content%></p>
+      </div>
+    </div>
+  </script>
+
+{% endblock %}

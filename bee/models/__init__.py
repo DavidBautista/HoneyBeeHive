@@ -7,7 +7,6 @@ from bee.models.beetask import BeeTask
 from bee.models.issue import Issue
 from bee.models.discussion import Discussion
 from bee.models.post import Post
-from bee.models.discussion_subscription import DiscussionSubscription
 from bee.models.assigned_worker_to_task import AssignedWorkerToTask
 from bee.models.assigned_worker_to_project import AssignedWorkerToProject
 from bee.models.user_story import UserStory
@@ -22,5 +21,5 @@ models.Model.__getitem__=__getitem__
 models.Model.__setitem__=__setitem__
 
 
-__all__ = ['UserBee', 'Project', 'Sprint', 'BeeTask', 'Issue', 'Discussion', 'Post', 'DiscussionSubscription',
+__all__ = ['UserBee', 'Project', 'Sprint', 'BeeTask', 'Issue', 'Discussion', 'Post',
            'AssignedWorkerToTask', 'AssignedWorkerToProject',]

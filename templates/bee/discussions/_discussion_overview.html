@@ -1,0 +1,17 @@
+{% load i18n %}
+{% if discussion %}
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ discussion.subject }}</h3> <small><a href="{% url 'discussion_detail' proj_id=project.id dis_id=discussion.id %}">{% trans 'view more...' %}</a></small>
+        </div>
+        <div class="panel-body">
+          {% with discussion_post=discussion.first_post %}
+            {% include 'bee/discussions/_post.html' %}
+          {% endwith %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
