@@ -42,5 +42,9 @@ class TaskResource(ModelResource):
         filtering = {
             'sprint': ALL_WITH_RELATIONS
         }
+    def dehydrate(self, bundle):
+        bundle.data['username'] = bundle.obj.created_by.name
+
+        return bundle
 
 #todo darle formato a las fechas http://django-tastypie.readthedocs.org/en/latest/serialization.html#format-datetime
