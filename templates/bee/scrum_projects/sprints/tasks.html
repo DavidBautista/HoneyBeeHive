@@ -13,7 +13,9 @@
 
   <script type="text/javascript">
     $(document).ready(function(){
-     {% if user|can_write:project.id %} $("#create_task").colorbox({innerHeight:600,scrolling:false});{% endif %}
+     {% if user|can_write:project.id %}
+       $("#create_task").colorbox({innerHeight:600,scrolling:false});
+     {% endif %}
 
       var callview= new SprintTasks.TasksCallView({el:"#tasks"});
       callview.load({'sprint':"{{ sprint.id }}" });
@@ -24,26 +26,34 @@
 
 {% block right_content %}
   <script id="task-overview-template" type="text/template">
-    <div class="row task-row task-row-<%=id%>">
-      <div class="col-xs-2"><%=name%></div>
-      <div class="col-xs-2"><%=pred_start_date%></div>
-      <div class="col-xs-2"><%=pred_end_date%></div>
-      <div class="col-xs-1"><%=time_prevision%></div>
-      <div class="col-xs-1">0</div>
-      <div class="col-xs-4">
-        <div class="btn-group">
-          <button type="button" class="btn btn-default" title="{% trans 'incidences' %}"><span class="glyphicon glyphicon-warning-sign"></span> </button>
-          <a type="button" class="btn btn-default" title="{% trans 'discussions' %}"><span class="glyphicon glyphicon-comment"></span> </a>
-          <button type="button" class="btn btn-default" title="{% trans 'description' %}"><span class="glyphicon glyphicon-list-alt"></span> </button>
-          <button type="button" class="btn btn-default" title="{% trans 'start work' %}"><span class="glyphicon glyphicon-time"></span></button>
+    <div class="task-row task-row-<%=id%>" style="margin-bottom: 5px;">
+      <div class="row">
+        <div class="col-xs-2"><%=name%></div>
+        <div class="col-xs-2"><%=pred_start_date%></div>
+        <div class="col-xs-2"><%=pred_end_date%></div>
+        <div class="col-xs-1"><%=time_prevision%></div>
+        <div class="col-xs-1">0</div>
+        <div class="col-xs-4">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" title="{% trans 'incidences' %}"><span class="glyphicon glyphicon-warning-sign"></span> </button>
+            <a type="button" href="/project/{{ project.id }}/sprints/{{ sprint.id }}/task/<%=id%>/discussions/" class="btn btn-default" title="{% trans 'discussions' %}"><span class="glyphicon glyphicon-comment"></span> </a>
+            <button type="button" class="btn btn-default" title="{% trans 'description' %}" onclick="console.info('toggle');$('.task-row-description-<%=id%>').toggle('slow');"><span class="glyphicon glyphicon-list-alt"></span> </button>
+            <button type="button" class="btn btn-default" title="{% trans 'start work' %}"><span class="glyphicon glyphicon-time"></span></button>
+          </div>
         </div>
       </div>
+      <div class="row well task-row-description-<%=id%>" style="display: none;">
+          <div class="col-xs-12">
+            <%=description%>
+          </div>
+        </div>
     </div>
+
   </script>
 
   <script id="no-tasks-in-sprint" type="text/template">
     <div>
-      {% trans "There are no Tasks in this sprint." %} {% if user|can_write:project.id %}<a id="create_sprint-link" href="{% url 'create_task_colorbox' proj_id=project.id spr_id=sprint.id %}">{% trans "Create a new Task." %}</a>{% endif %}
+      {% trans "There are no Tasks in this sprint." %} {% if user|can_write:project.id %}<a id="create-task-link" class="create-task-link" href="{% url 'create_task_colorbox' proj_id=project.id spr_id=sprint.id %}">{% trans "Create a new Task." %}</a>{% endif %}
     </div>
   </script>
 

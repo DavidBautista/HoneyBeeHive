@@ -47,7 +47,9 @@ var SprintTasks = (function () {
     noData: function(){
       this.$el.append($('#no-tasks-in-sprint').html());
       self.resetDom = true;
-      try {$("#create_task-link").colorbox({innerHeight:600, scrolling:false});} catch (Exception) {}
+      try {
+        $(".create-task-link").colorbox({innerHeight:600,scrolling:false});
+      } catch (Exception) {}
     },
     load: function (data) {
       this.tasks.fetch({

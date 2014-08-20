@@ -8,7 +8,7 @@ from bee.models import UserBee, Project, Sprint, BeeTask
 from django.utils.translation import ugettext as _, activate, deactivate
 from standard import SimpleReaderAuthorization, ProjectReaderAuthorization
 import tastypie.compat
-
+from standard import DateSerializer
 
 
 class _SprintResource(ModelResource):
@@ -28,6 +28,7 @@ class TaskResource(ModelResource):
         allowed_methods = ['get']
         queryset = BeeTask.objects.all()
         authentication = SessionAuthentication()
+        serializer = DateSerializer()
         fields = (
             'id',
             'name',

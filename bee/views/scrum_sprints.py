@@ -53,12 +53,12 @@ def create_task_js(request, proj_id, spr_id):
     task_form = TaskCreationForm(request.POST, instance=taskObj)
     if task_form.is_valid():
         new_task = task_form.save()
-        return render_to_response('bee/scrum_projects/_create_task.js',
+        return render_to_response('bee/scrum_projects/sprints/_create_task.js',
             {'project': pr, 'sprint': spr, 'new_task': new_task, 'reset_dom':reset_dom}, content_type='text/x-javascript',
             context_instance=RequestContext(request))
     else:
         task_form.save()
         print task_form.non_field_errors()
-        return render_to_response('bee/scrum_projects/_create_task_error.js',
+        return render_to_response('bee/scrum_projects/sprints/_create_task_error.js',
                 {'project': pr, 'sprint': spr, 'task_form':task_form}, content_type='text/x-javascript',
                 context_instance=RequestContext(request))
