@@ -17,7 +17,6 @@ import json
 def projects(request):
     pr_owner_list = list(Project.objects.filter(created_by=request.user))
     pr_participant_list = list(request.user.get_projects_participant_list())
-    print pr_participant_list, pr_owner_list
     return render_to_response('bee/scrum_projects/projects.html',
         {'projects_owner': pr_owner_list, 'projects_participant':pr_participant_list},
         context_instance=RequestContext(request))

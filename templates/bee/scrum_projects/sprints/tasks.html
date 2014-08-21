@@ -14,7 +14,7 @@
   <script type="text/javascript">
     $(document).ready(function(){
      {% if user|can_write:project.id %}
-       $("#create_task").colorbox({innerHeight:600,scrolling:false});
+       $("#create_task").colorbox({innerHeight:680,scrolling:false});
      {% endif %}
 
       var callview= new SprintTasks.TasksCallView({el:"#tasks"});
@@ -61,7 +61,7 @@
 
   <div class="well page-header">
     <h1>{{ sprint.name }} <small>{% trans 'Sprint tasks' %}</small>{% if user|can_write:project.id %}<a id="create_task" href="{% url 'create_task_colorbox' proj_id=project.id spr_id=sprint.id %}" class="btn btn-default pull-right">{% trans "New Task" %}</a>{% endif %}</h1>
-
+    <script type="text/javascript">console.info('error-{{ request.GET.error }}');</script>
     <p>{{ sprint.start_date|date:"d/m/y" }} - {{ sprint.end_date|date:"d/m/y" }}</p>
   </div>
   <div class="row">

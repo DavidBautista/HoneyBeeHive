@@ -36,14 +36,14 @@ class TaskResource(ModelResource):
             'pred_start_date',
             'pred_end_date',
             'time_prevision',
-            'created_by',
+            'assigned_user',
 
         )
         filtering = {
             'sprint': ALL_WITH_RELATIONS
         }
     def dehydrate(self, bundle):
-        bundle.data['username'] = bundle.obj.created_by.name
+        bundle.data['username'] = bundle.obj.assigned_user.name
 
         return bundle
 

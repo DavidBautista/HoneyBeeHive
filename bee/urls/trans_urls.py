@@ -42,6 +42,13 @@ urlpatterns = patterns('',
     url(r'^project/(?P<proj_id>\d+)/sprints/(?P<spr_id>\d+)/create_task_colorbox/$', 'bee.views.scrum_sprints.create_task_colorbox', name='create_task_colorbox'),
     url(r'^project/(?P<proj_id>\d+)/sprints/(?P<spr_id>\d+)/create_task_js/$', 'bee.views.scrum_sprints.create_task_js', name='create_task_js'),
 
+
+    url(r'^project/(?P<proj_id>\d+)/sprints/(?P<spr_id>\d+)/task/(?P<task_id>\d+)/start_working/$', 'bee.views.scrum_sprints.work_in_task', name='work_in_task'),
+    url(r'^project/(?P<proj_id>\d+)/sprints/(?P<spr_id>\d+)/task/(?P<task_id>\d+)/pause/$', 'bee.views.scrum_sprints.pause_task', name='pause_task'),
+    url(r'^project/(?P<proj_id>\d+)/sprints/(?P<spr_id>\d+)/task/(?P<task_id>\d+)/complete/$', 'bee.views.scrum_sprints.complete_task', name='complete_task'),
+    url(r'^project/(?P<proj_id>\d+)/sprints/(?P<spr_id>\d+)/task/(?P<task_id>\d+)/create_incidence/$', 'bee.views.scrum_sprints.create_incidence', name='create_incidence'),
+
+
     #PROFILE SUMMARY
 
     #MESSAGING & DISCUSSION

@@ -14,4 +14,11 @@ WORKERS_PERMISSIONS = (
     (3, u'Admin'),
 )
 
+TASKS_STATUS = (
+    (1, u'Prepared'),
+    (2, u'Working'),
+    (3, u'Paused'),
+    (4, u'Finished'),
+)
+
 # models.SmallIntegerField(choices=((1, '1960-1969'), 2, '1970 - 1970))

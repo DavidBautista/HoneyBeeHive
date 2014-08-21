@@ -48,7 +48,7 @@ var SprintTasks = (function () {
       this.$el.append($('#no-tasks-in-sprint').html());
       self.resetDom = true;
       try {
-        $(".create-task-link").colorbox({innerHeight:600,scrolling:false});
+        $(".create-task-link").colorbox({innerHeight:680,scrolling:false});
       } catch (Exception) {}
     },
     load: function (data) {
