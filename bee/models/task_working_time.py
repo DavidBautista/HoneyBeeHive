@@ -1,5 +1,4 @@
 from django.db import models
-from _enums import TASKS_STATUS
 
 class TaskWorkingTime(models.Model):
     start_date = models.DateTimeField(null=True)

@@ -37,6 +37,8 @@ class TaskResource(ModelResource):
             'pred_end_date',
             'time_prevision',
             'assigned_user',
+            'status',
+            'time_worked'
 
         )
         filtering = {

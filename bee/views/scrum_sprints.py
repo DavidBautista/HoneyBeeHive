@@ -67,14 +67,14 @@ def create_task_js(request, proj_id, spr_id):
 
 
 def work_in_task(request, proj_id, spr_id, task_id):
-    task = BeeTask.objects.get(task_id)
+    task = BeeTask.objects.get(id=task_id)
     error = ''
     if request.user == task.assigned_user:
-        if task.state in [1, 3]:
-            if task.state == 1:
+        if task.status in [1, 3]:
+            if task.status == 1:
                 task.real_start_date = datetime.date.today()
-            task.state = 2
-            twt = TaskWorkingTime(start_date=datetime.date.now(), task=task)
+            task.status = 2
+            twt = TaskWorkingTime(start_date=datetime.datetime.now(), btask=task)
             task.save()
             twt.save()
         else:
@@ -85,13 +85,13 @@ def work_in_task(request, proj_id, spr_id, task_id):
 
 
 def pause_task(request, proj_id, spr_id, task_id):
-    task = BeeTask.objects.get(task_id)
+    task = BeeTask.objects.get(id=task_id)
     error = ''
     if request.user == task.assigned_user:
-        if task.state == 2:
+        if task.status == 2:
             now = datetime.datetime.now()
-            task.state = 3
-            twt = TaskWorkingTime.objects.get(task=task, end_date=None)
+            task.status = 3
+            twt = TaskWorkingTime.objects.get(btask=task, end_date=None)
             twt.end_date = now
             task.save()
             twt.save()
@@ -105,15 +105,18 @@ def pause_task(request, proj_id, spr_id, task_id):
 
 
 def complete_task(request, proj_id, spr_id, task_id):
-    task = BeeTask.objects.get(task_id)
+    task = BeeTask.objects.get(id=task_id)
     error = ''
     if request.user == task.assigned_user:
-        if task.state != 4:
+        if task.status in [2,3]:
             now = datetime.datetime.now()
-            task.state = 4
-            twt = TaskWorkingTime.objects.get(task=task, end_date=None)
-            twt.end_date = now
-            twt.save()
+            task.status = 4
+            try:
+                twt = TaskWorkingTime.objects.get(btask=task, end_date=None)
+                twt.end_date = now
+                twt.save()
+            except TaskWorkingTime.DoesNotExist as e:
+                pass
             task.update_time_worked()
             task.save()
         else:
