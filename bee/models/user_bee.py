@@ -113,6 +113,17 @@ class UserBee(AbstractBaseUser, PermissionsMixin):
                                    "ON pr.id=ad.project_id  WHERE ad.uworker_id=%s AND created_by_id!=%s",
                                    [self.id, self.id])
 
+    def has_projects(self):
+        return self.projects().__len__()>0
+
+    def projects(self):
+        proj_list = []
+        pr_owner_list = list(Project.objects.filter(created_by=self))
+        pr_participant_list = list(self.get_projects_participant_list())
+        proj_list.extend(pr_owner_list)
+        proj_list.extend(pr_participant_list)
+        return proj_list
+
     @classmethod
     def activate_user(cls, email, code):
         user = UserBee.objects.get(email=email)
