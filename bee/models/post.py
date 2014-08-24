@@ -1,5 +1,5 @@
 from django.db import models
-from bee.models.user_bee import UserBee
+#from bee.models.user_bee import UserBee
 #from bee.models.discussion import Discussion
 
 

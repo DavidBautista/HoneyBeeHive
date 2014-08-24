@@ -4,7 +4,8 @@
 {% endblock %}
 
 {% block scripts %}
-  <script src="{{ STATIC_URL }}js/highstock/highstock.js"></script>
+  <script src="{{ STATIC_URL }}js/highstock/highstock.js"></script> s
+
   <script>
     $(document).ready(function () {
       var red = "#EC2748";
@@ -47,12 +48,6 @@
             to: interval.to
           });
 
-          // add a null value between intervals
-          if (task.intervals[j + 1]) {
-            item.data.push(
-                [(interval.to + task.intervals[j + 1].from) / 2, null]
-            );
-          }
         });
         series.push(item);
       });
@@ -64,11 +59,12 @@
 
         chart: {
           renderTo: 'gantt-diagram-container',
-          height: 200+30*{{ num_tasks }}
+          height: 200+30*{{ num_tasks }},
+          backgroundColor: "#ffeba3"
         },
 
         title: {
-          text: 'Gantt diagram'
+          text: '{% trans 'Gantt diagram' %}'
         },
 
         xAxis: {
@@ -99,7 +95,7 @@
           startOnTick: false,
           endOnTick: false,
           title: {
-            text: 'Activity'
+            text: '{% trans 'Tasks' %}'
           },
           minPadding: 0.2,
           maxPadding: 0.2

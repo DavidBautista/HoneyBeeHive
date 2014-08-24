@@ -1,5 +1,5 @@
 from django.db import models
-from bee.models.project import Project
+#from bee.models.project import Project
 
 
 class Sprint(models.Model):

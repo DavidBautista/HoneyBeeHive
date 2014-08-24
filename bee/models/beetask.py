@@ -1,6 +1,6 @@
 from django.db import models
-from bee.models.user_bee import UserBee
-from bee.models.sprint import Sprint
+#from bee.models.user_bee import UserBee
+#from bee.models.sprint import Sprint
 from bee.models.task_working_time import TaskWorkingTime
 from _enums import TASKS_STATUS
 import datetime
