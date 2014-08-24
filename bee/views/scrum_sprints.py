@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render_to_response
-from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject, BeeTask, TaskWorkingTime, UserBee
+from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject, BeeTask, TaskWorkingTime, UserBee, Discussion
 from bee.models._enums import TASKS_STATUS
 from bee.forms.sprints_forms import TaskCreationForm
 import pprint
@@ -19,9 +19,22 @@ import datetime
 def sprint(request, proj_id, spr_id):
     pr = Project.objects.get(id=proj_id)
     spr = Sprint.objects.get(id=spr_id)
+    numtasks = BeeTask.objects.filter(sprint=spr).count()
+    btasks = BeeTask.objects.filter(sprint=spr, status=4).order_by('real_end_date')
+    counter = numtasks
+    ini_date = spr.start_date.date()
+    counts_array = []
+    for btask in btasks:
+        if btask.real_end_date > ini_date:
+            counts_array.append((ini_date, counter))
+            ini_date+=datetime.timedelta(days=1)
+        counter-=1
 
+    counts_array.append((ini_date, counter))
+    discussion_list = Discussion.objects.filter(sprint=spr).order_by('-start_date')
     return render_to_response('bee/scrum_projects/sprints/overview.html',
-        {'project': pr, 'sprint': spr},
+        {'project': pr, 'sprint': spr, 'numtasks':numtasks, 'tasks':reversed(list(btasks)[-5:]),
+         'completed_tasks': counts_array, 'completed_tasks_count': btasks.__len__(),'discussion_list': discussion_list },
         context_instance=RequestContext(request))
 
 @login_required
@@ -117,6 +130,7 @@ def complete_task(request, proj_id, spr_id, task_id):
                 twt.save()
             except TaskWorkingTime.DoesNotExist as e:
                 pass
+            task.real_end_date = now
             task.update_time_worked()
             task.save()
         else:

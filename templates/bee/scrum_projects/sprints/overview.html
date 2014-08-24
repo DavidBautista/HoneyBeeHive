@@ -8,27 +8,120 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ STATIC_URL }}js/highcharts/highcharts.js"></script>
 
+  <script src="{{ STATIC_URL }}js/highcharts/modules/exporting.js"></script>
+
+<script type="text/javascript">
+$(function () {
+    var series = [{
+            name: '{% trans  'Ideal Trend' %}',
+            data: [
+               [Date.UTC({{ sprint.start_date.year }}, {{ sprint.start_date.month }}-1, {{ sprint.start_date.day }}), {{ numtasks }}],
+               [Date.UTC({{ sprint.end_date.year }}, {{ sprint.end_date.month }}-1, {{ sprint.end_date.day }}), 0]
+            ]
+        }, {
+            name: '{% trans 'Work Remaining' %}',
+            data: [
+              {% for date, task_count in completed_tasks %}
+                {% if forloop.last %}
+                  [Date.UTC({{ date.year }}, {{ date.month }}-1, {{ date.day }}), {{ task_count }}   ]
+                {% else %}
+                  [Date.UTC({{ date.year }}, {{ date.month }}-1, {{ date.day }}), {{ task_count }}   ],
+                {% endif %}
+              {% endfor %}
+
+            ]
+        }];
+
+    $('#sprint-progress-container').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: '{% trans 'Sprint Progress Chart' %}'
+        },
+        subtitle: {
+            text: '{{ sprint.name }}'
+        },
+
+          navigator:{
+        enabled:false
+    },
+    scrollbar: {
+        enabled:true
+    },
+
+    rangeSelector: {
+        enabled: false
+    },
+
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { // don't display the dummy year
+                month: '%e. %b',
+                year: '%b'
+            },
+            title: {
+                text: '{% trans 'Date' %}'
+            }
+        },
+        yAxis: {
+            title: {
+                text: '{% trans 'Pending tasks' %}'
+            },
+            min: 0
+        },
+        plotOptions: {
+            series: {
+                marker: {
+                    enabled: false
+                },
+                states: {
+                    hover: {
+                        enabled: false
+                    }
+                }
+            }
+        },
+        tooltip: {
+            enabled:false
+        },
+
+        'series': series
+    });
+});
+</script>
 {% endblock %}
 
 
 {% block right_content %}
   <div class="well page-header">
     <h1>{{ sprint.name }} <small>{% trans 'Sprint overview' %}</small></h1>
-    <p>{{ sprint.start_date }} - {{ sprint.end_date }}</p>
+    <p>{{ sprint.start_date|date:"SHORT_DATE_FORMAT" }} - {{ sprint.end_date|date:"SHORT_DATE_FORMAT" }}</p>
   </div>
 
   <div class="row">
-    <div class="col-xs-8">
+    <div class="col-xs-8" id="sprint-progress-container">
       gráfico de progreso
     </div>
     <div class="col-xs-4">
-      datos tareas completadas
+
+      <h3>{% trans 'Recently completed tasks' %}</h3>
+      <h4>{{ completed_tasks_count }} {% trans 'of' %} {{ numtasks }}</h4>
+      <ul>
+        {% for task in tasks %}
+         <li><span style="font-weight: bold;">{{ task.name }}</span> {% trans 'completed on' %} {{task.real_end_date|date:"SHORT_DATE_FORMAT" }} {% trans 'spending' %} <span style="font-weight: bold;">{{ task.time_worked }}</span></li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
+  {% if discussion_list %}
   <div class="row">
     <div class="col-xs-12">
-      ultimas discusiones
+      <h3>Last Discussions</h3>
+      {% include 'bee/discussions/_discussions_list.html' %}
     </div>
   </div>
+  {% endif %}
 {% endblock %}
