@@ -134,11 +134,11 @@ def create_sprint_js(request, proj_id):
     if form.is_valid():
         spr = form.save()
         return render_to_response('bee/scrum_projects/_create_sprint.js',
-            {'project': pr, 'sprint': spr, 'reset_dom':reset_dom}, content_type='text/x-javascript',
+            {'project': pr, 'sprint': spr, 'reset_dom':reset_dom, 'form':form}, content_type='text/x-javascript',
             context_instance=RequestContext(request))
     else:
         return render_to_response('bee/scrum_projects/_create_sprint_error.js',
-                {'project': pr, 'sprint': spr}, content_type='text/x-javascript',
+                {'project': pr, 'sprint': spr, 'form':form}, content_type='text/x-javascript',
                 context_instance=RequestContext(request))
 
 

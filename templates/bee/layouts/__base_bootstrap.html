@@ -17,6 +17,16 @@
   {% endblock %}
   {% block default_style %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/hbeeh.css">
+    <style>
+    .errormessage {
+        position: fixed;
+        top: 45%;
+        left: 50%;
+        margin-left: -150px;
+        width: 300px;
+        z-index: 9999;
+    }
+    </style>
   {% endblock %}
   {% block styles %}{% endblock %}
 
