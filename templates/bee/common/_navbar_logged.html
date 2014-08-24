@@ -37,7 +37,7 @@
         {% endif %}
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li {% if request.resolver_match.url_name == "calendar" %}class="active"{% endif %}><a href="#"><span class="glyphicon glyphicon-calendar"></span> </a></li>
+        <li {% if request.resolver_match.url_name == "calendar" %}class="active"{% endif %}><a href="{% url 'calendar' %}"><span class="glyphicon glyphicon-calendar"></span> </a></li>
         <li><a href="#">{{ user.name }}</a></li>
         <li class="login-navbar-padding">
           <div><a id="login_button" href="{% url 'logout' %}" class="btn btn-default">{% trans "Logout" %}</a></div>

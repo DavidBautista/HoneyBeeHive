@@ -1,0 +1,35 @@
+{% extends "bee/layouts/__base_bootstrap.html" %}
+{% load i18n %}
+
+
+{% block styles %}
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block content %}
+  <div class="well page-header">
+    <h1>{% trans 'Calendar' %} <small>{% trans 'Your pending tasks' %}</small></h1>
+  </div>
+
+  <div class="row">
+    {% for task in tasks %}
+    <div class="col-xs-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ task.name }}</h3> <small><a href="{% url 'tasks' proj_id=task.sprint.project.id spr_id=task.sprint.id %}">{% trans 'view in sprint' %}</a></small>
+        </div>
+        <div class="panel-body">
+           <p><span style="font-weight: bold;">{% trans 'Project' %}: </span><a href="{% url 'project' proj_id=task.sprint.project.id %}">{{ task.sprint.project.name }}</a></p>
+           <p><span style="font-weight: bold;">{% trans 'Description' %}: </span>{{ task.description }}</p>
+           <p><span style="font-weight: bold;">{% trans 'Expected execution time' %}:</span> {{ task.time_prevision }} </p>
+           <p><span style="font-weight: bold;">{% trans 'Date' %}:</span> {{ task.pred_start_date|date:"SHORT_DATE_FORMAT" }} - {{ task.pred_end_date|date:"SHORT_DATE_FORMAT" }} </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

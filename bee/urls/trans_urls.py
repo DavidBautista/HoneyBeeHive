@@ -50,6 +50,8 @@ urlpatterns = patterns('',
 
 
     #PROFILE SUMMARY
+    url(r'^calendar/$', 'bee.views.common.calendar', name='calendar'),
+
 
     #MESSAGING & DISCUSSION
     url(r'^project/(?P<proj_id>\d+)/discussions/$', 'bee.views.discussions.project_discussions', name='project_discussions'),
