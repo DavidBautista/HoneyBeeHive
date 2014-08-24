@@ -1,6 +1,6 @@
 from django.db import models
-from bee.models.beetask import BeeTask
-from bee.models.discussion import Discussion
+from beetask import BeeTask
+from discussion import Discussion
 from assigned_worker_to_project import AssignedWorkerToProject
 from _enums import PROJECT_METODOLOGES
 

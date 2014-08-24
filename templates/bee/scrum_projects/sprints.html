@@ -22,15 +22,21 @@
 
 {% block right_content %}
   <script id="sprint-overview-template" type="text/template">
+  <div class="col-xs-4">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title"><%= name %></h3>
       </div>
       <div class="panel-body">
-        <a href="/project/{{ project.id }}/sprints/<%=id%>/">go</a>
-        link to sprint {# TODO rellenar con datos del sprint #}
+        <p><%=start_date_f %> - <%= end_date_f %></p>
+        <p>{% trans 'Tasks' %}: <%= num_tasks %></p>
+        <p>{% trans 'Completed tasks' %}: <%= num_tasks_completed%> </p>
+        <p>{% trans 'Discussions' %}: <%= num_discussions %> </p>
+        <a class="btn btn-info" href="/project/{{ project.id }}/sprints/<%=id%>/">{% trans 'View Sprint' %}</a>
       </div>
     </div>
+  </div>
+
   </script>
 
   <script id="no-sprints-in-project" type="text/template">
@@ -43,7 +49,11 @@
     <h1>{{ project.name }} <small>{% trans 'Sprints' %}</small>{% if user|can_write:project.id %}<a id="create_sprint" href="{% url 'create_sprint_colorbox' proj_id=project.id %}" class="btn btn-default pull-right">{% trans "New Sprint" %}</a>{% endif %}</h1>
   </div>
   <div class="row">
-    <div class="col-xs-12" id="sprints"></div>
+    <div class="col-xs-12">
+      <div clas="row"  id="sprints">
+
+      </div>
+    </div>
   </div>
 
 {% endblock %}

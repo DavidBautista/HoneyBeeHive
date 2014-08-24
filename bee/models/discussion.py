@@ -2,8 +2,8 @@ from django.db import models
 import datetime
 #from bee.models.user_bee import UserBee
 #from bee.models.project import Project
-from bee.models.sprint import Sprint
-from bee.models.beetask import BeeTask
+#from sprint import Sprint
+#from bee.models.beetask import BeeTask
 from bee.models.post import Post
 
 class Discussion(models.Model):
