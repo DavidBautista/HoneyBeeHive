@@ -64,7 +64,14 @@ def create_task_js(request, proj_id, spr_id):
     pr = Project.objects.get(id=proj_id)
     spr = Sprint.objects.get(id=spr_id)
     reset_dom = 'true' if spr.ttasks.count() == 0 else 'false'
-    taskObj = BeeTask(sprint=spr, created_by=request.user, assigned_user=UserBee.objects.get(id=request.POST.get('user_assign')))
+    try:
+        user_assign = UserBee.objects.get(id=request.POST.get('user_assign'))
+    except UserBee.DoesNotExist as e:
+        print e.message
+        return render_to_response('bee/scrum_projects/sprints/_create_task_error.js',
+                {'project': pr, 'sprint': spr, 'task_form': TaskCreationForm(request.POST)}, content_type='text/x-javascript',
+                context_instance=RequestContext(request))
+    taskObj = BeeTask(sprint=spr, created_by=request.user, assigned_user=user_assign)
     task_form = TaskCreationForm(request.POST, instance=taskObj)
     if task_form.is_valid():
         new_task = task_form.save()
@@ -72,8 +79,6 @@ def create_task_js(request, proj_id, spr_id):
             {'project': pr, 'sprint': spr, 'new_task': new_task, 'reset_dom':reset_dom}, content_type='text/x-javascript',
             context_instance=RequestContext(request))
     else:
-        task_form.save()
-        print task_form.non_field_errors()
         return render_to_response('bee/scrum_projects/sprints/_create_task_error.js',
                 {'project': pr, 'sprint': spr, 'task_form':task_form}, content_type='text/x-javascript',
                 context_instance=RequestContext(request))

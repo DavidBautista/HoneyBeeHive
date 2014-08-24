@@ -24,13 +24,10 @@ class BeeTask(models.Model):
         app_label="bee"
 
     def update_time_worked(self):
-        #todo sumar todas las diferencias de tiempo entre los TaskWorkingTime de la tarea
-
         twts = TaskWorkingTime.objects.filter(btask=self)
         timesum = datetime.timedelta(seconds=0)
 
         for twt in twts:
             timesum += (twt.end_date-twt.start_date)
-        print timesum, timesum.seconds/3600, (timesum.seconds%3600)/60, timesum.seconds%60
         self.time_worked = datetime.time(hour=timesum.seconds/3600, minute=(timesum.seconds%3600)/60, second=timesum.seconds%60)
         self.save()

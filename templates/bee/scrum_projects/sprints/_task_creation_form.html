@@ -13,7 +13,7 @@
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon create-project-span">{% trans 'Assign to' %}</span>
-          <select id="user_assign" name="user_assign" class="form-control">
+          <select id="user_assign" name="user_assign" class="form-control" style="width: 180px;">
             <option value="0"></option>
             {% for user_assign in project_participants %}
               <option value="{{ user_assign.id }}">{{ user_assign.name }}</option>

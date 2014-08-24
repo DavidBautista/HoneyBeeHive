@@ -1,7 +1,7 @@
 from django import forms
 from bee.models import Project, UserStory, WORKERS_PERMISSIONS, UserBee, AssignedWorkerToProject
 from django.utils.translation import ugettext_lazy as _
-
+import datetime
 
 class Html5DateInput(forms.DateInput):
     input_type = 'date'
@@ -22,12 +22,18 @@ class ProjectForm(forms.ModelForm):
     )
     pred_start_date = forms.DateField(
         label=_('Start date'),
-        widget=Html5DateInput(attrs={'class': 'form-control'})
+        widget=Html5DateInput(attrs={'class': 'form-control', 'value': datetime.date.today()})
     )
     pred_end_date = forms.DateField(
         label=_('End date'),
-        widget=Html5DateInput(attrs={'class': 'form-control'})
+        widget=Html5DateInput(attrs={'class': 'form-control', 'value': datetime.date.today()+datetime.timedelta(days=30)})
     )
+
+    def clean(self):
+        if self.cleaned_data["pred_end_date"]< self.cleaned_data["pred_start_date"]:
+            raise forms.ValidationError(_("End date cannot be before than start date."))
+        else:
+            return self.cleaned_data
 
     class Meta:
         model = Project
@@ -66,12 +72,19 @@ class SprintForm(forms.ModelForm):
     )
     start_date = forms.DateField(
         label=_('Start date'),
-        widget=Html5DateInput(attrs={'class': 'form-control'})
+        widget=Html5DateInput(attrs={'class': 'form-control', 'value': datetime.date.today()})
     )
     end_date = forms.DateField(
         label=_('End date'),
-        widget=Html5DateInput(attrs={'class': 'form-control'})
+        widget=Html5DateInput(attrs={'class': 'form-control', 'value': datetime.date.today()+datetime.timedelta(days=7)})
     )
+
+    def clean(self):
+        if self.cleaned_data["end_date"]< self.cleaned_data["start_date"]:
+            raise forms.ValidationError(_("End date cannot be before than start date."))
+        else:
+            return self.cleaned_data
+
     class Meta:
         model = Project
         fields = ['name', 'start_date', 'end_date']

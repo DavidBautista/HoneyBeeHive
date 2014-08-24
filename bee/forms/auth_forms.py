@@ -100,7 +100,7 @@ class RegisterForm(UserCreationForm):
             UserBee.objects.get(email=email)
         except UserBee.DoesNotExist:
             return email
-        raise forms.ValidationError("A user with that email address already exists.")
+        raise forms.ValidationError(_("A user with that email address already exists."))
 
     def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)

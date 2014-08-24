@@ -32,9 +32,7 @@ def create_project(request):
         if form.is_valid():
             #the project data is valid
             new_project = form.save()
-            #todo testear
             AssignedWorkerToProject.objects.create(uworker=request.user, project=new_project, role="owner", permissions=3)
-            #TODO messages.success(request, "project created")
             return HttpResponseRedirect(reverse('project', kwargs={'proj_id': new_project.id}))
         #the project data is not valid
     else:
@@ -132,7 +130,7 @@ def create_sprint_js(request, proj_id):
     reset_dom = 'true' if pr.sprints.count() == 0 else 'false'
     spr = Sprint(project=pr)
     form = SprintForm(request.POST, instance=spr)
-    #todo revisar permisos
+
     if form.is_valid():
         spr = form.save()
         return render_to_response('bee/scrum_projects/_create_sprint.js',

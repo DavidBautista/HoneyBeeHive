@@ -25,17 +25,23 @@ class TaskCreationForm(forms.ModelForm):
     )
     pred_start_date = forms.DateField(
         label=_('Start date'),
-        widget=Html5DateInput(attrs={'class': 'form-control'})
+        widget=Html5DateInput(attrs={'class': 'form-control', 'value': datetime.date.today()})
     )
     pred_end_date = forms.DateField(
         label=_('End date'),
-        widget=Html5DateInput(attrs={'class': 'form-control'})
+        widget=Html5DateInput(attrs={'class': 'form-control', 'value': datetime.date.today()+datetime.timedelta(days=1)})
     )
     time_prevision = forms.TimeField(
         label=_('Time prevision (hours)'),
         widget=forms.widgets.TimeInput(attrs={'class': 'form-control', 'value': '1:30'},),
         input_formats=valid_time_formats
     )
+
+    def clean(self):
+        if self.cleaned_data["pred_end_date"]< self.cleaned_data["pred_start_date"]:
+            raise forms.ValidationError(_("End date cannot be before than start date."))
+        else:
+            return self.cleaned_data
 
     class Meta:
         model = BeeTask
