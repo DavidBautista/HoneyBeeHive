@@ -21,19 +21,19 @@
         <li class="dropdown {% if request.resolver_match.url_name in "project,user_stories,gantt_diagram,niko_calendar,admin_project,sprints,project_discussions" %}active{% endif %}">
 
         {% if project %}
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ project.name }}<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ project.name|truncatechars:20 }}<span class="caret"></span></a>
 
         {% else %}
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Projects' %}<span class="caret"></span></a>
         {% endif %}
           <ul class="dropdown-menu" role="menu">
             {% for proj in user.projects %}
-            <li><a href="{% url 'project' proj_id=proj.id %}">{{ proj.name }}</a></li>
+            <li><a href="{% url 'project' proj_id=proj.id %}">{{ proj.name|truncatechars:20 }}</a></li>
             {% endfor %}
           </ul>
          </li>
         {% if sprint %}
-          <li {% if request.resolver_match.url_name in "sprint_overview,tasks,sprint_discussions" %}class="active"{% endif %}><a href="{% url 'sprint_overview' proj_id=project.id spr_id=sprint.id %}">{{ sprint.name }}</a></li>
+          <li {% if request.resolver_match.url_name in "sprint_overview,tasks,sprint_discussions" %}class="active"{% endif %}><a href="{% url 'sprint_overview' proj_id=project.id spr_id=sprint.id %}">{{ sprint.name|truncatechars:20 }}</a></li>
         {% endif %}
       </ul>
       <ul class="nav navbar-nav navbar-right">

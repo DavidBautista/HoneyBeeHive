@@ -53,7 +53,7 @@
     <div id="add-worker-to-project" class="row add-worker-to-project" style="display: none;">
       <div class="alert alert-danger fade in" role="alert" style="display: none;">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-        <strong>{% trans "Error." %}</strong> aqui ira el error del djangoform
+        <strong>{% trans "Error." %}</strong>
       </div>
       <form id="add-project-worker-form" class="ajax-form-script" action="{% url 'add_participant_to_project' proj_id=project.id  %}" method="post">
         {% csrf_token %}
@@ -74,8 +74,8 @@
   </div>
   <div class="row">
     <div class="col-xs-12" style="padding-top: 10px;">
-      <button id="add-participant-button" class="btn btn-default" onclick=''>Añadir usuarios</button>
-      <button class="btn btn-default" onclick='$(".add-worker-to-project .alert").show(); setTimeout(function(){$(".add-worker-to-project .alert").alert("close");}, 5000);'>error formulario</button>
+      <button id="add-participant-button" class="btn btn-default">Añadir usuarios</button>
+{#      <button class="btn btn-default" onclick='$(".add-worker-to-project .alert").show(); setTimeout(function(){$(".add-worker-to-project .alert").alert("close");}, 5000);'>error formulario</button>#}
     </div>
   </div>
 {% endblock %}

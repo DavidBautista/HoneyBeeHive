@@ -176,5 +176,5 @@ def add_participant_to_project(request, proj_id): #todo mostrar error al fallar
                 context_instance=RequestContext(request))
 
     return render_to_response('bee/scrum_projects/_add_participant_to_project_error.js',
-            {'project': pr, 'awtp': awtp}, content_type='text/x-javascript',
+            {'project': pr, 'awtp': awtp, 'form':form}, content_type='text/x-javascript',
             context_instance=RequestContext(request))
