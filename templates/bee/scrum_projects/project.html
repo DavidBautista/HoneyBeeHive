@@ -15,5 +15,26 @@
 {% block right_content %}
   <div class="well page-header">
     <h1>{{ project.name }} <small>{% trans 'Project overview' %}</small></h1>
-  </div>  <p>{{ project.description }}</p>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 well">
+      <p><span style="font-weight: bold;">{% trans 'Description' %}: </span>{{ project.description }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>{% trans 'Recently completed tasks' %}</h3>
+      <h4>{{ completed_tasks_count }} {% trans 'of' %} {{ numtasks }}</h4>
+      <ul>
+        {% for task in tasks %}
+          <li><span style="font-weight: bold;">{{ task.name }}</span> {% trans 'completed on' %} {{task.real_end_date|date:"SHORT_DATE_FORMAT" }} {% trans 'spending' %} <span style="font-weight: bold;">{{ task.time_worked }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-xs-6">
+      <h3>Last Discussions</h3>
+      {% include 'bee/discussions/_discussions_list.html' %}
+    </div>
+  </div>
 {% endblock %}

@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render_to_response
-from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject, BeeTask
+from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject, BeeTask, Discussion
 from bee.forms.projects_forms import ProjectForm, UserStoryForm, SprintForm, AddParticipantToProjectForm
 import pprint
 from django.contrib import messages
@@ -49,8 +49,16 @@ def create_project(request):
 @check_project_read
 def project(request, proj_id):
     pr = Project.objects.get(id=proj_id)
+
+    numtasks = BeeTask.objects.filter(sprint__project=pr).count()
+    btasks = BeeTask.objects.filter(sprint__project=pr, status=4).order_by('-real_end_date')
+
+    discussion_list = Discussion.objects.filter(project=pr).order_by('-start_date')[0:3]
+
+
     return render_to_response('bee/scrum_projects/project.html',
-        {'project': pr},
+        {'project': pr, 'discussion_list': discussion_list, 'numtasks': numtasks, 'tasks': btasks[0:5],
+         'completed_tasks_count': btasks.__len__()},
         context_instance=RequestContext(request))
 
 

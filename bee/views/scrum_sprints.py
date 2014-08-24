@@ -31,7 +31,7 @@ def sprint(request, proj_id, spr_id):
         counter-=1
 
     counts_array.append((ini_date, counter))
-    discussion_list = Discussion.objects.filter(sprint=spr).order_by('-start_date')
+    discussion_list = Discussion.objects.filter(sprint=spr).order_by('-start_date')[0:3]
     return render_to_response('bee/scrum_projects/sprints/overview.html',
         {'project': pr, 'sprint': spr, 'numtasks':numtasks, 'tasks':reversed(list(btasks)[-5:]),
          'completed_tasks': counts_array, 'completed_tasks_count': btasks.__len__(),'discussion_list': discussion_list },
