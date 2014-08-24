@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render_to_response
-from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject
+from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject, BeeTask
 from bee.forms.projects_forms import ProjectForm, UserStoryForm, SprintForm, AddParticipantToProjectForm
 import pprint
 from django.contrib import messages
@@ -97,8 +97,11 @@ def create_user_story(request, proj_id):
 @check_project_admin
 def gantt_diagram(request, proj_id):
     pr = Project.objects.get(id=proj_id)
+
+    btasks = BeeTask.objects.filter(sprint__project=pr).order_by('pred_start_date')
+
     return render_to_response('bee/scrum_projects/gantt_diagram.html',
-        {'project': pr},
+        {'project': pr, 'num_tasks': btasks.__len__(), 'tasks':btasks},
         context_instance=RequestContext(request))
 
 

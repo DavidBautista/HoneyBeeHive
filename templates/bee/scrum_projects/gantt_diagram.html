@@ -1,16 +1,157 @@
 {% extends "bee/layouts/__base_with_left_menu.html" %}
 {% load i18n %}
 {% block styles %}
-
 {% endblock %}
 
 {% block scripts %}
+  <script src="{{ STATIC_URL }}js/highstock/highstock.js"></script>
+  <script>
+    $(document).ready(function () {
+      var red = "#EC2748";
+      var green = "#90EC66";
+      var blue = "#2CADEC";
+      var tasks = [
+        {% for btask in tasks %}
+        {
+          name: '{{ btask.name }}',
+          color: {% if btask.status == 4 and btask.real_end_date <= btask.pred_end_date %}green{% elif btask.status == 4 and btask.real_end_date > btask.pred_end_date %}red{% else %}blue{% endif %},
+          intervals: [{ // From-To pairs
+            from: Date.UTC({{ btask.pred_start_date.year }}, {{ btask.pred_start_date.month }}, {{ btask.pred_start_date.day }}),
+            to: Date.UTC({{ btask.pred_end_date.year }}, {{ btask.pred_end_date.month }}, {{ btask.pred_end_date.day }})
+          }]
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
 
+      ];
+
+      // re-structure the tasks into line seriesvar series = [];
+      var series = [];
+      $.each(tasks.reverse(), function(i, task) {
+        var item = {
+          name: task.name,
+          data: []
+        };
+        if(task.color)
+          item.color=task.color;
+        $.each(task.intervals, function(j, interval) {
+          item.data.push({
+            x: interval.from,
+            y: i,
+            label: interval.label,
+            from: interval.from,
+            to: interval.to
+          }, {
+            x: interval.to,
+            y: i,
+            from: interval.from,
+            to: interval.to
+          });
+
+          // add a null value between intervals
+          if (task.intervals[j + 1]) {
+            item.data.push(
+                [(interval.to + task.intervals[j + 1].from) / 2, null]
+            );
+          }
+        });
+        series.push(item);
+      });
+
+
+
+      // create the chart
+      var chart = new Highcharts.Chart({
+
+        chart: {
+          renderTo: 'gantt-diagram-container',
+          height: 200+30*{{ num_tasks }}
+        },
+
+        title: {
+          text: 'Gantt diagram'
+        },
+
+        xAxis: {
+          type: 'datetime',
+          minRange: 3600*24*1000
+        },
+
+        navigator:{
+          enabled:true
+        },
+        scrollbar: {
+          enabled:true
+        },
+
+        rangeSelector: {
+          enabled: true
+        },
+
+        yAxis: {
+          tickInterval: 1,
+          labels: {
+            formatter: function() {
+              if (tasks[this.value]) {
+                return tasks[this.value].name;
+              }
+            }
+          },
+          startOnTick: false,
+          endOnTick: false,
+          title: {
+            text: 'Activity'
+          },
+          minPadding: 0.2,
+          maxPadding: 0.2
+        },
+
+        legend: {
+          enabled: false
+        },
+
+        tooltip: {
+          formatter: function() {
+            return '<b>'+ tasks[this.y].name + '</b><br/>' +
+                Highcharts.dateFormat('%d/%m', this.point.options.from)  +
+                ' - ' + Highcharts.dateFormat('%d/%m', this.point.options.to);
+          }
+        },
+
+        plotOptions: {
+          line: {
+            lineWidth: 9,
+            marker: {
+              enabled: false
+            },
+            dataLabels: {
+              enabled: true,
+              align: 'left',
+              formatter: function() {
+                return this.point.options && this.point.options.label;
+              }
+            }
+          }
+        },
+
+        series: series
+
+      });
+    });
+
+
+
+  </script>
 {% endblock %}
 
 
 {% block right_content %}
   <div class="well page-header">
     <h1>{{ project.name }} <small>{% trans 'Gantt diagram' %}</small></h1>
+  </div>
+
+  <div class="row">
+    <div id="gantt-diagram-container" class="col-xs-12">
+
+    </div>
   </div>
 {% endblock %}
