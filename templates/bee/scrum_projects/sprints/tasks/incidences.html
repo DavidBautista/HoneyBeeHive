@@ -1,0 +1,27 @@
+{% load i18n %}
+
+<div style="width: 700px; background-color: #fefacd;">
+  <div style="overflow:scroll; height:400px;">
+    {% for issue in issues %}
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="well">
+            {{ issue.description }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{% trans 'Create new issue' %}</h3>
+    </div>
+    <div class="panel-body">
+      <form action="{% url 'create_issue' proj_id=project.id spr_id=sprint.id task_id=task.id %}" method="post">
+        {% csrf_token %}
+        <textarea name="description" class="form-control user-story" rows="3" maxlength="220" placeholder="{% trans 'Write your issue here...' %}"></textarea>
+        <input type="submit" class="btn btn-default" value="{% trans 'Create issue' %}">
+      </form>
+    </div>
+  </div>
+</div>

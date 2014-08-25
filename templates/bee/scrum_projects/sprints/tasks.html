@@ -39,7 +39,7 @@
         </div>
         <div class="col-xs-4">
           <div class="btn-group">
-            <a type="button" href="/project/{{ project.id }}/sprints/{{ sprint.id }}/task/<%=id%>/create_incidence/" class="btn btn-default" title="{% trans 'incidences' %}"><span class="glyphicon glyphicon-warning-sign"></span> </a>
+            <a type="button" href="/project/{{ project.id }}/sprint/{{ sprint.id }}/task/<%=id%>/issues/" class="btn btn-default task-issue-link" title="{% trans 'issues' %}"><span class="glyphicon glyphicon-warning-sign"></span> </a>
             <a type="button" href="/project/{{ project.id }}/sprints/{{ sprint.id }}/task/<%=id%>/discussions/" class="btn btn-default" title="{% trans 'discussions' %}"><span class="glyphicon glyphicon-comment"></span> </a>
             <button type="button" class="btn btn-default" title="{% trans 'description' %}" onclick="console.info('toggle');$('.task-row-description-<%=id%>').toggle('slow');"><span class="glyphicon glyphicon-list-alt"></span> </button>
             <% if (status == 1 ) { %>

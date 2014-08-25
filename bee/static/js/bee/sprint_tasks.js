@@ -35,6 +35,7 @@ var SprintTasks = (function () {
         this.noData();
       else
         rows.each(this.renderInfo);
+      $(".task-issue-link").colorbox({innerHeight:600,scrolling:false});
     },
 
     renderInfo: function (rep) {

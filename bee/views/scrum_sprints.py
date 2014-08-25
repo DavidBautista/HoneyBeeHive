@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render_to_response
-from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject, BeeTask, TaskWorkingTime, UserBee, Discussion
+from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject, BeeTask, TaskWorkingTime, UserBee, Discussion, Issue
 from bee.models._enums import TASKS_STATUS
 from bee.forms.sprints_forms import TaskCreationForm
 import pprint
@@ -83,7 +83,8 @@ def create_task_js(request, proj_id, spr_id):
                 {'project': pr, 'sprint': spr, 'task_form':task_form}, content_type='text/x-javascript',
                 context_instance=RequestContext(request))
 
-
+@login_required
+@check_project_read
 def work_in_task(request, proj_id, spr_id, task_id):
     task = BeeTask.objects.get(id=task_id)
     error = ''
@@ -101,7 +102,8 @@ def work_in_task(request, proj_id, spr_id, task_id):
         error = '?error=2'
     return HttpResponseRedirect(reverse('tasks', kwargs={'proj_id': proj_id, 'spr_id': spr_id})+error)
 
-
+@login_required
+@check_project_read
 def pause_task(request, proj_id, spr_id, task_id):
     task = BeeTask.objects.get(id=task_id)
     error = ''
@@ -121,7 +123,8 @@ def pause_task(request, proj_id, spr_id, task_id):
     return HttpResponseRedirect(reverse('tasks', kwargs={'proj_id': proj_id, 'spr_id': spr_id})+error)
 
 
-
+@login_required
+@check_project_read
 def complete_task(request, proj_id, spr_id, task_id):
     task = BeeTask.objects.get(id=task_id)
     error = ''
@@ -145,5 +148,25 @@ def complete_task(request, proj_id, spr_id, task_id):
 
     return HttpResponseRedirect(reverse('tasks', kwargs={'proj_id': proj_id, 'spr_id': spr_id})+error)
 
-def create_incidence(request, proj_id, spr_id, task_id):
-    pass
+@login_required
+@check_project_read
+def show_issue(request, proj_id, spr_id, task_id):
+    pr = Project.objects.get(id=proj_id)
+    spr = Sprint.objects.get(id=spr_id)
+    task = BeeTask.objects.get(id=task_id)
+    issues = Issue.objects.filter(ttask=task)
+    return render_to_response('bee/scrum_projects/sprints/tasks/incidences.html',
+        {'project': pr, 'sprint': spr,'task':task , 'issues': issues},
+        context_instance=RequestContext(request))
+
+@login_required
+@require_POST
+@check_project_read
+def create_issue(request, proj_id, spr_id, task_id):
+    pr = Project.objects.get(id=proj_id)
+    spr = Sprint.objects.get(id=spr_id)
+    task = BeeTask.objects.get(id=task_id)
+    issues = Issue.objects.filter(ttask=task)
+    if request.POST.get('description'):
+        Issue(ttask=task, description=request.POST.get('description')).save()
+    return HttpResponseRedirect(reverse('tasks', kwargs={'proj_id': proj_id, 'spr_id': spr_id}))

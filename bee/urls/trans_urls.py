@@ -48,8 +48,8 @@ urlpatterns = patterns('',
     url(r'^project/(?P<proj_id>\d+)/sprints/(?P<spr_id>\d+)/task/(?P<task_id>\d+)/start_working/$', 'bee.views.scrum_sprints.work_in_task', name='work_in_task'),
     url(r'^project/(?P<proj_id>\d+)/sprints/(?P<spr_id>\d+)/task/(?P<task_id>\d+)/pause/$', 'bee.views.scrum_sprints.pause_task', name='pause_task'),
     url(r'^project/(?P<proj_id>\d+)/sprints/(?P<spr_id>\d+)/task/(?P<task_id>\d+)/complete/$', 'bee.views.scrum_sprints.complete_task', name='complete_task'),
-    url(r'^project/(?P<proj_id>\d+)/sprints/(?P<spr_id>\d+)/task/(?P<task_id>\d+)/create_incidence/$', 'bee.views.scrum_sprints.create_incidence', name='create_incidence'),
-
+    url(r'^project/(?P<proj_id>\d+)/sprint/(?P<spr_id>\d+)/task/(?P<task_id>\d+)/issues/$', 'bee.views.scrum_sprints.show_issue', name='issues'),
+    url(r'^project/(?P<proj_id>\d+)/sprint/(?P<spr_id>\d+)/task/(?P<task_id>\d+)/create_issue/$', 'bee.views.scrum_sprints.create_issue', name='create_issue'),
 
     #PROFILE SUMMARY
     url(r'^calendar/$', 'bee.views.common.calendar', name='calendar'),
@@ -70,4 +70,5 @@ urlpatterns = patterns('',
     url(r'^project/(?P<proj_id>\d+)/sprints/(?P<spr_id>\d+)/task/(?P<task_id>\d+)/discussions/$', 'bee.views.discussions.task_discussions', name='task_discussions'),
     url(r'^project/(?P<proj_id>\d+)/(?P<spr_id>\d+)/(?P<task_id>\d+)/discussions_colorbox/$', 'bee.views.discussions.create_discussion_colorbox', name='create_task_discussion_colorbox'),
     url(r'^project/(?P<proj_id>\d+)/sprint/(?P<spr_id>\d+)/task/(?P<task_id>\d+)/discussions_js/$', 'bee.views.discussions.create_discussion_js', name='create_task_discussion_js'),
+
 )
