@@ -1,7 +1,7 @@
 from django.db import models
 from user_bee import UserBee
 from project import Project
-
+from user_story_acceptance_criteria import AcceptanceCriteria
 
 class UserStory(models.Model):
     why = models.CharField(max_length=255)
@@ -14,4 +14,5 @@ class UserStory(models.Model):
     class Meta:
         app_label = "bee"
 
-
+    def acceptance_criterias(self):
+        return AcceptanceCriteria.objects.filter(user_story=self)

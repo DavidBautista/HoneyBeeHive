@@ -4,10 +4,10 @@ from bee.decorators.permissions import check_project_read_js, check_project_read
     check_project_write_js, check_project_admin_js, check_project_admin
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import render_to_response
-from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject, BeeTask, Discussion
-from bee.forms.projects_forms import ProjectForm, UserStoryForm, SprintForm, AddParticipantToProjectForm
+from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject, BeeTask, Discussion, AcceptanceCriteria
+from bee.forms.projects_forms import ProjectForm, UserStoryForm, SprintForm, AddParticipantToProjectForm, AcceptanceCriteriaForm
 import pprint
 from django.contrib import messages
 import json
@@ -97,6 +97,45 @@ def create_user_story(request, proj_id):
         return render_to_response('bee/scrum_projects/new_user_story.html',
         {'project': pr, 'user_story_form': form},
         context_instance=RequestContext(request))
+
+
+@login_required
+@require_GET
+@check_project_write
+def new_acceptance_criteria(request, proj_id, us_id):
+    pr = Project.objects.get(id=proj_id)
+    try:
+        us = UserStory.objects.get(id=us_id, project=pr)
+    except UserStory.DoesNotExist() as e:
+        return HttpResponseForbidden
+    form = AcceptanceCriteriaForm()
+    return render_to_response('bee/scrum_projects/new_acceptance_criteria.html',
+        {'project': pr, 'form': form, 'user_story':us},
+        context_instance=RequestContext(request))
+
+
+@login_required
+@require_POST
+@check_project_write
+def create_acceptance_criteria(request, proj_id, us_id):
+    pr = Project.objects.get(id=proj_id)
+    try:
+        us = UserStory.objects.get(id=us_id, project=pr)
+    except UserStory.DoesNotExist() as e:
+        return HttpResponseForbidden
+
+    acc = AcceptanceCriteria(user_story=us)
+    form = AcceptanceCriteriaForm(request.POST, instance=acc)
+    if form.is_valid():
+        form.save()
+        return render_to_response('bee/scrum_projects/_create_acceptance_criteria.js',
+        {'project': pr, 'form': form}, content_type='text/x-javascript',
+        context_instance=RequestContext(request))
+
+    return render_to_response('bee/scrum_projects/_create_acceptance_criteria_error.js',
+        {'project': pr, 'form': form}, content_type='text/x-javascript',
+        context_instance=RequestContext(request))
+
 
 
 @login_required

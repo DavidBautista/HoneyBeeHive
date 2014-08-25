@@ -1,5 +1,5 @@
 from django.db import models
-from user_story import UserStory
+#from user_story import UserStory
 
 
 class AcceptanceCriteria(models.Model):

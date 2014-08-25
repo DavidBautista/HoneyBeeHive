@@ -1,0 +1,27 @@
+{% load i18n %}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div style="max-width: 700px; background-color: #fefacd; padding:20px;">
+      <form class="ajax-form-script" action="{% url 'create_acceptance_criteria' proj_id=project.id us_id=user_story.id %}" method="POST" role="form">
+        {% csrf_token %}
+        <div class="form-group">
+          <div class="input-group" style=" margin-bottom: 15px;">
+            <label class="control-label input-group-addon user-story">{{ form.data.label }}</label>
+            {{ form.data }}
+          </div>
+          <div class="input-group" style=" margin-bottom: 15px;">
+            <label class="control-label input-group-addon user-story">{{ form.expected_result.label }}</label>
+            {{ form.expected_result }}
+          </div>
+          <div class="input-group" style=" margin-bottom: 15px;">
+            <label class="control-label input-group-addon user-story">{{ form.expected_message.label }}</label>
+            {{ form.expected_message }}
+          </div>
+        </div>
+        <input type="submit" class="btn btn-default center-block" name="Submit" value="{% trans "Create acceptance criteria" %}">
+      </form>
+    </div>
+
+  </div>
+</div>

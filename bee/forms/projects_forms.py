@@ -61,8 +61,29 @@ class UserStoryForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Project
+        model = UserStory
         fields = ['why', 'who', 'what', ]
+
+
+class AcceptanceCriteriaForm(forms.ModelForm):
+    data = forms.CharField(
+        label=_("Data Input"),
+        widget=forms.Textarea(attrs={'class': 'form-control user-story mb15', 'rows': '3', 'maxlength': '220'}),
+        help_text=_("")
+    )
+    expected_result = forms.CharField(
+        label=_("Expected result"),
+        widget=forms.Textarea(attrs={'class': 'form-control user-story mb15', 'rows': '3', 'maxlength': '220'}),
+        help_text=_("")
+    )
+    expected_message = forms.CharField(
+        label=_("Expected message"),
+        widget=forms.Textarea(attrs={'class': 'form-control user-story mb15', 'rows': '3', 'maxlength': '220'}),
+        help_text=_("")
+    )
+    class Meta:
+        model = UserStory
+        fields = ['data', 'expected_result', 'expected_message', ]
 
 
 class SprintForm(forms.ModelForm):

@@ -1,13 +1,14 @@
 {% extends "bee/layouts/__base_with_left_menu.html" %}
 {% load i18n %}
-{% block styles %}
-
-{% endblock %}
 
 {% block scripts %}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $(".new_acceptance_criteria-link").colorbox({innerHeight:350, scrolling:false});
+    });
 
+  </script>
 {% endblock %}
-
 
 {% block right_content %}
   <div class="well page-header">
@@ -16,14 +17,27 @@
   <div class="row">
     <div class="col-xs-12">
       {% for user_story in project.user_story.all %}
-      <div class="well">
-        <p><strong>{% trans "As a" %}</strong> {{ user_story.who }},</p>
-        <p><strong>{% trans "I want" %}</strong> {{ user_story.what }},</p>
-        <p><strong>{% trans "so that I can" %}</strong> {{ user_story.why }}.</p>
-        <button type="button" class="btn btn-light" data-toggle="collapse" data-target="#acceptance-criteria-{{ user_story.id }}">{% trans "Acceptance criterias" %}</button>{# TODO #}
-        <a class="btn btn-light" href="#">{% trans "New acceptance criteria" %}</a>{# TODO #}
-        <div id="acceptance-criteria-{{ user_story.id }}" class="collapse out">void criteria</div>
-      </div>
+        <div class="well">
+          <p><strong>{% trans "As a" %}</strong> {{ user_story.who }},</p>
+          <p><strong>{% trans "I want" %}</strong> {{ user_story.what }},</p>
+          <p><strong>{% trans "so that I can" %}</strong> {{ user_story.why }}.</p>
+          <button type="button" class="btn btn-light" data-toggle="collapse" data-target="#acceptance-criteria-{{ user_story.id }}">{% trans "Acceptance criterias" %}</button>{# TODO #}
+          <a class="btn btn-light new_acceptance_criteria-link" href="{% url 'new_acceptance_criteria' proj_id=project.id us_id=user_story.id %}">{% trans "New acceptance criteria" %}</a>{# TODO #}
+          <div id="acceptance-criteria-{{ user_story.id }}" class="collapse out">
+            <table class="table table-bordered">
+              {% for acriteria in user_story.acceptance_criterias %}
+                <tr>
+                  <td>
+                    <p><strong>{% trans "Data input" %}: </strong> {{ acriteria.data }}</p>
+                    <p><strong>{% trans "Expected result" %}: </strong> {{ acriteria.expected_result }}</p>
+                    <p><strong>{% trans "Expected_message" %}: </strong> {{ acriteria.expected_message }}</p>
+                  </td>
+                </tr>
+              {% endfor %}
+
+            </table>
+          </div>
+        </div>
       {% endfor %}
     </div>
   </div>
