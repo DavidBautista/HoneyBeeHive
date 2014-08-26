@@ -2,7 +2,7 @@ from django.db import models
 from _enums import SCORE_CHOICES
 from bee.models.beetask import BeeTask
 
-class Issue(models.Model): #TODO pensar si es buen nombre
+class Issue(models.Model):
     #seriousness = models.SmallIntegerField(choices=SCORE_CHOICES, default=1)
     #name = models.CharField(max_length=140)
     #itype = models.CharField(max_length=64)

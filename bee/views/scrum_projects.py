@@ -6,11 +6,12 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import render_to_response
-from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject, BeeTask, Discussion, AcceptanceCriteria
+from bee.models import Project, UserStory, Sprint, AssignedWorkerToProject, BeeTask, Discussion, AcceptanceCriteria, NikoMood
 from bee.forms.projects_forms import ProjectForm, UserStoryForm, SprintForm, AddParticipantToProjectForm, AcceptanceCriteriaForm
 import pprint
 from django.contrib import messages
 import json
+import datetime
 
 
 @login_required
@@ -56,9 +57,11 @@ def project(request, proj_id):
     discussion_list = Discussion.objects.filter(project=pr).order_by('-start_date')[0:3]
 
 
+    can_select_niko= NikoMood.objects.filter(date=datetime.date.today(), user=request.user, project=pr).count() == 0
+
     return render_to_response('bee/scrum_projects/project.html',
         {'project': pr, 'discussion_list': discussion_list, 'numtasks': numtasks, 'tasks': btasks[0:5],
-         'completed_tasks_count': btasks.__len__()},
+         'completed_tasks_count': btasks.__len__(), 'can_select_niko':can_select_niko},
         context_instance=RequestContext(request))
 
 
@@ -193,9 +196,34 @@ def create_sprint_js(request, proj_id):
 @check_project_admin
 def niko_calendar(request, proj_id):
     pr = Project.objects.get(id=proj_id)
+    today = datetime.date.today()
+    days7ago = today -datetime.timedelta(days=7)
+    dates = []
+    todayaux = days7ago +datetime.timedelta(days=1)
+    print isinstance(todayaux, datetime.date), isinstance(today, datetime.date)
+    while todayaux <= today:
+        dates.append(todayaux)
+        todayaux+=datetime.timedelta(days=1)
+
+    moods = NikoMood.objects.filter(date__lte=today, date__gt=days7ago, project=pr).order_by('user','-date')
     return render_to_response('bee/scrum_projects/niko_calendar.html',
-        {'project': pr},
+        {'project': pr, 'moods':moods, 'dates':dates },
         context_instance=RequestContext(request))
+
+
+@login_required
+@check_project_read
+def add_niko_mood(request, proj_id):
+    pr = Project.objects.get(id=proj_id)
+    try:
+        NikoMood.objects.get(date=datetime.date.today(), project=pr, user=request.user)
+        return HttpResponseBadRequest()
+    except NikoMood.DoesNotExist:
+        mood = int(request.POST.get('mood'))
+        if mood <4 and mood > 0:
+            NikoMood(date=datetime.date.today(), project=pr, user=request.user, mood=mood).save()
+    return HttpResponseRedirect(reverse('project', kwargs={'proj_id': pr.id}))
+
 
 
 @login_required

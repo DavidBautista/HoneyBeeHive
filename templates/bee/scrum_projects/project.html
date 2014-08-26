@@ -17,7 +17,39 @@
     <h1>{{ project.name }} <small>{% trans 'Project overview' %}</small></h1>
   </div>
   <div class="row">
+  {% if can_select_niko %}
+    <div class="col-xs-4">
+      <h4>{% trans "Select your satisfaction with today's tasks" %}</h4>
+      <table>
+        <tr>
+          <td>
+      <form  action="{% url 'add_niko_mood' proj_id=project.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="mood" value="1">
+        <button type="submit" name="submit" class="btn btn-light center-block"><img src="{{ STATIC_URL }}img/niko-calendar/niko-1.png" width="50px"></button>
+      </form>
+          </td>
+          <td>
+      <form action="{% url 'add_niko_mood' proj_id=project.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden"  name="mood"  value="2">
+        <button type="submit" name="submit" class="btn btn-light center-block"><img src="{{ STATIC_URL }}img/niko-calendar/niko-2.png" width="50px"></button>
+      </form>
+          </td>
+          <td>
+      <form action="{% url 'add_niko_mood' proj_id=project.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="mood"  value="3">
+        <button type="submit" name="submit" class="btn btn-light center-block"><img src="{{ STATIC_URL }}img/niko-calendar/niko-3.png" width="50px"></button>
+      </form>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xs-8" well>
+  {% else %}
     <div class="col-xs-12 well">
+  {% endif %}
       <p><span style="font-weight: bold;">{% trans 'Description' %}: </span>{{ project.description }}</p>
     </div>
   </div>

@@ -13,4 +13,38 @@
   <div class="well page-header">
     <h1>{{ project.name }} <small>{% trans 'Niko calendar' %}</small></h1>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table table-bordered">
+      <caption><h4>{% trans 'Last 7 days' %}</h4></caption>
+      <thead>
+        <tr>
+          <th>{% trans 'Participant' %}</th>
+          {% for date in dates %}
+            <th>{{ date|date:"SHORT_DATE_FORMAT" }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for usr_mood in project.worker_assigned.all %}
+          <tr>
+            <td>{{ usr_mood.uworker.name }}</td>
+            {% for date in dates %}
+              <td>
+              {% for mood in moods %}
+                {% if usr_mood.uworker == mood.user %}
+                  {% if  date == mood.date %}
+                    <img src="{{ STATIC_URL }}img/niko-calendar/niko-{{ mood.mood }}.png" width="50px">
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+              </td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+      </table>
+    </div>
+  </div>
 {% endblock %}
+
