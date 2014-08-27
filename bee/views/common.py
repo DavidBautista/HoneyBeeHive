@@ -9,7 +9,7 @@ from bee.decorators.auth import anonymous_required
 from bee.models import BeeTask
 
 @anonymous_required
-@cache_page(60*15)
+#@cache_page(60*15)
 def index(request):
     login_form = LoginForm()
     register_form = RegisterForm()
