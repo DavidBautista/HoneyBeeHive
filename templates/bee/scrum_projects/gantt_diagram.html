@@ -17,8 +17,8 @@
           name: '{{ btask.name }}',
           color: {% if btask.status == 4 and btask.real_end_date <= btask.pred_end_date %}green{% elif btask.status == 4 and btask.real_end_date > btask.pred_end_date %}red{% else %}blue{% endif %},
           intervals: [{ // From-To pairs
-            from: Date.UTC({{ btask.pred_start_date.year }}, {{ btask.pred_start_date.month }}, {{ btask.pred_start_date.day }}),
-            to: Date.UTC({{ btask.pred_end_date.year }}, {{ btask.pred_end_date.month }}, {{ btask.pred_end_date.day }})
+            from: Date.UTC({{ btask.pred_start_date.year }}, {{ btask.pred_start_date.month }}-1, {{ btask.pred_start_date.day }}),
+            to: Date.UTC({{ btask.pred_end_date.year }}, {{ btask.pred_end_date.month }}-1, {{ btask.pred_end_date.day }})
           }]
         }{% if not forloop.last %},{% endif %}
         {% endfor %}
@@ -145,6 +145,32 @@
     <h1>{{ project.name }} <small>{% trans 'Gantt diagram' %}</small></h1>
   </div>
 
+  <div class="row">
+    <div class="col-xs-7 col-xs-offset-1 well">
+      <table>
+        <tr>
+          <td style="width:20px;"></td>
+          <td style="width:10px;"></td>
+          <td style="margin-left: 10px;"></td>
+        </tr>
+        <tr>
+          <td style="background-color: #2CADEC"></td>
+          <td></td>
+          <td>{% trans 'Not completed tasks' %}</td>
+        </tr>
+        <tr>
+          <td style="background-color: #90EC66"></td>
+          <td></td>
+          <td>{% trans 'Tasks completed succesfully' %}</td>
+        </tr>
+        <tr>
+          <td style="background-color: #EC2748"></td>
+          <td></td>
+          <td>{% trans 'Tasks completed later than expected' %}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
   <div class="row">
     <div id="gantt-diagram-container" class="col-xs-12">
 

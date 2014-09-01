@@ -103,7 +103,6 @@ $(function () {
 
   <div class="row">
     <div class="col-xs-8" id="sprint-progress-container">
-      gráfico de progreso
     </div>
     <div class="col-xs-4">
 
@@ -119,7 +118,7 @@ $(function () {
   {% if discussion_list %}
   <div class="row">
     <div class="col-xs-12">
-      <h3>Last Discussions</h3>
+      <h3>{% trans 'Last Discussions' %}</h3>
       {% include 'bee/discussions/_discussions_list.html' %}
     </div>
   </div>

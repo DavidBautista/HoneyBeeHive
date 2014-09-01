@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-26 22:38+0000\n"
-"PO-Revision-Date: 2014-08-27 01:58+0100\n"
+"POT-Creation-Date: 2014-09-01 22:45+0000\n"
+"PO-Revision-Date: 2014-09-02 00:48+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
@@ -77,12 +77,11 @@ msgid "Last name"
 msgstr "Apellidos"
 
 #: bee/forms/auth_forms.py:103
-#| msgid "A user with that username already exists."
 msgid "A user with that email address already exists."
 msgstr "Ya existe un usuario con este email."
 
 #: bee/forms/discussion_forms.py:14
-#: templates/bee/discussions/_discussion_creation_form.html:22
+#: templates/bee/discussions/_discussion_creation_form.html:24
 msgid "Content"
 msgstr "Nombre"
 
@@ -121,7 +120,6 @@ msgstr "Activa tu cuenta de HoneyBeeHive"
 
 #: templates/bee/auth/_login_form.html:3
 #: templates/bee/common/_navbar_anonym.html:32
-#: templates/bee/discussions/_discussion_creation_form.html:3
 msgid "Login"
 msgstr "Iniciar sesión"
 
@@ -129,13 +127,15 @@ msgstr "Iniciar sesión"
 msgid "Remember me on this computer."
 msgstr "Recuérdame en este ordenador."
 
+#: templates/bee/auth/_login_form.html:28
+msgid "Submit"
+msgstr "Enviar"
+
 #: templates/bee/auth/_login_form.html:32
-#: templates/bee/discussions/_discussion_creation_form.html:33
 msgid "Don't have a HoneyBeeHive account?"
 msgstr "No tienes una cuenta en HoneyBeeHive?"
 
 #: templates/bee/auth/_login_form.html:32
-#: templates/bee/discussions/_discussion_creation_form.html:33
 msgid "Register now"
 msgstr "Regístrate ahora"
 
@@ -197,7 +197,6 @@ msgid "About us"
 msgstr "Quiénes somos"
 
 #: templates/bee/common/_navbar_logged.html:27
-#| msgid "Project name"
 msgid "Projects"
 msgstr "Proyectos"
 
@@ -218,7 +217,6 @@ msgid "view in sprint"
 msgstr "ver en sprint"
 
 #: templates/bee/common/calendar.html:26
-#| msgid "Project name"
 msgid "Project"
 msgstr "Proyecto"
 
@@ -272,9 +270,17 @@ msgstr ""
 "Agradecimientos a Javi Castro por su contribución con el logo y otras "
 "imágenes de la aplicación."
 
-#: templates/bee/discussions/_discussion_creation_form.html:15
+#: templates/bee/discussions/_discussion_creation_form.html:5
+msgid "Create discussion"
+msgstr "Crear discusión"
+
+#: templates/bee/discussions/_discussion_creation_form.html:17
 msgid "Subject"
 msgstr "Asunto"
+
+#: templates/bee/discussions/_discussion_creation_form.html:31
+msgid "Create"
+msgstr "Crear"
 
 #: templates/bee/discussions/_discussion_overview.html:7
 msgid "view more..."
@@ -293,7 +299,6 @@ msgid "Related discussions: "
 msgstr "Discusiones relacionadas: "
 
 #: templates/bee/discussions/discussion_detail.html:11
-#| msgid "Your projects"
 msgid "project"
 msgstr "proyecto"
 
@@ -313,40 +318,40 @@ msgstr "Comentar"
 msgid "Follow us"
 msgstr "Síguenos"
 
-#: templates/bee/scrum_projects/_left_menu.html:5
+#: templates/bee/scrum_projects/_left_menu.html:10
 #: templates/bee/scrum_projects/sprints/_left_menu.html:5
 msgid "Overview"
 msgstr "Resumen"
 
-#: templates/bee/scrum_projects/_left_menu.html:6
+#: templates/bee/scrum_projects/_left_menu.html:11
 #: templates/bee/scrum_projects/user_stories.html:15
 msgid "User stories"
 msgstr "User stories"
 
-#: templates/bee/scrum_projects/_left_menu.html:7
+#: templates/bee/scrum_projects/_left_menu.html:12
 #: templates/bee/scrum_projects/sprints.html:49
 msgid "Sprints"
 msgstr "Sprints"
 
-#: templates/bee/scrum_projects/_left_menu.html:8
+#: templates/bee/scrum_projects/_left_menu.html:13
 #: templates/bee/scrum_projects/_project_box.html:11
 #: templates/bee/scrum_projects/sprints.html:34
 #: templates/bee/scrum_projects/sprints/_left_menu.html:7
 msgid "Discussions"
 msgstr "Discusiones"
 
-#: templates/bee/scrum_projects/_left_menu.html:11
+#: templates/bee/scrum_projects/_left_menu.html:16
 #: templates/bee/scrum_projects/gantt_diagram.html:67
 #: templates/bee/scrum_projects/gantt_diagram.html:145
 msgid "Gantt diagram"
 msgstr "Diagrama de Gantt"
 
-#: templates/bee/scrum_projects/_left_menu.html:12
+#: templates/bee/scrum_projects/_left_menu.html:17
 #: templates/bee/scrum_projects/niko_calendar.html:14
 msgid "Niko calendar"
 msgstr "Calendario Niko"
 
-#: templates/bee/scrum_projects/_left_menu.html:13
+#: templates/bee/scrum_projects/_left_menu.html:18
 msgid "Admin"
 msgstr "Admin"
 
@@ -372,9 +377,8 @@ msgstr "Ver proyecto"
 
 #: templates/bee/scrum_projects/_sprint_creation_form.html:5
 #: templates/bee/scrum_projects/_sprint_creation_form.html:36
-#| msgid "Create project"
 msgid "Create sprint"
-msgstr "Crear proyecto"
+msgstr "Crear sprint"
 
 #: templates/bee/scrum_projects/admin_project.html:24
 msgid "Administration"
@@ -408,6 +412,18 @@ msgstr "Discusiones del proyecto"
 msgid "New Discussion"
 msgstr "Nueva discusión"
 
+#: templates/bee/scrum_projects/gantt_diagram.html:159
+msgid "Not completed tasks"
+msgstr "Tareas no completadas"
+
+#: templates/bee/scrum_projects/gantt_diagram.html:164
+msgid "Tasks completed succesfully"
+msgstr "Tareas completadas satisfactoriamente"
+
+#: templates/bee/scrum_projects/gantt_diagram.html:169
+msgid "Tasks completed later than expected"
+msgstr "Tareas completadas más tarde de lo previsto"
+
 #: templates/bee/scrum_projects/new_acceptance_criteria.html:22
 msgid "Create acceptance criteria"
 msgstr "Crear criterio de aceptación"
@@ -421,7 +437,6 @@ msgid "Create user story"
 msgstr "Crear user story"
 
 #: templates/bee/scrum_projects/niko_calendar.html:19
-#| msgid "Last name"
 msgid "Last 7 days"
 msgstr "Últimos 7 días"
 
@@ -430,7 +445,6 @@ msgid "Participant"
 msgstr "Participante"
 
 #: templates/bee/scrum_projects/project.html:17
-#| msgid "Project name"
 msgid "Project overview"
 msgstr "Resumen del proyecto"
 
@@ -439,24 +453,29 @@ msgid "Select your satisfaction with today's tasks"
 msgstr "Selecciona tu satisfacción con las tareas de hoy"
 
 #: templates/bee/scrum_projects/project.html:59
-#: templates/bee/scrum_projects/sprints/overview.html:110
+#: templates/bee/scrum_projects/sprints/overview.html:109
 msgid "Recently completed tasks"
 msgstr "Tareas completadas recientemente"
 
 #: templates/bee/scrum_projects/project.html:60
-#: templates/bee/scrum_projects/sprints/overview.html:111
+#: templates/bee/scrum_projects/sprints/overview.html:110
 msgid "of"
 msgstr "de"
 
 #: templates/bee/scrum_projects/project.html:63
-#: templates/bee/scrum_projects/sprints/overview.html:114
+#: templates/bee/scrum_projects/sprints/overview.html:113
 msgid "completed on"
 msgstr "completado el"
 
 #: templates/bee/scrum_projects/project.html:63
-#: templates/bee/scrum_projects/sprints/overview.html:114
+#: templates/bee/scrum_projects/sprints/overview.html:113
 msgid "spending"
 msgstr "gastando"
+
+#: templates/bee/scrum_projects/project.html:68
+#: templates/bee/scrum_projects/sprints/overview.html:121
+msgid "Last Discussions"
+msgstr "Últimas Discusiones"
 
 #: templates/bee/scrum_projects/projects.html:18
 msgid "Your projects"
@@ -471,7 +490,6 @@ msgid "Ask your friends to be invited in their projects!"
 msgstr "Pide a tus amigos que te inviten a sus proyectos!"
 
 #: templates/bee/scrum_projects/sprints.html:35
-#| msgid "View Project"
 msgid "View Sprint"
 msgstr "Ver Sprint"
 
@@ -480,7 +498,6 @@ msgid "There are no Sprints in this project,"
 msgstr "No hay Sprints en este proyecto,"
 
 #: templates/bee/scrum_projects/sprints.html:44
-#| msgid "Create new project"
 msgid "create a new Sprint."
 msgstr "Crear nuevo Sprint"
 
@@ -490,7 +507,6 @@ msgstr "Nuevo Sprint"
 
 #: templates/bee/scrum_projects/sprints/_task_creation_form.html:4
 #: templates/bee/scrum_projects/sprints/_task_creation_form.html:71
-#| msgid "Create project"
 msgid "Create task"
 msgstr "Crear tarea"
 
@@ -531,13 +547,11 @@ msgid "discussions"
 msgstr "discusiones"
 
 #: templates/bee/scrum_projects/sprints/tasks.html:44
-#| msgid "Description"
 msgid "description"
 msgstr "descripción"
 
 #: templates/bee/scrum_projects/sprints/tasks.html:46
 #: templates/bee/scrum_projects/sprints/tasks.html:53
-#| msgid "Start date"
 msgid "Start"
 msgstr "Empezar"
 
@@ -559,7 +573,6 @@ msgid "There are no Tasks in this sprint."
 msgstr "No hay tareas en este sprint."
 
 #: templates/bee/scrum_projects/sprints/tasks.html:79
-#| msgid "Create new project"
 msgid "Create a new Task."
 msgstr "Crear una nueva Tarea"
 
@@ -576,7 +589,6 @@ msgid "Task discussions"
 msgstr "Discusiones de la tarea"
 
 #: templates/bee/scrum_projects/sprints/tasks/incidences.html:17
-#| msgid "Create new project"
 msgid "Create new issue"
 msgstr "Crear nueva incidencia"
 
@@ -585,7 +597,6 @@ msgid "Write your issue here..."
 msgstr "Escribe la incidencia aquí..."
 
 #: templates/bee/scrum_projects/sprints/tasks/incidences.html:23
-#| msgid "Create project"
 msgid "Create issue"
 msgstr "Crear incidencia"
 
@@ -624,6 +635,3 @@ msgstr "Resultado esperado"
 #: templates/bee/scrum_projects/user_stories.html:33
 msgid "Expected_message"
 msgstr "Mensaje esperado"
-
-#~ msgid "Project type"
-#~ msgstr "Tipo de proyecto"
