@@ -53,6 +53,7 @@ var SprintTasks = (function () {
       } catch (Exception) {}
     },
     load: function (data) {
+      data['limit']=50;
       this.tasks.fetch({
         reset: true,
         data: data,

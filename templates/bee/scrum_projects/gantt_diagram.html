@@ -14,7 +14,7 @@
       var tasks = [
         {% for btask in tasks %}
         {
-          name: '{{ btask.name }}',
+          name: '{{ btask.name|truncatechars:20 }}',
           color: {% if btask.status == 4 and btask.real_end_date <= btask.pred_end_date %}green{% elif btask.status == 4 and btask.real_end_date > btask.pred_end_date %}red{% else %}blue{% endif %},
           intervals: [{ // From-To pairs
             from: Date.UTC({{ btask.pred_start_date.year }}, {{ btask.pred_start_date.month }}-1, {{ btask.pred_start_date.day }}),
